@@ -24,8 +24,8 @@ public class M3Controller {
     }
 
     @PatchMapping
-    ResponseEntity<M3> cambiarReflector(){
-        M3 m3=servicio.cambiarReflector();
+    ResponseEntity<M3> cambiarReflector(@RequestBody String id){
+        M3 m3=servicio.cambiarReflector(id);
 
         return new ResponseEntity<>(m3, HttpStatus.CREATED);
     }
@@ -53,15 +53,15 @@ public class M3Controller {
     }
 
     @PutMapping
-    ResponseEntity<M3> cambiarRotores(){
-        M3 m3=servicio.cambiarRotores();
+    ResponseEntity<M3> cambiarRotores(@RequestBody String id){
+        M3 m3=servicio.cambiarRotores(id);
 
         return new ResponseEntity<>(m3, HttpStatus.CREATED);
     }
 
     @GetMapping
     ResponseEntity<M3> cifrar(@RequestBody String id, char a){
-        M3 m3=servicio.cifrar(a);
+        M3 m3=servicio.cifrar(id,a);
 
         return new ResponseEntity<>(m3, HttpStatus.CREATED);
     }

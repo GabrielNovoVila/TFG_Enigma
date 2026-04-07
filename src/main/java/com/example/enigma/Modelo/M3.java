@@ -16,11 +16,13 @@ public class M3 {
     public ArrayList<Character> alfabeto1=new ArrayList<>(Arrays.asList('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'));
     public HashMap<Character,Character> cables;
     public ArrayList<Rotor> rotores;
+    public Reflector reflector;
 
     public M3(String id){
         this.id=id;
         rotores = new ArrayList<>();
         cables=new HashMap<>();
+        reflector=new Reflector(0);
 
         for (int i = 1; i < 4; i++){
             rotores.add(new Rotor(i));

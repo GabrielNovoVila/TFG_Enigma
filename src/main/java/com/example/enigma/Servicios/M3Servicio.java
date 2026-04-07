@@ -27,12 +27,28 @@ public class M3Servicio {
         return m3;
     }
 
-    public M3 cambiarReflector(){
-        return new M3(crearId());
+    public M3 cambiarReflector(String id){
+        M3 maquina;
+
+        var m3=m3Repo.findById(id);
+        if(m3.isPresent()){
+            maquina=m3.get();
+            maquina.reflector.setTipo(1-maquina.reflector.getTipo());
+
+            return maquina;
+        }else return null;
     }
 
-    public M3 cambiarRotores(){
-        return new M3(crearId());
+    public M3 cambiarRotores(String id){
+        M3 maquina;
+
+        var m3=m3Repo.findById(id);
+        if(m3.isPresent()){
+            maquina=m3.get();
+            // TODO cambiar rotores (pienso que hay que mandar un DTO por las posiciones iniciales y esas movidas)
+
+            return maquina;
+        }else return null;
     }
 
     public boolean eliminarMaquina(String id){
@@ -46,7 +62,22 @@ public class M3Servicio {
         return false;
     }
 
-    public M3 cifrar(char a){
+    public M3 cifrar(String id, char a){
+        M3 maquina;
+        char nuevo;
+
+        var m3=m3Repo.findById(id);
+        if(m3.isPresent()){
+            maquina=m3.get();
+        }else return null;
+
+        if(maquina.cables.containsKey(a)){
+            nuevo=maquina.cables.get(a);
+        }
+
+        //TODO Rotores y reflector
+
+
         return new M3(crearId());
     }
 
