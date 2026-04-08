@@ -2,12 +2,12 @@ package com.example.enigma.Modelo;
 
 public class Reflector {
 
-    //ATRIBUTOS
+    // ATRIBUTOS
 
     private int tipo;
     public int[] alfabeto;
 
-    //CONSTRUCTORES
+    // CONSTRUCTORES
 
     public Reflector(int tipo) {
         this.tipo = tipo;
@@ -24,7 +24,7 @@ public class Reflector {
         }
     }
 
-    //GETTERS Y SETTERS
+    // GETTERS Y SETTERS
 
     public int getTipo() {
         return tipo;
@@ -45,6 +45,6 @@ public class Reflector {
         }
     }
 
-    //MÉTODOS
-    //...
+    // MÉTODOS
+    // ...
 }

@@ -1,12 +1,16 @@
 package com.example.enigma.Modelo;
 
 public class Rotor {
+
+    // ATRIBUTOS
     public int[] alfabeto;
     private int tipo;
     public int letra_cambio;
     
     public int ring_setting;
     public int posicion;
+
+    // CONSTRUCTORES
 
     public Rotor(int tipo) {
         this.tipo = tipo;
@@ -104,6 +108,8 @@ public class Rotor {
         }
     }
 
+    // GETTERS Y SETTERS
+
     public int getTipo() {
         return tipo;
     }
@@ -136,6 +142,8 @@ public class Rotor {
                 letra_cambio = -1;
         }
     }
+
+    // MÉTODOS
 
     public void sumarPosicion(){
         posicion++;

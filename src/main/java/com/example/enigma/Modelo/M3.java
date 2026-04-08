@@ -10,6 +10,8 @@ import java.util.List;
 
 public class M3 {
 
+    // ATRIBUTOS
+
     @Id
     public String id;
 
@@ -18,19 +20,31 @@ public class M3 {
     public ArrayList<Rotor> rotores;
     public Reflector reflector;
 
+    // CONSTRUCTOR
+
     public M3(String id){
         this.id=id;
         rotores = new ArrayList<>();
         cables=new HashMap<>();
         reflector=new Reflector(0);
 
-        for (int i = 1; i < 4; i++){
+        for (int i = 0; i < 3; i++){
             rotores.add(new Rotor(i));
         }
     }
 
+    // GETTERS Y SETTERS
+    // ...
+
+    // MÉTODOS
+
     public void anadirCables(String c, String d){
         cables.put(c, d);
         cables.put(d, c);
+    }
+
+    public void eliminarCables(String c, String d){
+        cables.remove(c, d);
+        cables.remove(d, c);
     }
 }

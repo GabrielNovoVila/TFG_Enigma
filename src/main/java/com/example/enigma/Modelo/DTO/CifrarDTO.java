@@ -1,14 +1,15 @@
 package com.example.enigma.Modelo.DTO;
 
-import com.example.enigma.Modelo.M3;
-
 public class CifrarDTO {
     private String letra;
-    private M3 maquina;
+    private String pasos;
+    private M3DTO maquina;
 
-    public CifrarDTO(String letra, M3 maquina){
+    public CifrarDTO(String letra, M3DTO maquina){
         this.letra=letra;
         this.maquina=maquina;
+
+        pasos="Aquí irían los pasos que se siguieron";
     }
 
     public String getLetra() {
@@ -19,11 +20,19 @@ public class CifrarDTO {
         this.letra = letra;
     }
 
-    public M3 getMaquina() {
+    public M3DTO getMaquina() {
         return maquina;
     }
 
-    public void setMaquina(M3 maquina) {
+    public void setMaquina(M3DTO maquina) {
         this.maquina = maquina;
+    }
+
+    public String getPasos() {
+        return pasos;
+    }
+
+    public void setPasos(String pasos) {
+        this.pasos = pasos;
     }
 }
