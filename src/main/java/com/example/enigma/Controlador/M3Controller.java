@@ -1,4 +1,5 @@
 package com.example.enigma.Controlador;
+import com.example.enigma.Modelo.DTO.CifrarDTO;
 import com.example.enigma.Modelo.M3;
 import com.example.enigma.Servicios.M3Servicio;
 import org.jspecify.annotations.NullMarked;
@@ -27,7 +28,13 @@ public class M3Controller {
     ResponseEntity<M3> cambiarReflector(@RequestBody String id){
         M3 m3=servicio.cambiarReflector(id);
 
-        return new ResponseEntity<>(m3, HttpStatus.CREATED);
+        // Si existe, 201 CREATED
+        if(m3!=null){
+            return new ResponseEntity<>(m3, HttpStatus.OK);
+        }
+
+        // Si no existe, 404 NOT FOUND
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
@@ -56,13 +63,14 @@ public class M3Controller {
     ResponseEntity<M3> cambiarRotores(@RequestBody String id){
         M3 m3=servicio.cambiarRotores(id);
 
-        return new ResponseEntity<>(m3, HttpStatus.CREATED);
+        return new ResponseEntity<>(m3, HttpStatus.OK);
     }
 
     @GetMapping
-    ResponseEntity<M3> cifrar(@RequestBody String id, char a){
-        M3 m3=servicio.cifrar(id,a);
+    ResponseEntity<CifrarDTO> cifrar(@RequestBody String id, char a){
+        // Cifrar DTO es un DTO que conforma la máquina y la letra resultante del cifrado
+        CifrarDTO m3=servicio.cifrar(id,a);
 
-        return new ResponseEntity<>(m3, HttpStatus.CREATED);
+        return new ResponseEntity<>(m3, HttpStatus.OK);
     }
 }

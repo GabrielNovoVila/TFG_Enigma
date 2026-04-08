@@ -4,13 +4,13 @@ public class Rotor {
     public int[] alfabeto;
     private int tipo;
     public int letra_cambio;
-
-    public int posicionInicial;
+    
+    public int ring_setting;
     public int posicion;
 
     public Rotor(int tipo) {
         this.tipo = tipo;
-        posicionInicial=0;
+        ring_setting=0;
         posicion=0;
 
         switch(tipo){
@@ -44,7 +44,7 @@ public class Rotor {
 
     public Rotor(int tipo, int posicionInicial) {
         this.tipo = tipo;
-        this.posicionInicial = posicionInicial;
+        this.ring_setting = posicionInicial;
         posicion=posicionInicial;
 
         switch(tipo){
@@ -75,7 +75,7 @@ public class Rotor {
 
     public Rotor(int tipo, int posicionInicial, int posicion) {
         this.tipo = tipo;
-        this.posicionInicial = posicionInicial;
+        this.ring_setting = posicionInicial;
         this.posicion=posicion;
 
         switch(tipo){
