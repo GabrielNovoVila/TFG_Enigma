@@ -8,6 +8,7 @@ import com.example.enigma.Repositorio.M3Repo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Service
 public class M3Servicio {
@@ -140,7 +141,8 @@ public class M3Servicio {
 
     // TODO Implementar el crear un ID
     private String crearId(){
-        String id="";
+        String id= UUID.randomUUID().toString();
+        System.out.println(id);
 
         return id;
     }
