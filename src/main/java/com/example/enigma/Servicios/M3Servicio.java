@@ -148,6 +148,7 @@ public class M3Servicio {
         return id;
     }
 
+    // TODO no funciona, cifra mal
     private String cifrarRotor(M3 maquina, Rotor rotor, String a){
         // Calculamos offset (la posición menos la configuración inicial)
         int offset=rotor.posicion-rotor.ring_setting;
