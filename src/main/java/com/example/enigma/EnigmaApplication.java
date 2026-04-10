@@ -21,7 +21,7 @@ public class EnigmaApplication {
 
     public static void init(){
 
-        MongoConnection db= new MongoConnection();
+        //MongoConnection db= new MongoConnection();
         springContext = new SpringApplicationBuilder(EnigmaApplication.class).run();
     }
 

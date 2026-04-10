@@ -22,20 +22,22 @@ public class M3Servicio {
 
         // Aseguramos que el "id" creado no exista ya (es improbable, pero existe la posibilidad)
         String id=crearId();
-        while(m3Repo.findById(id).isEmpty()){
+        while(m3Repo.findById(id).isPresent()){
             id=crearId();
         }
 
+        System.out.println("Acabé de crear el id");
+
         // Creamos la máquina y la guardamos en el repositorio
-        M3 m3=new M3(id);
-        m3Repo.save(m3); // TODO comprobar si aquí tengo que guardar m3 o m3DTO
+        M3DTO m3=new M3DTO(new M3(id));
+        m3Repo.save(m3);
 
         // Devolvemos el DTO de la máquina creada
-        return new M3DTO(m3);
+        return m3;
     }
 
     public M3DTO cambiarReflector(String id){
-        M3 maquina=null;
+        M3DTO maquina=null;
 
         // Buscamos la máquina, si existe, se cambia el reflector
         var m3=m3Repo.findById(id);
@@ -43,15 +45,15 @@ public class M3Servicio {
             maquina=m3.get();
 
             // Al haber solo 2 tipos de reflector, puede ser definido fácilmente con 0 o 1
-            maquina.reflector.setTipo(1-maquina.reflector.getTipo());
+            maquina.setReflector(1-maquina.getReflector());
         }
 
         // Devolvemos el DTO de la máquina editada
-        return new M3DTO(maquina);
+        return maquina;
     }
 
     public M3DTO cambiarRotores(String id, ArrayList<Integer> rotores, ArrayList<String> ring_settings){
-        M3 maquina=null;
+        M3DTO maquina=null;
 
         // Buscamos la máquina
         var m3=m3Repo.findById(id);
@@ -60,16 +62,13 @@ public class M3Servicio {
             maquina=m3.get();
 
             // Vamos rotor por rotor de la máquina cambiando sus ajustes
-            for(int i=0;i<3;i++){
-                Rotor rotor=maquina.rotores.get(i);
+            maquina.setRotores(rotores);
+            maquina.setRotores_settings(ring_settings);
 
-                rotor.setTipo(rotores.get(i));
-                rotor.ring_setting=maquina.alfabeto_letras.indexOf(ring_settings.get(i));
-            }
 
         }
         // Devolvemos el DTO de la máquina editada
-        return new M3DTO(maquina);
+        return maquina;
 
     }
 
@@ -86,7 +85,8 @@ public class M3Servicio {
         return false;
     }
 
-    public CifrarDTO cifrar(String id, char a){
+    public CifrarDTO cifrar(String id, String a){
+        M3DTO maquinaDTO;
         M3 maquina;
         String nuevo;
 
@@ -94,17 +94,19 @@ public class M3Servicio {
 
         var m3=m3Repo.findById(id);
         if(m3.isPresent()){
-            maquina=m3.get();
+            maquinaDTO=m3.get();
         }else return null;
 
+        // Convertimos el DTO obtenido de la BD a una máquina para hacerlo más intuitivo
+        maquina=new M3(maquinaDTO);
+
         // Convertimos a String para poder hacer un uppercase
+        a=a.toUpperCase();
 
-        String letra=String.valueOf(a);
-        letra=letra.toUpperCase();
+        // Si hay cable asociado a esta letra, transformamos la letra, si no, se mantiene igual
+        nuevo = maquina.cables.getOrDefault(a, a);
 
-        nuevo = maquina.cables.getOrDefault(letra, letra);
-
-        // Sumamos la posición al rotor.
+        // Le sumamos la posición al rotor.
         // Si llegamos a la posición de cambio, habrá que cambiar también el siguiente
         // Esto habrá que comprobarlo cada vez que cambiamos uno
 
@@ -132,17 +134,16 @@ public class M3Servicio {
         }
 
         // Miramos el cable, de nuevo
-        nuevo = maquina.cables.getOrDefault(letra, letra);
+        nuevo = maquina.cables.getOrDefault(a, a);
 
-        M3DTO maquinadto=new M3DTO(maquina);
+        maquinaDTO=new M3DTO(maquina);
 
-        return new CifrarDTO(nuevo, maquinadto);
+        return new CifrarDTO(nuevo, maquinaDTO);
     }
 
-    // TODO Implementar el crear un ID
     private String crearId(){
         String id= UUID.randomUUID().toString();
-        System.out.println(id);
+        System.out.println("Id creado: "+id);
 
         return id;
     }
@@ -151,14 +152,16 @@ public class M3Servicio {
         // Calculamos offset (la posición menos la configuración inicial)
         int offset=rotor.posicion-rotor.ring_setting;
 
+        //System.out.println("Rotor numero "+rotor.getTipo()+"tiene posicion "+rotor.posicion+" y setting "+rotor.ring_setting);
+
         // Convertimos la letra en base a ese offset (Se le suma el offset)
-        String nuevo=maquina.alfabeto_letras.get(maquina.alfabeto_letras.indexOf(a)+offset);
+        String nuevo=maquina.alfabeto_letras.get((maquina.alfabeto_letras.indexOf(a)+offset)%26);
 
         // Aplicamos la traducción del rotor
         nuevo=maquina.alfabeto_letras.get(rotor.alfabeto[maquina.alfabeto_letras.indexOf(nuevo)]);
 
         // Convertimos la letra resultante en base al offset, de nuevo (Se le resta el offset)
-        nuevo=maquina.alfabeto_letras.get(maquina.alfabeto_letras.indexOf(nuevo)-offset);
+        nuevo=maquina.alfabeto_letras.get((maquina.alfabeto_letras.indexOf(nuevo)-offset)%26);
 
         // Devolvemos la letra resultante
         return nuevo;

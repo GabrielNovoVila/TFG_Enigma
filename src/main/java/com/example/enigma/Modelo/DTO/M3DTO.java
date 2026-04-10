@@ -2,22 +2,30 @@ package com.example.enigma.Modelo.DTO;
 
 import com.example.enigma.Modelo.M3;
 import com.example.enigma.Modelo.Rotor;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 
 import java.util.ArrayList;
 
+@Entity
 public class M3DTO {
 
     @Id
     private String id;
 
-    private ArrayList<Integer> rotores=new ArrayList<>();
+    // Creo que en algún momento del desarrollo voy a necesitar la posición de los rotores, pero, por el momento, me da igual
+    private ArrayList<Integer> rotores;
     private ArrayList<String> rotores_settings;
+    private ArrayList<ArrayList<Integer>> cables;
     private int reflector;
 
     public M3DTO(M3 m3){
         if(m3!=null){
             this.id=m3.id;
+            rotores=new ArrayList<>();
+            rotores_settings=new ArrayList<>();
+            cables=new ArrayList<>();
 
             for(Rotor rotor:m3.rotores){
                 rotores.add(rotor.getTipo());
@@ -25,6 +33,8 @@ public class M3DTO {
             }
         }
     }
+
+    public M3DTO(){}
 
     public String getId() {
         return id;
@@ -56,5 +66,14 @@ public class M3DTO {
 
     public void setReflector(int reflector) {
         this.reflector = reflector;
+    }
+
+
+    public ArrayList<ArrayList<Integer>> getCables() {
+        return cables;
+    }
+
+    public void setCables(ArrayList<ArrayList<Integer>> cables) {
+        this.cables = cables;
     }
 }

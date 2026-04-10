@@ -1,12 +1,12 @@
 package com.example.enigma.Utils;
-import com.mongodb.*;
-import com.mongodb.client.*;
-import com.mongodb.client.MongoClients;
-import org.bson.Document;
+//import com.mongodb.*;
+//import com.mongodb.client.*;
+//import com.mongodb.client.MongoClients;
+//import org.bson.Document;
 
 public class MongoConnection {
 
-    private MongoClient client;
+    /*private MongoClient client;
 
     public MongoConnection() {
         String connectionString = "mongodb+srv://gabinv2016_db_user:G72321408g@aventurasubmarina.ffb14rg.mongodb.net/aventuraSubmarinaDB?retryWrites=true&w=majority&appName=enigma";
@@ -34,5 +34,5 @@ public class MongoConnection {
         if (client != null) {
             client.close();
         }
-    }
+    }*/
 }

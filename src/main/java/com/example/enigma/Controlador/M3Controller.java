@@ -2,7 +2,6 @@ package com.example.enigma.Controlador;
 import com.example.enigma.Modelo.DTO.CifrarDTO;
 import com.example.enigma.Modelo.DTO.M3DTO;
 import com.example.enigma.Servicios.M3Servicio;
-import org.jspecify.annotations.NullMarked;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("m3")
-@NullMarked
 public class M3Controller {
     private final M3Servicio servicio;
 
@@ -19,8 +17,8 @@ public class M3Controller {
         this.servicio = servicio;
     }
 
-    @PatchMapping
-    ResponseEntity<M3DTO> cambiarReflector(@RequestBody String id){
+    @PatchMapping("{id}")
+    ResponseEntity<M3DTO> cambiarReflector(@PathVariable String id){
         M3DTO m3=servicio.cambiarReflector(id);
 
         // Si existe, 200 OK
@@ -42,8 +40,8 @@ public class M3Controller {
 
     //TODO POST Y DELETE a /{id}/cables para hacer put y remove
 
-    @DeleteMapping
-    ResponseEntity<Void> eliminarMaquina(@RequestBody String id){
+    @DeleteMapping("{id}")
+    ResponseEntity<Void> eliminarMaquina(@PathVariable String id){
         boolean eliminado= servicio.eliminarMaquina(id);
 
         if (eliminado) {
@@ -55,8 +53,8 @@ public class M3Controller {
         }
     }
 
-    @PutMapping
-    ResponseEntity<M3DTO> cambiarRotores(@RequestBody String id, ArrayList<Integer> rotores, ArrayList<String> ring_settings){
+    @PutMapping("{id}")
+    ResponseEntity<M3DTO> cambiarRotores(@PathVariable String id, @RequestBody ArrayList<Integer> rotores, @RequestBody ArrayList<String> ring_settings){
         M3DTO m3=servicio.cambiarRotores(id, rotores, ring_settings);
 
         // Si existe, 200 OK
@@ -68,10 +66,10 @@ public class M3Controller {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping
-    ResponseEntity<CifrarDTO> cifrar(@RequestBody String id, char a){
+    @PostMapping("{id}/cifrar")
+    ResponseEntity<CifrarDTO> cifrar(@RequestBody String caracter, @PathVariable String id){
         // Cifrar DTO es un DTO que conforma la máquina y la letra resultante del cifrado
-        CifrarDTO cifrarDTO=servicio.cifrar(id,a);
+        CifrarDTO cifrarDTO=servicio.cifrar(id,caracter);
 
         // Devolvemos la máquina editada junto al carácter encriptado
         // (Cuando encriptamos un carácter, cambian las posiciones de los rotores)
