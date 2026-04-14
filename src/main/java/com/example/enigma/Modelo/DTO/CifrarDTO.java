@@ -1,15 +1,17 @@
 package com.example.enigma.Modelo.DTO;
 
+import java.util.ArrayList;
+
 public class CifrarDTO {
     private String letra;
-    private String pasos;
+    private ArrayList<String> pasos;
     private M3DTO maquina;
 
-    public CifrarDTO(String letra, M3DTO maquina){
+    public CifrarDTO(String letra, M3DTO maquina, ArrayList<String> pasos){
         this.letra=letra;
         this.maquina=maquina;
 
-        pasos="Aquí irían los pasos que se siguieron";
+        this.pasos=pasos;
     }
 
     public String getLetra() {
@@ -28,11 +30,11 @@ public class CifrarDTO {
         this.maquina = maquina;
     }
 
-    public String getPasos() {
+    public ArrayList<String> getPasos() {
         return pasos;
     }
 
-    public void setPasos(String pasos) {
+    public void setPasos(ArrayList<String> pasos) {
         this.pasos = pasos;
     }
 }

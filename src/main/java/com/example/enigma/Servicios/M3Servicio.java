@@ -89,6 +89,7 @@ public class M3Servicio {
         M3DTO maquinaDTO;
         M3 maquina;
         String nuevo;
+        ArrayList<String> pasos=new ArrayList<>();
 
         // Comprobamos que la máquina exista
 
@@ -100,12 +101,6 @@ public class M3Servicio {
         // Convertimos el DTO obtenido de la BD a una máquina para hacerlo más intuitivo
         maquina=new M3(maquinaDTO);
 
-        // Convertimos a String para poder hacer un uppercase
-        a=a.toUpperCase();
-
-        // Si hay cable asociado a esta letra, transformamos la letra, si no, se mantiene igual
-        nuevo = maquina.cables.getOrDefault(a, a);
-
         // Le sumamos la posición al rotor.
         // Si llegamos a la posición de cambio, habrá que cambiar también el siguiente
         // Esto habrá que comprobarlo cada vez que cambiamos uno
@@ -113,32 +108,55 @@ public class M3Servicio {
         maquina.rotores.getLast().sumarPosicion();
 
         for(int i=2;i>=0;i--){
-           if(maquina.rotores.get(i).posicion==maquina.rotores.get(i).letra_cambio){
-               if(i==0) maquina.rotores.getLast().sumarPosicion();
-               else maquina.rotores.get(i-1).sumarPosicion();
-           }
+            if(maquina.rotores.get(i).posicion==maquina.rotores.get(i).letra_cambio){
+                if(i==0) maquina.rotores.getLast().sumarPosicion();
+                else maquina.rotores.get(i-1).sumarPosicion();
+            }
         }
+
+        StringBuilder rotores= new StringBuilder();
+        for(Rotor rotor: maquina.rotores){
+            rotores.append(maquina.alfabeto_letras.get(rotor.posicion));
+        }
+
+        pasos.add("ROTORES: "+rotores);
+
+        // Convertimos a mayúscula
+        a=a.toUpperCase();
+
+        pasos.add("INPUT: "+a);
+
+        // Si hay cable asociado a esta letra, transformamos la letra, si no, se mantiene igual
+        nuevo = maquina.cables.getOrDefault(a, a);
+
+        pasos.add("CABLES: "+nuevo);
 
         for(int i=2;i>=0;i--){
             Rotor rotor=maquina.rotores.get(i);
 
-            nuevo=cifrarRotor(maquina, rotor, nuevo);
+            nuevo=cifrarRotor(maquina, rotor, nuevo, false);
+            System.out.println("Letra tras rotor "+i+": "+nuevo);
+            pasos.add("ROTOR "+rotor.getTipo()+": "+nuevo);
         }
 
         // Reflector
         nuevo=maquina.alfabeto_letras.get(maquina.reflector.alfabeto[maquina.alfabeto_letras.indexOf(nuevo)]);
 
+        pasos.add("REFLECTOR: "+nuevo);
+
         // Volvemos a ir rotor por rotor cambiando la letra
         for(Rotor rotor:maquina.rotores){
-            nuevo=cifrarRotor(maquina, rotor, nuevo);
+            nuevo=cifrarRotor(maquina, rotor, nuevo, true);
+            pasos.add("ROTOR "+rotor.getTipo()+": "+nuevo);
         }
 
         // Miramos el cable, de nuevo
-        nuevo = maquina.cables.getOrDefault(a, a);
+        nuevo = maquina.cables.getOrDefault(nuevo, nuevo);
+        pasos.add("CABLES: "+nuevo);
 
         maquinaDTO=new M3DTO(maquina);
 
-        return new CifrarDTO(nuevo, maquinaDTO);
+        return new CifrarDTO(nuevo, maquinaDTO, pasos);
     }
 
     private String crearId(){
@@ -148,18 +166,27 @@ public class M3Servicio {
         return id;
     }
 
-    // TODO no funciona, cifra mal
-    private String cifrarRotor(M3 maquina, Rotor rotor, String a){
+    private String cifrarRotor(M3 maquina, Rotor rotor, String a, boolean vuelta){
         // Calculamos offset (la posición menos la configuración inicial)
         int offset=rotor.posicion-rotor.ring_setting;
-
-        //System.out.println("Rotor numero "+rotor.getTipo()+"tiene posicion "+rotor.posicion+" y setting "+rotor.ring_setting);
 
         // Convertimos la letra en base a ese offset (Se le suma el offset)
         String nuevo=maquina.alfabeto_letras.get((maquina.alfabeto_letras.indexOf(a)+offset)%26);
 
         // Aplicamos la traducción del rotor
-        nuevo=maquina.alfabeto_letras.get(rotor.alfabeto[maquina.alfabeto_letras.indexOf(nuevo)]);
+        // Si estamos en el camino de ida se hace de manera distinta a si estuviéramos en el de vuelta
+        if(vuelta) {
+            // Si ya se hizo la traducción del reflector, miramos qué letra se traduce en la que tenemos
+            for(int i=0;i<26;i++){
+                if(rotor.alfabeto[i]==maquina.alfabeto_letras.indexOf(nuevo)){
+                    nuevo=maquina.alfabeto_letras.get(i);
+                    break;
+                }
+            }
+        }else{
+            // Si aún no se hizo la traducción del reflector, miramos a qué letra se traduce la que tenemos
+            nuevo = maquina.alfabeto_letras.get(rotor.alfabeto[maquina.alfabeto_letras.indexOf(nuevo)]);
+        }
 
         // Convertimos la letra resultante en base al offset, de nuevo (Se le resta el offset)
         nuevo=maquina.alfabeto_letras.get((maquina.alfabeto_letras.indexOf(nuevo)-offset)%26);

@@ -4,8 +4,6 @@ import com.example.enigma.Modelo.M3;
 import com.example.enigma.Modelo.Rotor;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
-
 import java.util.ArrayList;
 
 @Entity
