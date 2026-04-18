@@ -1,5 +1,7 @@
 package com.example.enigma.Servicios;
 
+import com.example.enigma.Modelo.Cable;
+import com.example.enigma.Modelo.DTO.CablesDTO;
 import com.example.enigma.Modelo.DTO.CifrarDTO;
 import com.example.enigma.Modelo.DTO.ConfigDTO;
 import com.example.enigma.Modelo.DTO.M3DTO;
@@ -9,6 +11,7 @@ import com.example.enigma.Repositorio.M3Repo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -214,4 +217,71 @@ public class M3Servicio {
         // Devolvemos la letra resultante
         return nuevo;
     }
+
+    public M3DTO ponerCables(String id, CablesDTO cabledto){
+        M3DTO maquina=null;
+
+        // Buscamos la máquina
+        var m3=m3Repo.findById(id);
+
+        if(m3.isPresent()&&!cabledto.getA().equals(cabledto.getB())){
+            maquina=m3.get();
+
+            boolean esta=false;
+
+            // Vamos rotor por rotor de la máquina cambiando sus ajustes
+            List<Cable> cables=maquina.getCables();
+            for(Cable cable:cables){
+                if (cable.getA().equals(cabledto.getA())) {
+                    esta = true;
+                    break;
+                }
+            }
+
+            if(!esta){
+                cables.add(new Cable(cabledto.getA(), cabledto.getB()));
+                cables.add(new Cable(cabledto.getB(), cabledto.getA()));
+
+                maquina.setCables(cables);
+                // Actualizamos la máquina en la BD
+                m3Repo.save(maquina);
+            }
+        }
+        // Devolvemos el DTO de la máquina editada
+        return maquina;
+    }
+
+    public M3DTO sacarCables(String id, CablesDTO cabledto){
+        M3DTO maquina=null;
+        var m3=m3Repo.findById(id);
+        if(m3.isPresent()){
+            maquina=m3.get();
+            Cable cable1=null;
+            Cable cable2=null;
+
+            boolean esta=false;
+            List<Cable> cables=maquina.getCables();
+            for(Cable cable:cables){
+                if (cable.getA().equals(cabledto.getA())) {
+                    esta = true;
+                    cable1=cable;
+                }
+
+                else if(cable.getB().equals(cabledto.getA())) {
+                    esta = true;
+                    cable2=cable;
+                }
+            }
+
+            if(esta){
+                cables.remove(cable1);
+                cables.remove(cable2);
+
+                maquina.setCables(cables);
+                m3Repo.save(maquina);
+            }
+        }
+        return maquina;
+    }
+
 }

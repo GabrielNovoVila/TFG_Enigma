@@ -31,4 +31,14 @@ public class Cable {
     public void setB(Integer b) {
         this.b = b;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Cable c) {
+
+            if(c.getA().equals(this.getA())&&c.getB().equals(this.getB())) return true;
+            return a.equals(c.getA()) && b.equals(c.getB());
+        }
+        return false;
+    }
 }

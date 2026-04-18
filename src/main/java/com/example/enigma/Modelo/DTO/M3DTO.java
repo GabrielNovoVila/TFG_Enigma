@@ -96,7 +96,7 @@ public class M3DTO {
         return cables;
     }
 
-    public void setCables(ArrayList<Cable> cables) {
+    public void setCables(List<Cable> cables) {
         this.cables = cables;
     }
 }

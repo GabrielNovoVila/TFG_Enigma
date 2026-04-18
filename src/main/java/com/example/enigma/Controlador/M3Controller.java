@@ -1,4 +1,5 @@
 package com.example.enigma.Controlador;
+import com.example.enigma.Modelo.DTO.CablesDTO;
 import com.example.enigma.Modelo.DTO.CifrarDTO;
 import com.example.enigma.Modelo.DTO.ConfigDTO;
 import com.example.enigma.Modelo.DTO.M3DTO;
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 @RequestMapping("m3")
 public class M3Controller {
     private final M3Servicio servicio;
+    private final M3Servicio m3Servicio;
 
-    public M3Controller(M3Servicio servicio) {
+    public M3Controller(M3Servicio servicio, M3Servicio m3Servicio) {
         this.servicio = servicio;
+        this.m3Servicio = m3Servicio;
     }
 
     @PatchMapping("{id}")
@@ -38,8 +41,6 @@ public class M3Controller {
         // Devolvemos la máquina creada (201 CREATED)
         return new ResponseEntity<>(m3, HttpStatus.CREATED);
     }
-
-    //TODO POST Y DELETE a /{id}/cables para hacer put y remove
 
     @DeleteMapping("{id}")
     ResponseEntity<Void> eliminarMaquina(@PathVariable String id){
@@ -74,6 +75,28 @@ public class M3Controller {
 
         // Devolvemos la máquina editada junto al carácter encriptado
         // (Cuando encriptamos un carácter, cambian las posiciones de los rotores)
-        return new ResponseEntity<>(cifrarDTO, HttpStatus.OK);
+        if(cifrarDTO!=null){
+            return new ResponseEntity<>(cifrarDTO, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/{id}/cables")
+    ResponseEntity<M3DTO> meterCables(@PathVariable String id, @RequestBody CablesDTO cable){
+        M3DTO m3dto= m3Servicio.ponerCables(id, cable);
+        if(m3dto!=null){
+            return new ResponseEntity<>(m3dto, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("{id}/cables")
+    ResponseEntity<M3DTO> sacarCables(@PathVariable String id, @RequestBody CablesDTO cable){
+        M3DTO m3dto= m3Servicio.sacarCables(id, cable);
+
+        if(m3dto!=null){
+            return new ResponseEntity<>(m3dto, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
