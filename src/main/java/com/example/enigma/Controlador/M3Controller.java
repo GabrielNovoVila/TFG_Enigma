@@ -1,5 +1,6 @@
 package com.example.enigma.Controlador;
 import com.example.enigma.Modelo.DTO.CifrarDTO;
+import com.example.enigma.Modelo.DTO.ConfigDTO;
 import com.example.enigma.Modelo.DTO.M3DTO;
 import com.example.enigma.Servicios.M3Servicio;
 import org.springframework.http.HttpStatus;
@@ -54,8 +55,8 @@ public class M3Controller {
     }
 
     @PutMapping("{id}")
-    ResponseEntity<M3DTO> cambiarRotores(@PathVariable String id, @RequestBody ArrayList<Integer> rotores, @RequestBody ArrayList<String> ring_settings){
-        M3DTO m3=servicio.cambiarRotores(id, rotores, ring_settings);
+    ResponseEntity<M3DTO> cambiarRotores(@PathVariable String id, @RequestBody ConfigDTO config){
+        M3DTO m3=servicio.cambiarRotores(id, config);
 
         // Si existe, 200 OK
         if(m3!=null){

@@ -1,6 +1,7 @@
 package com.example.enigma.Servicios;
 
 import com.example.enigma.Modelo.DTO.CifrarDTO;
+import com.example.enigma.Modelo.DTO.ConfigDTO;
 import com.example.enigma.Modelo.DTO.M3DTO;
 import com.example.enigma.Modelo.M3;
 import com.example.enigma.Modelo.Rotor;
@@ -46,13 +47,16 @@ public class M3Servicio {
 
             // Al haber solo 2 tipos de reflector, puede ser definido fácilmente con 0 o 1
             maquina.setReflector(1-maquina.getReflector());
+
+            // Actualizamos la máquina en la BD
+            m3Repo.save(maquina);
         }
 
         // Devolvemos el DTO de la máquina editada
         return maquina;
     }
 
-    public M3DTO cambiarRotores(String id, ArrayList<Integer> rotores, ArrayList<String> ring_settings){
+    public M3DTO cambiarRotores(String id, ConfigDTO config){
         M3DTO maquina=null;
 
         // Buscamos la máquina
@@ -62,10 +66,11 @@ public class M3Servicio {
             maquina=m3.get();
 
             // Vamos rotor por rotor de la máquina cambiando sus ajustes
-            maquina.setRotores(rotores);
-            maquina.setRotores_settings(ring_settings);
+            maquina.setRotores(config.getRotores());
+            maquina.setRotores_settings(config.getRing_settings());
 
-
+            // Actualizamos la máquina en la BD
+            m3Repo.save(maquina);
         }
         // Devolvemos el DTO de la máquina editada
         return maquina;
@@ -92,10 +97,12 @@ public class M3Servicio {
         ArrayList<String> pasos=new ArrayList<>();
 
         // Comprobamos que la máquina exista
+        System.out.println("Hay "+m3Repo.count()+ "máquinas");
 
         var m3=m3Repo.findById(id);
         if(m3.isPresent()){
             maquinaDTO=m3.get();
+            System.out.println("DESDE BD: " + maquinaDTO.getRotores());
         }else return null;
 
         // Convertimos el DTO obtenido de la BD a una máquina para hacerlo más intuitivo
@@ -107,10 +114,13 @@ public class M3Servicio {
 
         maquina.rotores.getLast().sumarPosicion();
 
-        for(int i=2;i>=0;i--){
-            if(maquina.rotores.get(i).posicion==maquina.rotores.get(i).letra_cambio){
-                if(i==0) maquina.rotores.getLast().sumarPosicion();
-                else maquina.rotores.get(i-1).sumarPosicion();
+        if(maquina.rotores.getLast().posicion==maquina.rotores.getLast().letra_cambio){
+            maquina.rotores.get(1).sumarPosicion();
+            if(maquina.rotores.get(1).posicion==maquina.rotores.get(1).letra_cambio){
+                maquina.rotores.getFirst().sumarPosicion();
+                if(maquina.rotores.getFirst().posicion==maquina.rotores.getFirst().letra_cambio){
+                    maquina.rotores.getFirst().sumarPosicion();
+                }
             }
         }
 
@@ -156,6 +166,10 @@ public class M3Servicio {
 
         maquinaDTO=new M3DTO(maquina);
 
+        // Actualizamos la máquina en la BD
+        System.out.println("ANTES DE GUARDAR: " + maquina.rotores);
+        m3Repo.save(maquinaDTO);
+
         return new CifrarDTO(nuevo, maquinaDTO, pasos);
     }
 
@@ -189,8 +203,14 @@ public class M3Servicio {
         }
 
         // Convertimos la letra resultante en base al offset, de nuevo (Se le resta el offset)
-        nuevo=maquina.alfabeto_letras.get((maquina.alfabeto_letras.indexOf(nuevo)-offset)%26);
+        int letra=maquina.alfabeto_letras.indexOf(nuevo)-offset;
 
+        if(letra<0){
+            nuevo=maquina.alfabeto_letras.get(26+letra);
+        }else{
+            nuevo=maquina.alfabeto_letras.get(letra%26);
+
+        }
         // Devolvemos la letra resultante
         return nuevo;
     }

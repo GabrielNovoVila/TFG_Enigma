@@ -45,14 +45,14 @@ public class M3 {
         cables=new HashMap<>();
 
         for(int i=0;i<3;i++){
-            rotores.add(new Rotor(m3DTO.getRotores().get(i),alfabeto_letras.indexOf(m3DTO.getRotores_settings().get(i))));
+            rotores.add(new Rotor(m3DTO.getRotores().get(i),alfabeto_letras.indexOf(m3DTO.getRotores_settings().get(i)),m3DTO.getRotores_posiciones().get(i)));
         }
 
         reflector=new Reflector(m3DTO.getReflector());
 
-        for(ArrayList<Integer> cable: m3DTO.getCables()){
-            cables.put(alfabeto_letras.get(cable.getFirst()),alfabeto_letras.get(cable.getLast()));
-            cables.put(alfabeto_letras.get(cable.getLast()),alfabeto_letras.get(cable.getFirst()));
+        for(Cable cable: m3DTO.getCables()){
+            cables.put(alfabeto_letras.get(cable.getA()),alfabeto_letras.get(cable.getB()));
+            cables.put(alfabeto_letras.get(cable.getB()),alfabeto_letras.get(cable.getA()));
         }
     }
 
@@ -72,4 +72,5 @@ public class M3 {
         cables.remove(c, d);
         cables.remove(d, c);
     }
+
 }
