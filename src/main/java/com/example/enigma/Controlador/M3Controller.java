@@ -6,6 +6,7 @@ import com.example.enigma.Modelo.DTO.M3DTO;
 import com.example.enigma.Servicios.M3Servicio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/m3")
+
 public class M3Controller {
     private final M3Servicio servicio;
     private final M3Servicio m3Servicio;
@@ -23,7 +26,7 @@ public class M3Controller {
     }
 
     @PatchMapping("{id}")
-    ResponseEntity<M3DTO> cambiarReflector(@PathVariable String id){
+    ResponseEntity<M3DTO> cambiarReflector(@PathVariable String id, Authentication auth){
         M3DTO m3=servicio.cambiarReflector(id);
 
         // Si existe, 200 OK
@@ -36,7 +39,7 @@ public class M3Controller {
     }
 
     @PostMapping
-    ResponseEntity<M3DTO> crearMaquina(){
+    ResponseEntity<M3DTO> crearMaquina(Authentication auth){
         M3DTO m3=servicio.crearMaquina();
 
         // Devolvemos la máquina creada (201 CREATED)
@@ -44,7 +47,7 @@ public class M3Controller {
     }
 
     @DeleteMapping("{id}")
-    ResponseEntity<Void> eliminarMaquina(@PathVariable String id){
+    ResponseEntity<Void> eliminarMaquina(@PathVariable String id,Authentication auth){
         boolean eliminado= servicio.eliminarMaquina(id);
 
         if (eliminado) {
@@ -57,7 +60,7 @@ public class M3Controller {
     }
 
     @PutMapping("{id}")
-    ResponseEntity<M3DTO> cambiarRotores(@PathVariable String id, @RequestBody ConfigDTO config){
+    ResponseEntity<M3DTO> cambiarRotores(@PathVariable String id, @RequestBody ConfigDTO config,Authentication auth){
         M3DTO m3=servicio.cambiarRotores(id, config);
 
         // Si existe, 200 OK
@@ -70,7 +73,7 @@ public class M3Controller {
     }
 
     @PostMapping("{id}/cifrar")
-    ResponseEntity<CifrarDTO> cifrar(@RequestBody String caracter, @PathVariable String id){
+    ResponseEntity<CifrarDTO> cifrar(@RequestBody String caracter, @PathVariable String id,Authentication auth){
         // Cifrar DTO es un DTO que conforma la máquina y la letra resultante del cifrado
         CifrarDTO cifrarDTO=servicio.cifrar(id,caracter);
 
@@ -83,7 +86,7 @@ public class M3Controller {
     }
 
     @PostMapping("/{id}/cables")
-    ResponseEntity<M3DTO> meterCables(@PathVariable String id, @RequestBody CablesDTO cable){
+    ResponseEntity<M3DTO> meterCables(@PathVariable String id, @RequestBody CablesDTO cable,Authentication auth){
         M3DTO m3dto= m3Servicio.ponerCables(id, cable);
         if(m3dto!=null){
             return new ResponseEntity<>(m3dto, HttpStatus.OK);
@@ -92,7 +95,7 @@ public class M3Controller {
     }
 
     @DeleteMapping("{id}/cables")
-    ResponseEntity<M3DTO> sacarCables(@PathVariable String id, @RequestBody CablesDTO cable){
+    ResponseEntity<M3DTO> sacarCables(@PathVariable String id, @RequestBody CablesDTO cable,Authentication auth){
         M3DTO m3dto= m3Servicio.sacarCables(id, cable);
 
         if(m3dto!=null){
