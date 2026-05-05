@@ -30,11 +30,16 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         String email = user.getAttribute("email");
 
-        String token = jwtService.generarToken(email);
+        String accessToken = jwtService.generarAccessToken(email);
+        String refreshToken = jwtService.generarRefreshToken(email);
+
 
         response.setContentType("application/json");
         response.getWriter().write("""
-            {"token":"%s"}
-        """.formatted(token));
+        {
+            "accessToken": "%s",
+            "refreshToken": "%s"
+        }
+        """.formatted(accessToken, refreshToken));
     }
 }

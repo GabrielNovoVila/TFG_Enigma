@@ -14,12 +14,21 @@ public class AutenticacionServicio {
     private static final String SECRET_STRING = "my-super-secret-key-must-be-at-least-32-chars-long!!";
     private final SecretKey key = Keys.hmacShaKeyFor(SECRET_STRING.getBytes());
 
-    public String generarToken(String email) {
+    public String generarAccessToken(String email) {
         return Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 86400000))
+                .expiration(new Date(System.currentTimeMillis() + 1000*60*10)) // 10 minutos
                 .signWith(key, Jwts.SIG.HS256) // Especifica explícitamente el algoritmo
+                .compact();
+    }
+
+    public String generarRefreshToken(String email) {
+        return Jwts.builder()
+                .subject(email)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000L*60*60*24*7)) // 7 días
+                .signWith(key, Jwts.SIG.HS256)
                 .compact();
     }
 

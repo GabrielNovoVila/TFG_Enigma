@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/**", "/login/**", "/oauth2/**").permitAll() // Añade /oauth2/**
+                        .requestMatchers("/public/**", "/login/**", "/oauth2/**", "/auth/refresh").permitAll() // Añade /oauth2/**
                         .anyRequest().authenticated()
                 )
 
@@ -47,7 +47,6 @@ public class SecurityConfig {
 
                 .oauth2Login(oauth -> oauth.successHandler(successHandler))
                 .addFilterBefore(filtroJWT, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 }
