@@ -41,5 +41,8 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             "refreshToken": "%s"
         }
         """.formatted(accessToken, refreshToken));
+        response.sendRedirect(
+                "http://localhost:3000/login-success?access=" + accessToken + "&refresh=" + refreshToken
+        );
     }
 }

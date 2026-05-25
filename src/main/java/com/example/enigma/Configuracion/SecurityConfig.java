@@ -34,16 +34,13 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
 
-                // --- ESTO ES LO QUE TE FALTA ---
                 .exceptionHandling(e -> e
                         .authenticationEntryPoint((request, response, authException) -> {
-                            // Evita el 302 a Google y devuelve 401 puro
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                             response.setContentType("application/json");
                             response.getWriter().write("{\"error\": \"No autorizado - Token faltante o invalido\"}");
                         })
                 )
-                // -------------------------------
 
                 .oauth2Login(oauth -> oauth.successHandler(successHandler))
                 .addFilterBefore(filtroJWT, UsernamePasswordAuthenticationFilter.class);
