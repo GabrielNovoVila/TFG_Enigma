@@ -1,6 +1,8 @@
 package com.example.enigma.Controlador;
 
 import com.example.enigma.Servicios.AutenticacionServicio;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +21,21 @@ public class AutenticacionControlador {
     }
 
     @PostMapping("/refresh")
-    public Map<String, String> refresh(@RequestBody Map<String, String> body) {
+    public ResponseEntity<Map<String, String>> refresh(@RequestBody Map<String, String> body) {
 
         String refreshToken = body.get("refreshToken");
 
-        String email = jwtService.validarToken(refreshToken);
+        if (refreshToken == null || refreshToken.isBlank()) {
+            return new ResponseEntity<>(Map.of("error", "Refresh token faltante"), HttpStatus.UNAUTHORIZED);
+        }
 
-        String newAccessToken = jwtService.generarAccessToken(email);
+        try {
+            String email = jwtService.validarToken(refreshToken);
+            String newAccessToken = jwtService.generarAccessToken(email);
 
-        return Map.of("accessToken", newAccessToken);
+            return new ResponseEntity<>(Map.of("accessToken", newAccessToken), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(Map.of("error", "Refresh token invalido o caducado"), HttpStatus.UNAUTHORIZED);
+        }
     }
 }

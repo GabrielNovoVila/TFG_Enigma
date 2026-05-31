@@ -85,6 +85,16 @@ public class M3Controller {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PostMapping("{id}/descifrar")
+    ResponseEntity<CifrarDTO> descifrar(@RequestBody String caracter, @PathVariable String id,Authentication auth){
+        CifrarDTO cifrarDTO=servicio.descifrar(id,caracter);
+
+        if(cifrarDTO!=null){
+            return new ResponseEntity<>(cifrarDTO, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @PostMapping("/{id}/cables")
     ResponseEntity<M3DTO> meterCables(@PathVariable String id, @RequestBody CablesDTO cable,Authentication auth){
         M3DTO m3dto= m3Servicio.ponerCables(id, cable);

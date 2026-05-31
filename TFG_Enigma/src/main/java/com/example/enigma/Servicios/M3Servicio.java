@@ -71,6 +71,9 @@ public class M3Servicio {
             // Vamos rotor por rotor de la máquina cambiando sus ajustes
             maquina.setRotores(config.getRotores());
             maquina.setRotores_settings(config.getRing_settings());
+            if(config.getRotor_positions()!=null){
+                maquina.setRotores_posiciones(config.getRotor_positions());
+            }
 
             // Actualizamos la máquina en la BD
             m3Repo.save(maquina);
@@ -94,10 +97,19 @@ public class M3Servicio {
     }
 
     public CifrarDTO cifrar(String id, String a){
+        return procesarLetra(id, a, false);
+    }
+
+    public CifrarDTO descifrar(String id, String a){
+        return procesarLetra(id, a, true);
+    }
+
+    private CifrarDTO procesarLetra(String id, String a, boolean descifrando){
         M3DTO maquinaDTO;
         M3 maquina;
         String nuevo;
         ArrayList<String> pasos=new ArrayList<>();
+        String operacion=descifrando ? "DESCIFRAR" : "CIFRAR";
 
         // Comprobamos que la máquina exista
         System.out.println("Hay "+m3Repo.count()+ "máquinas");
@@ -137,7 +149,7 @@ public class M3Servicio {
         // Convertimos a mayúscula
         a=a.toUpperCase();
 
-        pasos.add("INPUT: "+a);
+        pasos.add("INPUT "+operacion+": "+a);
 
         // Si hay cable asociado a esta letra, transformamos la letra, si no, se mantiene igual
         nuevo = maquina.cables.getOrDefault(a, a);
@@ -147,7 +159,9 @@ public class M3Servicio {
         for(int i=2;i>=0;i--){
             Rotor rotor=maquina.rotores.get(i);
 
-            nuevo=cifrarRotor(maquina, rotor, nuevo, false);
+            nuevo=descifrando
+                    ? descifrarRotor(maquina, rotor, nuevo, false)
+                    : cifrarRotor(maquina, rotor, nuevo, false);
             System.out.println("Letra tras rotor "+i+": "+nuevo);
             pasos.add("ROTOR "+rotor.getTipo()+": "+nuevo);
         }
@@ -159,7 +173,9 @@ public class M3Servicio {
 
         // Volvemos a ir rotor por rotor cambiando la letra
         for(Rotor rotor:maquina.rotores){
-            nuevo=cifrarRotor(maquina, rotor, nuevo, true);
+            nuevo=descifrando
+                    ? descifrarRotor(maquina, rotor, nuevo, true)
+                    : cifrarRotor(maquina, rotor, nuevo, true);
             pasos.add("ROTOR "+rotor.getTipo()+": "+nuevo);
         }
 
@@ -216,6 +232,10 @@ public class M3Servicio {
         }
         // Devolvemos la letra resultante
         return nuevo;
+    }
+
+    private String descifrarRotor(M3 maquina, Rotor rotor, String a, boolean vuelta){
+        return cifrarRotor(maquina, rotor, a, vuelta);
     }
 
     public M3DTO ponerCables(String id, CablesDTO cabledto){

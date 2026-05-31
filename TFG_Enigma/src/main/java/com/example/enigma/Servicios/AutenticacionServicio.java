@@ -10,7 +10,6 @@ import java.util.Date;
 @Component
 public class AutenticacionServicio {
 
-    // 1. Usa una constante para que la clave sea inmutable
     private static final String SECRET_STRING = "my-super-secret-key-must-be-at-least-32-chars-long!!";
     private final SecretKey key = Keys.hmacShaKeyFor(SECRET_STRING.getBytes());
 
@@ -18,8 +17,8 @@ public class AutenticacionServicio {
         return Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000*60*10)) // 10 minutos
-                .signWith(key, Jwts.SIG.HS256) // Especifica explícitamente el algoritmo
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 10))
+                .signWith(key, Jwts.SIG.HS256)
                 .compact();
     }
 
@@ -27,7 +26,7 @@ public class AutenticacionServicio {
         return Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000L*60*60*24*7)) // 7 días
+                .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7))
                 .signWith(key, Jwts.SIG.HS256)
                 .compact();
     }
@@ -41,9 +40,7 @@ public class AutenticacionServicio {
                     .getPayload()
                     .getSubject();
         } catch (Exception e) {
-            // 2. Imprime el error real en la consola para ver qué está pasando
-            e.printStackTrace();
-            throw new RuntimeException("Error en validación: " + e.getMessage());
+            throw new RuntimeException("Error en validacion: " + e.getMessage());
         }
     }
 }
