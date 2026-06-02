@@ -143,7 +143,6 @@ function normaliseSteps(steps) {
 
 export default function Home() {
     const { accessToken, logout } = useAuth();
-    const [menuOpen, setMenuOpen] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const [plugboardOpen, setPlugboardOpen] = useState(false);
     const [machine, setMachine] = useState(emptyMachine);
@@ -481,52 +480,44 @@ export default function Home() {
     return (
         <main className="enigma-page">
             <header className="topbar">
-                <div className="menu-area">
-                    <button
-                        className="icon-button menu-button"
-                        aria-label="Abrir menu"
-                        onClick={() => setMenuOpen((open) => !open)}
-                    >
-                        <span />
-                        <span />
-                        <span />
-                    </button>
-
-                    {menuOpen && (
-                        <nav className="side-menu" aria-label="Menu principal">
-                            <button>Mi maquina</button>
-                            <button onClick={openHistory}>Historial</button>
-                            <button>Configuraciones</button>
-                            <button>Ayuda</button>
-                        </nav>
-                    )}
-                </div>
+                <nav className="main-tabs" aria-label="Navegacion principal">
+                    <button type="button">Maquina Enigma</button>
+                    <button type="button">Como funciona?</button>
+                    <button type="button">Historia</button>
+                    <button type="button">German Book</button>
+                    <button type="button">Retos</button>
+                </nav>
 
                 <div className="title-strip">ENIGMA M3</div>
 
                 <div className="user-area">
-                    {accessToken ? (
-                        <>
-                            <span className="session-dot" aria-label="Sesion iniciada" />
-                            <button
-                                className="avatar-button"
-                                onClick={() => setAccountMenuOpen((open) => !open)}
-                                title={userEmail || "Cuenta"}
-                            >
-                                {userInitial}
+                    <div className="auth-row">
+                        {accessToken ? (
+                            <>
+                                <span className="session-dot" aria-label="Sesion iniciada" />
+                                <button
+                                    className="avatar-button"
+                                    onClick={() => setAccountMenuOpen((open) => !open)}
+                                    title={userEmail || "Cuenta"}
+                                >
+                                    {userInitial}
+                                </button>
+                                {accountMenuOpen && (
+                                    <div className="account-menu">
+                                        <button onClick={openHistory}>Historial</button>
+                                        <button onClick={closeSession}>Cerrar sesion</button>
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <button className="login-button" onClick={loginWithGoogle}>
+                                Google
                             </button>
-                            {accountMenuOpen && (
-                                <div className="account-menu">
-                                    <button onClick={openHistory}>Historial</button>
-                                    <button onClick={closeSession}>Cerrar sesion</button>
-                                </div>
-                            )}
-                        </>
-                    ) : (
-                        <button className="login-button" onClick={loginWithGoogle}>
-                            Google
-                        </button>
-                    )}
+                        )}
+                    </div>
+                    <button className="accessibility-button" type="button" aria-label="Accesibilidad">
+                        <span aria-hidden="true" />
+                    </button>
                 </div>
             </header>
 
@@ -542,7 +533,7 @@ export default function Home() {
                 </div>
                 <div className="intro-notes">
                     <span>Rotores configurables</span>
-                    <span>Conexiones 1 a 1</span>
+                    <span>Cifrado y descifrado</span>
                     <span>Historial de sesion</span>
                 </div>
             </section>
