@@ -55,9 +55,10 @@ select {
   min-height: 84px;
 }
 
-.avatar-button,
+.account-button,
 .login-button,
 .main-tabs button,
+.intro-notes button,
 .machine-panel button,
 .plug,
 .key {
@@ -105,12 +106,13 @@ select {
   justify-self: center;
   width: min(360px, 100%);
   height: 34px;
-  background: var(--muted);
   display: grid;
   place-items: center;
-  color: #4d4d4d;
+  color: #d7c28a;
   font-weight: 700;
   letter-spacing: 0;
+  font-size: clamp(2.4rem, 3vw, 5rem);
+  text-align: center
 }
 
 .intro-panel {
@@ -124,7 +126,7 @@ select {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
 }
 
-.intro-panel h1 {
+h1 {
   margin: 0 0 10px;
   font-size: clamp(2.4rem, 7vw, 5rem);
   line-height: 0.95;
@@ -152,14 +154,196 @@ select {
   gap: 9px;
 }
 
-.intro-notes span {
+.intro-notes button {
   min-height: 34px;
   display: flex;
   align-items: center;
-  background: rgba(232, 228, 217, 0.88);
-  border-left: 4px solid var(--brass);
+  background: #4d4d49;
+  box-shadow: inset 4px 0 0 var(--brass);
   padding: 0 12px;
-  color: #000000;
+  color: #f2f2ef;
+  font-weight: 700;
+  text-align: left;
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.intro-notes button:hover {
+  background: #5a5a55;
+  color: #ffffff;
+  transform: translateX(4px);
+  box-shadow:
+    inset 5px 0 0 var(--brass),
+    0 8px 16px rgba(0, 0, 0, 0.18);
+}
+
+.intro-notes button:active {
+  transform: translateX(1px);
+  box-shadow: inset 3px 0 0 var(--brass);
+}
+
+.jump-pulse {
+  animation: jumpPulse 760ms ease;
+}
+
+@keyframes jumpPulse {
+  0% {
+    transform: scale(1);
+    filter: none;
+  }
+
+  45% {
+    transform: scale(1.045);
+    filter: drop-shadow(0 0 18px rgba(181, 155, 84, 0.58));
+  }
+
+  100% {
+    transform: scale(1);
+    filter: none;
+  }
+}
+
+.how-page {
+  width: min(980px, 92vw);
+  margin: 18px auto 0;
+  padding: 10px 0 72px;
+  color: #f2f2ef;
+  position: relative;
+  display: grid;
+  gap: clamp(38px, 7vw, 82px);
+}
+
+.how-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transition: background 280ms ease;
+}
+
+.how-page.is-inspecting::before {
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.how-intro {
+  width: min(900px, 100%);
+  margin-top: 0;
+}
+
+.how-jump-buttons {
+  align-self: end;
+}
+
+.component-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) minmax(240px, 430px);
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.component-row.reverse {
+  grid-template-columns: minmax(240px, 430px) minmax(260px, 420px);
+}
+
+.component-card {
+  min-height: clamp(330px, 41vw, 500px);
+  padding: clamp(48px, 8vw, 78px) clamp(44px, 7vw, 72px);
+  background-image: url("./assets/arrugas_sepia_hd.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: #21170f;
+  position: relative;
+  z-index: 3;
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.28));
+}
+
+.component-card h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: 0;
+}
+
+.component-card p {
+  margin: 0;
+  max-width: 310px;
+  color: #21170f;
+  line-height: 1.45;
+  font-size: clamp(0.86rem, 1.2vw, 1rem);
+}
+
+.component-image {
+  min-height: clamp(150px, 19vw, 230px);
+  padding: clamp(22px, 4vw, 38px);
+  background-image: url("./assets/arrugas_con_fondo-Picsart-AiImageEnhancer.png");
+  background-size: 116% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.24));
+}
+
+.panel-preview img {
+  width: min(230px, 72%);
+  aspect-ratio: 2.6;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  opacity: 0.88;
+}
+
+.component-tab {
+  position: absolute;
+  left: calc(100% - 10px);
+  top: 28%;
+  z-index: 4;
+  width: min(330px, 46vw);
+  min-height: 168px;
+  padding: 18px;
+  background: rgba(52, 52, 48, 0.96);
+  border-left: 5px solid var(--brass);
+  color: #f2f2ef;
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(-18px);
+  pointer-events: none;
+  transition:
+    opacity 260ms ease,
+    transform 260ms ease;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.34);
+}
+
+.rotor-card:hover .component-tab {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.component-tab img {
+  width: 96px;
+  height: 76px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.component-tab h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.component-tab p {
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.84rem;
 }
 
 .user-area {
@@ -184,13 +368,70 @@ select {
   background: var(--green);
 }
 
-.avatar-button,
 .login-button {
   min-width: 42px;
   height: 42px;
   background: var(--muted);
   color: #414141;
   font-weight: 700;
+}
+
+.account-button {
+  min-width: clamp(210px, 18vw, 270px);
+  height: 58px;
+  padding: 0 8px 0 16px;
+  background: #4d4d49;
+  border-radius: 0 999px 999px 0;
+  color: #f2f2ef;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46px;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  font-weight: 700;
+  box-shadow: inset 4px 0 0 var(--brass);
+  transition:
+    background 150ms ease,
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.account-button:hover {
+  background: #5d5d59;
+  transform: translateY(-2px);
+  box-shadow:
+    inset 5px 0 0 var(--brass),
+    0 8px 16px rgba(0, 0, 0, 0.18);
+}
+
+.account-button:active {
+  transform: translateY(1px);
+  box-shadow: inset 3px 0 0 var(--brass);
+}
+
+.account-button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-button img,
+.account-button strong {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid #202020;
+}
+
+.account-button img {
+  object-fit: cover;
+}
+
+.account-button strong {
+  display: grid;
+  place-items: center;
+  background: #4d4d49;
+  color: #f2f2ef;
 }
 
 .login-button {
@@ -260,7 +501,7 @@ select {
 
 .account-menu {
   position: absolute;
-  top: 50px;
+  top: 66px;
   right: 0;
   z-index: 12;
   min-width: 150px;
@@ -738,6 +979,16 @@ select {
   font-size: 0.85rem;
 }
 
+.site-footer {
+  width: min(980px, 92vw);
+  margin: 48px auto 0;
+  padding: 18px 0 0;
+  border-top: 1px solid rgba(181, 155, 84, 0.45);
+  color: rgba(255, 255, 255, 0.66);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 620px) {
   .enigma-page {
     padding-inline: 12px;
@@ -756,6 +1007,44 @@ select {
     flex: 0 0 96px;
     min-height: 54px;
     font-size: 0.88rem;
+  }
+
+  .how-page {
+    width: min(560px, 100%);
+    padding-top: 18px;
+    gap: 30px;
+  }
+
+  .how-copy {
+    margin-left: 0;
+  }
+
+  .component-row,
+  .component-row.reverse {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .component-row.reverse .component-image {
+    order: 2;
+  }
+
+  .component-card {
+    min-height: 320px;
+    padding: 54px 44px;
+  }
+
+  .component-tab {
+    left: 18px;
+    right: 18px;
+    top: calc(100% - 24px);
+    width: auto;
+    grid-template-columns: 82px minmax(0, 1fr);
+  }
+
+  .component-tab img {
+    width: 82px;
+    height: 66px;
   }
 
   .title-strip {

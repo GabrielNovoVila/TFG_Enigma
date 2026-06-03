@@ -29,9 +29,10 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         OAuth2User user = (OAuth2User) authentication.getPrincipal();
 
         String email = user.getAttribute("email");
+        String picture = user.getAttribute("picture");
 
-        String accessToken = jwtService.generarAccessToken(email);
-        String refreshToken = jwtService.generarRefreshToken(email);
+        String accessToken = jwtService.generarAccessToken(email, picture);
+        String refreshToken = jwtService.generarRefreshToken(email, picture);
 
 
         response.setContentType("application/json");

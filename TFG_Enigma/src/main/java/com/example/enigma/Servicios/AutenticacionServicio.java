@@ -14,21 +14,56 @@ public class AutenticacionServicio {
     private final SecretKey key = Keys.hmacShaKeyFor(SECRET_STRING.getBytes());
 
     public String generarAccessToken(String email) {
-        return Jwts.builder()
+        return generarAccessToken(email, null);
+    }
+
+    public String generarAccessToken(String email, String picture) {
+        var builder = Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 10))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 10));
+
+        if(picture!=null && !picture.isBlank()){
+            builder.claim("picture", picture);
+        }
+
+        return builder
                 .signWith(key, Jwts.SIG.HS256)
                 .compact();
     }
 
     public String generarRefreshToken(String email) {
-        return Jwts.builder()
+        return generarRefreshToken(email, null);
+    }
+
+    public String generarRefreshToken(String email, String picture) {
+        var builder = Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7))
+                .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7));
+
+        if(picture!=null && !picture.isBlank()){
+            builder.claim("picture", picture);
+        }
+
+        return builder
                 .signWith(key, Jwts.SIG.HS256)
                 .compact();
+    }
+
+    public String obtenerFoto(String token) {
+        try {
+            Object picture = Jwts.parser()
+                    .verifyWith(key)
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload()
+                    .get("picture");
+
+            return picture instanceof String ? (String) picture : null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String validarToken(String token) {

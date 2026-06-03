@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { fetchWithAuth } from "../services/api";
 import { useAuth } from "../auth/AuthContext";
+import rotorPreview from "../assets/fondo_rugoso.png";
 import "../App.css";
 
 const API_URL = "http://localhost:8082";
@@ -12,7 +13,7 @@ const MACHINE_MODES = {
     cifrar: {
         label: "Cifrar",
         endpoint: "cifrar",
-        statusReady: "Crea una maquina para cifrar",
+        statusReady: "Crea una máquina para cifrar",
         statusDone: "Letra cifrada",
         statusError: "No se pudo cifrar con el backend",
         requestError: "No se pudo cifrar"
@@ -20,7 +21,7 @@ const MACHINE_MODES = {
     descifrar: {
         label: "Descifrar",
         endpoint: "descifrar",
-        statusReady: "Crea una maquina para descifrar",
+        statusReady: "Crea una máquina para descifrar",
         statusDone: "Letra descifrada",
         statusError: "No se pudo descifrar con el backend",
         requestError: "No se pudo descifrar"
@@ -92,7 +93,7 @@ function getCableColor(index) {
     return CABLE_COLORS[index % CABLE_COLORS.length];
 }
 
-function getTokenSubject(token) {
+function getTokenPayload(token) {
     if (!token) {
         return null;
     }
@@ -105,10 +106,18 @@ function getTokenSubject(token) {
             "="
         );
         const decodedPayload = JSON.parse(atob(paddedPayload));
-        return decodedPayload.sub || null;
+        return decodedPayload;
     } catch (error) {
         return null;
     }
+}
+
+function getTokenSubject(token) {
+    return getTokenPayload(token)?.sub || null;
+}
+
+function getTokenPicture(token) {
+    return getTokenPayload(token)?.picture || null;
 }
 
 function getHistoryStorageKey(accessToken) {
@@ -141,6 +150,96 @@ function normaliseSteps(steps) {
     return [];
 }
 
+function HowWorksPage() {
+    const [activeInfo, setActiveInfo] = useState(null);
+
+    return (
+        <section
+            className={activeInfo ? "how-page is-inspecting" : "how-page"}
+            aria-label="Como funciona"
+        >
+            <section className="intro-panel how-intro" aria-label="Introduccion">
+                <div>
+                    <p className="eyebrow">Guía de componentes</p>
+                    <h1>¿Cómo funciona?</h1>
+                    <p>
+                        La máquina Enigma transforma cada letra pasando la señal por varios
+                        componentes mecánicos y eléctricos.
+                    </p>
+                    <p>
+                        Cuenta con 3 rotores, 1 reflector y 26 entradas para conexión posibles,
+                        una para cada letra del abecedario.
+                    </p>
+                </div>
+                <div className="intro-notes how-jump-buttons">
+                    {Array.from({ length: 6 }, (_, index) => (
+                        <button type="button" key={`how-button-${index + 1}`}>
+                            Boton {index + 1}
+                        </button>
+                    ))}
+                </div>
+            </section>
+
+            <div
+                className="component-row"
+                id="how-rotors"
+            >
+                <article
+                    className="component-card rotor-card"
+                    onMouseEnter={() => setActiveInfo("rotors")}
+                    onMouseLeave={() => setActiveInfo(null)}
+                >
+                    <h2>Rotores</h2>
+                    <p>
+                        Los rotores cambian la letra segun su cableado interno, su ajuste
+                        de anillo y la posicion actual.
+                    </p>
+                    <p>
+                        En nuestra maquina son las tres ruedas superiores que avanzan al
+                        cifrar o descifrar.
+                    </p>
+
+                    <aside className="component-tab" aria-hidden={activeInfo !== "rotors"}>
+                        <img src={rotorPreview} alt="" />
+                        <div>
+                            <h3>En nuestra maquina</h3>
+                            <p>
+                                Esta zona representa los tres rotores: tipo, posicion visible
+                                y avance de la senal.
+                            </p>
+                        </div>
+                    </aside>
+                </article>
+
+                <div className="component-image panel-preview">
+                    <img src={rotorPreview} alt="Vista provisional de los rotores" />
+                </div>
+            </div>
+
+            <div
+                className="component-row reverse"
+                id="how-reflector"
+            >
+                <div className="component-image panel-preview">
+                    <img src={rotorPreview} alt="Vista provisional del reflector" />
+                </div>
+
+                <article className="component-card">
+                    <h2>Reflector</h2>
+                    <p>
+                        El reflector devuelve la senal por el camino inverso, haciendo que
+                        el proceso pueda usarse para cifrar y descifrar.
+                    </p>
+                    <p>
+                        En el simulador puedes alternar entre los dos reflectores desde el
+                        control de la maquina.
+                    </p>
+                </article>
+            </div>
+        </section>
+    );
+}
+
 export default function Home() {
     const { accessToken, logout } = useAuth();
     const [settingsOpen, setSettingsOpen] = useState(false);
@@ -154,11 +253,15 @@ export default function Home() {
     const [accountMenuOpen, setAccountMenuOpen] = useState(false);
     const [historyOpen, setHistoryOpen] = useState(false);
     const [stepsOpen, setStepsOpen] = useState(false);
+    const [lastSteps, setLastSteps] = useState([]);
     const [status, setStatus] = useState("Lista para usar");
     const [machineMode, setMachineMode] = useState("cifrar");
+    const [activePage, setActivePage] = useState("machine");
+    const [pulseTarget, setPulseTarget] = useState("");
     const skipNextHistorySave = useRef(false);
     const isLoggedIn = Boolean(accessToken);
     const userEmail = useMemo(() => getTokenSubject(accessToken), [accessToken]);
+    const userPicture = useMemo(() => getTokenPicture(accessToken), [accessToken]);
     const userInitial = userEmail ? userEmail.charAt(0).toUpperCase() : "?";
     const historyStorageKey = useMemo(() => getHistoryStorageKey(accessToken), [accessToken]);
 
@@ -187,8 +290,8 @@ export default function Home() {
     }, [cablePairs]);
 
     const latestSteps = useMemo(() => {
-        return normaliseSteps(sessionHistory[0]?.steps);
-    }, [sessionHistory]);
+        return lastSteps.length ? lastSteps : normaliseSteps(sessionHistory[0]?.steps);
+    }, [lastSteps, sessionHistory]);
 
     useEffect(() => {
         const createMachine = async () => {
@@ -214,6 +317,7 @@ export default function Home() {
         skipNextHistorySave.current = true;
         setAllTimeHistory(loadSavedHistory(historyStorageKey));
         setSessionHistory([]);
+        setLastSteps([]);
         setHistoryOpen(false);
         setStepsOpen(false);
         setAccountMenuOpen(false);
@@ -256,13 +360,16 @@ export default function Home() {
     const encryptLetter = async (letter) => {
         const mode = MACHINE_MODES[machineMode];
         setLastInput(letter);
+        setStepsOpen(false);
 
         if (!machine.id) {
+            const fallbackSteps = ["No hay pasos disponibles porque todavia no hay maquina creada."];
             setLastOutput(letter);
+            setLastSteps(fallbackSteps);
             saveHistoryEntry({
                 input: letter,
                 output: letter,
-                steps: ["No hay pasos disponibles porque todavia no hay maquina creada."]
+                steps: fallbackSteps
             });
             setStatus(mode.statusReady);
             return;
@@ -280,23 +387,27 @@ export default function Home() {
 
             const data = await response.json();
             const output = data.letra || letter;
+            const steps = normaliseSteps(data.pasos);
 
             setMachine(normaliseMachine(data.maquina));
             setLastOutput(output);
+            setLastSteps(steps);
             saveHistoryEntry({
                 input: letter,
                 output,
                 mode: mode.label,
-                steps: normaliseSteps(data.pasos)
+                steps
             });
             setStatus(mode.statusDone);
         } catch (error) {
+            const errorSteps = [`No se pudieron recuperar los pasos porque fallo la peticion de ${mode.label.toLowerCase()}.`];
             setLastOutput(letter);
+            setLastSteps(errorSteps);
             saveHistoryEntry({
                 input: letter,
                 output: letter,
                 mode: mode.label,
-                steps: [`No se pudieron recuperar los pasos porque fallo la peticion de ${mode.label.toLowerCase()}.`]
+                steps: errorSteps
             });
             setStatus(mode.statusError);
         }
@@ -477,18 +588,36 @@ export default function Home() {
         }
     };
 
+    const jumpToSection = (target) => {
+        if (target === "rotors") {
+            setSettingsOpen(true);
+        }
+
+        setPulseTarget("");
+        requestAnimationFrame(() => {
+            const element = document.getElementById(`jump-${target}`);
+            element?.scrollIntoView({ behavior: "smooth", block: "center" });
+            setPulseTarget(target);
+            window.setTimeout(() => setPulseTarget(""), 900);
+        });
+    };
+
     return (
         <main className="enigma-page">
             <header className="topbar">
                 <nav className="main-tabs" aria-label="Navegacion principal">
-                    <button type="button">Maquina Enigma</button>
-                    <button type="button">Como funciona?</button>
+                    <button type="button" onClick={() => setActivePage("machine")}>
+                        Máquina Enigma
+                    </button>
+                    <button type="button" onClick={() => setActivePage("how")}>
+                        ¿Cómo funciona?
+                    </button>
                     <button type="button">Historia</button>
                     <button type="button">German Book</button>
                     <button type="button">Retos</button>
                 </nav>
 
-                <div className="title-strip">ENIGMA M3</div>
+                <div className="title-strip">MAQUINA ENIGMA M3</div>
 
                 <div className="user-area">
                     <div className="auth-row">
@@ -496,11 +625,16 @@ export default function Home() {
                             <>
                                 <span className="session-dot" aria-label="Sesion iniciada" />
                                 <button
-                                    className="avatar-button"
+                                    className="account-button"
                                     onClick={() => setAccountMenuOpen((open) => !open)}
                                     title={userEmail || "Cuenta"}
                                 >
-                                    {userInitial}
+                                    <span>{userEmail}</span>
+                                    {userPicture ? (
+                                        <img src={userPicture} alt="" referrerPolicy="no-referrer" />
+                                    ) : (
+                                        <strong aria-hidden="true">{userInitial}</strong>
+                                    )}
                                 </button>
                                 {accountMenuOpen && (
                                     <div className="account-menu">
@@ -521,20 +655,30 @@ export default function Home() {
                 </div>
             </header>
 
+            {activePage === "how" ? (
+                <HowWorksPage />
+            ) : (
+                <>
             <section className="intro-panel" aria-label="Introduccion">
                 <div>
                     <p className="eyebrow">Simulador interactivo</p>
                     <h1>Enigma M3</h1>
                     <p>
-                        Una maquina de cifrado por rotores donde cada letra atraviesa el
+                        Una máquina de cifrado por rotores donde cada letra atraviesa el
                         teclado, el panel de conexiones, los rotores y el reflector antes de
                         volver transformada.
                     </p>
                 </div>
                 <div className="intro-notes">
-                    <span>Rotores configurables</span>
-                    <span>Cifrado y descifrado</span>
-                    <span>Historial de sesion</span>
+                    <button type="button" onClick={() => jumpToSection("rotors")}>
+                        Rotores configurables
+                    </button>
+                    <button type="button" onClick={() => jumpToSection("cipher")}>
+                        Cifrado y descifrado
+                    </button>
+                    <button type="button" onClick={() => jumpToSection("history")}>
+                        Historial de sesión
+                    </button>
                 </div>
             </section>
 
@@ -542,7 +686,14 @@ export default function Home() {
                 <p className="status-line">{status}</p>
 
                 <div className="machine-panel">
-                    <div className="panel-actions">
+                    <div
+                        id="jump-cipher"
+                        className={
+                            pulseTarget === "cipher"
+                                ? "panel-actions jump-pulse"
+                                : "panel-actions"
+                        }
+                    >
                         <label className="mode-selector">
                             <span>Modo</span>
                             <select
@@ -562,7 +713,13 @@ export default function Home() {
                         <button onClick={changeReflector}>Reflector {machine.reflector}</button>
                     </div>
 
-                    <div className="rotor-bank" aria-label="Rotores">
+                    <div
+                        id="jump-rotors"
+                        className={
+                            pulseTarget === "rotors" ? "rotor-bank jump-pulse" : "rotor-bank"
+                        }
+                        aria-label="Rotores"
+                    >
                         {machine.rotores.map((rotor, index) => (
                             <div className="rotor" key={`rotor-${index}`}>
                                 <span>{rotorNames[rotor]}</span>
@@ -695,7 +852,11 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="notebook" aria-label="Libreta de traduccion">
+            <section
+                id="jump-history"
+                className={pulseTarget === "history" ? "notebook jump-pulse" : "notebook"}
+                aria-label="Libreta de traduccion"
+            >
                 <div className="notebook-line"/>
                 <div className="notebook-columns">
                     <div>
@@ -713,29 +874,11 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="context-panel" aria-label="Contexto de cifrado">
-                <article>
-                    <h2>Ruta de la senal</h2>
-                    <p>
-                        La letra entra por el teclado, cambia si hay un cable conectado y
-                        cruza los tres rotores. El reflector devuelve la senal por el camino
-                        inverso hasta obtener la letra cifrada.
-                    </p>
-                </article>
-                <article>
-                    <h2>Movimiento</h2>
-                    <p>
-                        Cada pulsacion avanza el rotor derecho. Cuando alcanza su punto de
-                        cambio, arrastra al siguiente rotor y altera el alfabeto de salida.
-                    </p>
-                </article>
-            </section>
-
             <section className="steps-area" aria-label="Pasos de cifrado">
                 <button
                     className="steps-toggle"
                     onClick={() => setStepsOpen((open) => !open)}
-                    disabled={!sessionHistory.length}
+                    disabled={!latestSteps.length}
                 >
                     {stepsOpen ? "Ocultar pasos seguidos" : "Mostrar pasos seguidos"}
                 </button>
@@ -759,6 +902,8 @@ export default function Home() {
                     </div>
                 )}
             </section>
+                </>
+            )}
 
             {historyOpen && (
                 <section className="history-panel" aria-label="Historial completo">
@@ -794,6 +939,10 @@ export default function Home() {
                     </div>
                 </section>
             )}
+
+            <footer className="site-footer">
+                Máquina Enigma - Gabriel Novo Vila
+            </footer>
         </main>
     );
 }

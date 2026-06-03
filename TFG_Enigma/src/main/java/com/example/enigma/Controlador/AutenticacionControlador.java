@@ -31,7 +31,8 @@ public class AutenticacionControlador {
 
         try {
             String email = jwtService.validarToken(refreshToken);
-            String newAccessToken = jwtService.generarAccessToken(email);
+            String picture = jwtService.obtenerFoto(refreshToken);
+            String newAccessToken = jwtService.generarAccessToken(email, picture);
 
             return new ResponseEntity<>(Map.of("accessToken", newAccessToken), HttpStatus.OK);
         } catch (Exception e) {
