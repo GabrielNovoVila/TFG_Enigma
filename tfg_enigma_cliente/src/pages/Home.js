@@ -2,12 +2,66 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { fetchWithAuth } from "../services/api";
 import { useAuth } from "../auth/AuthContext";
 import rotorPreview from "../assets/fondo_rugoso.png";
+import keyA from "../assets/a.png";
+import keyB from "../assets/b.png";
+import keyC from "../assets/c.png";
+import keyD from "../assets/d.png";
+import keyE from "../assets/e.png";
+import keyF from "../assets/f.png";
+import keyG from "../assets/g.png";
+import keyH from "../assets/h.png";
+import keyI from "../assets/i.png";
+import keyJ from "../assets/j.png";
+import keyK from "../assets/k.png";
+import keyL from "../assets/l.png";
+import keyM from "../assets/m.png";
+import keyN from "../assets/n.png";
+import keyO from "../assets/o.png";
+import keyP from "../assets/p.png";
+import keyQ from "../assets/q.png";
+import keyR from "../assets/r.png";
+import keyS from "../assets/s.png";
+import keyT from "../assets/t.png";
+import keyU from "../assets/u.png";
+import keyV from "../assets/v.png";
+import keyW from "../assets/w.png";
+import keyX from "../assets/x.png";
+import keyY from "../assets/y.png";
+import keyZ from "../assets/z.png";
 import "../App.css";
 
 const API_URL = "http://localhost:8082";
 const HISTORY_LIMIT = 60;
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-const KEY_ROWS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
+const KEY_ROWS = ["QWERTZUIO", "ASDFGHJK", "PYXCVBNML"];
+const KEY_IMAGES = {
+    A: keyA,
+    B: keyB,
+    C: keyC,
+    D: keyD,
+    E: keyE,
+    F: keyF,
+    G: keyG,
+    H: keyH,
+    I: keyI,
+    J: keyJ,
+    K: keyK,
+    L: keyL,
+    M: keyM,
+    N: keyN,
+    O: keyO,
+    P: keyP,
+    Q: keyQ,
+    R: keyR,
+    S: keyS,
+    T: keyT,
+    U: keyU,
+    V: keyV,
+    W: keyW,
+    X: keyX,
+    Y: keyY,
+    Z: keyZ
+};
 const ROTOR_OPTIONS = [0, 1, 2, 3, 4];
 const MACHINE_MODES = {
     cifrar: {
@@ -37,7 +91,10 @@ const CABLE_COLORS = [
     "#3f8f8a",
     "#9b6b3d",
     "#536fb3",
-    "#7d8b38"
+    "#7d8b38",
+    "#d555d5",
+    "#e66525",
+    "#222275"
 ];
 
 const emptyMachine = {
@@ -246,7 +303,6 @@ export default function Home() {
     const [plugboardOpen, setPlugboardOpen] = useState(false);
     const [machine, setMachine] = useState(emptyMachine);
     const [selectedPlug, setSelectedPlug] = useState(null);
-    const [lastInput, setLastInput] = useState("");
     const [lastOutput, setLastOutput] = useState("");
     const [sessionHistory, setSessionHistory] = useState([]);
     const [allTimeHistory, setAllTimeHistory] = useState([]);
@@ -359,7 +415,6 @@ export default function Home() {
 
     const encryptLetter = async (letter) => {
         const mode = MACHINE_MODES[machineMode];
-        setLastInput(letter);
         setStepsOpen(false);
 
         if (!machine.id) {
@@ -644,9 +699,12 @@ export default function Home() {
                                 )}
                             </>
                         ) : (
-                            <button className="login-button" onClick={loginWithGoogle}>
-                                Google
-                            </button>
+                            <>
+                                <span className="session-dot logged-out" aria-label="Sesion no iniciada" />
+                                <button className="login-button" onClick={loginWithGoogle}>
+                                    Iniciar sesión
+                                </button>
+                            </>
                         )}
                     </div>
                     <button className="accessibility-button" type="button" aria-label="Accesibilidad">
@@ -707,7 +765,10 @@ export default function Home() {
                                 ))}
                             </select>
                         </label>
-                        <button onClick={() => setSettingsOpen((open) => !open)}>
+                        <button
+                            className={pulseTarget === "rotors" ? "jump-pulse" : ""}
+                            onClick={() => setSettingsOpen((open) => !open)}
+                        >
                             Rotores
                         </button>
                         <button onClick={changeReflector}>Reflector {machine.reflector}</button>
@@ -733,11 +794,18 @@ export default function Home() {
 
 
                     {settingsOpen && (
-                        <div className="settings-panel">
+                        <div
+                            className={
+                                pulseTarget === "rotors"
+                                    ? "settings-panel jump-pulse"
+                                    : "settings-panel"
+                            }
+                        >
                             {machine.rotores.map((rotor, index) => (
-                                <label key={`setting-${index}`}>
-                                    R{index + 1}
+                                <div className="settings-column" key={`setting-${index}`}>
+                                    <span>R{index + 1}</span>
                                     <select
+                                        aria-label={`Rotor ${index + 1}`}
                                         value={String(rotor)}
                                         onChange={(event) => changeRotor(index, event.target.value)}
                                     >
@@ -748,6 +816,7 @@ export default function Home() {
                                         ))}
                                     </select>
                                     <select
+                                        aria-label={`Ajuste de anillo R${index + 1}`}
                                         value={machine.rotores_settings[index] || "A"}
                                         onChange={(event) => changeRing(index, event.target.value)}
                                     >
@@ -758,6 +827,7 @@ export default function Home() {
                                         ))}
                                     </select>
                                     <select
+                                        aria-label={`Posicion actual R${index + 1}`}
                                         value={String(machine.rotores_posiciones[index] || 0)}
                                         onChange={(event) =>
                                             changeRotorPosition(index, event.target.value)
@@ -769,7 +839,7 @@ export default function Home() {
                                             </option>
                                         ))}
                                     </select>
-                                </label>
+                                </div>
                             ))}
                         </div>
                     )}
@@ -783,11 +853,13 @@ export default function Home() {
                             <div className="key-row" key={row}>
                                 {row.split("").map((letter) => (
                                     <button
-                                        className={letter === lastInput ? "key active" : "key"}
+                                        className="key"
+                                        style={{ "--key-image": `url(${KEY_IMAGES[letter]})` }}
+                                        aria-label={`Tecla ${letter}`}
                                         key={letter}
                                         onClick={() => encryptLetter(letter)}
                                     >
-                                        {letter}
+                                        <span className="key-letter">{letter}</span>
                                     </button>
                                 ))}
                             </div>
