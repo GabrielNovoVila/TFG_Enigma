@@ -3,6 +3,7 @@ import { fetchWithAuth } from "../services/api";
 import { useAuth } from "../auth/AuthContext";
 import rotorPreview from "../assets/fondo_rugoso.png";
 import rotorWheel from "../assets/rueda.png";
+import accessibilityIcon from "../assets/accesibilidad.png";
 import keyA from "../assets/a.png";
 import keyB from "../assets/b.png";
 import keyC from "../assets/c.png";
@@ -97,6 +98,39 @@ const CABLE_COLORS = [
     "#e66525",
     "#222275"
 ];
+const COLORBLIND_CABLE_COLORS = [
+    "#0072b2",
+    "#e69f00",
+    "#009e73",
+    "#d55e00",
+    "#cc79a7",
+    "#56b4e9",
+    "#f0e442",
+    "#000000",
+    "#3b5ba9",
+    "#a65628",
+    "#6a3d9a",
+    "#1b9e77",
+    "#e7298a"
+];
+const FONT_SCALE_MIN = 85;
+const FONT_SCALE_MAX = 125;
+const FONT_SCALE_STEP = 10;
+const ROMAN_NUMERALS = [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V",
+    "VI",
+    "VII",
+    "VIII",
+    "IX",
+    "X",
+    "XI",
+    "XII",
+    "XIII"
+];
 
 const emptyMachine = {
     id: null,
@@ -147,8 +181,9 @@ function getCableKey(cable) {
     return [cable.a, cable.b].sort((a, b) => a - b).join("-");
 }
 
-function getCableColor(index) {
-    return CABLE_COLORS[index % CABLE_COLORS.length];
+function getCableColor(index, colorblindMode = false) {
+    const colors = colorblindMode ? COLORBLIND_CABLE_COLORS : CABLE_COLORS;
+    return colors[index % colors.length];
 }
 
 function getTokenPayload(token) {
@@ -225,8 +260,9 @@ function HowWorksPage() {
                         componentes mecánicos y eléctricos.
                     </p>
                     <p>
-                        Cuenta con 3 rotores, 1 reflector y 26 entradas para conexión posibles,
-                        una para cada letra del abecedario.
+                        Esta es una máquina M3, por lo que cuenta con 3 rotores, 1 reflector y
+                        26 entradas para conexión posibles, una para cada letra del abecedario.
+                        En la sección "Historia" se habla sobre otros tipos de Máquina Enigma.
                     </p>
                 </div>
                 <div className="intro-notes how-jump-buttons">
@@ -308,6 +344,7 @@ export default function Home() {
     const [sessionHistory, setSessionHistory] = useState([]);
     const [allTimeHistory, setAllTimeHistory] = useState([]);
     const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+    const [accessibilityOpen, setAccessibilityOpen] = useState(false);
     const [historyOpen, setHistoryOpen] = useState(false);
     const [stepsOpen, setStepsOpen] = useState(false);
     const [lastSteps, setLastSteps] = useState([]);
@@ -315,6 +352,16 @@ export default function Home() {
     const [machineMode, setMachineMode] = useState("cifrar");
     const [activePage, setActivePage] = useState("machine");
     const [pulseTarget, setPulseTarget] = useState("");
+    const [lightMode, setLightMode] = useState(
+        () => localStorage.getItem("enigma-accessibility-light") === "true"
+    );
+    const [colorblindMode, setColorblindMode] = useState(
+        () => localStorage.getItem("enigma-accessibility-colorblind") === "true"
+    );
+    const [fontScale, setFontScale] = useState(() => {
+        const savedScale = Number(localStorage.getItem("enigma-accessibility-font-scale"));
+        return savedScale >= FONT_SCALE_MIN && savedScale <= FONT_SCALE_MAX ? savedScale : 100;
+    });
     const skipNextHistorySave = useRef(false);
     const userAreaRef = useRef(null);
     const historyPanelRef = useRef(null);
@@ -341,12 +388,13 @@ export default function Home() {
     const connectedLetters = useMemo(() => {
         const letters = new Map();
         cablePairs.forEach((cable, index) => {
-            const color = getCableColor(index);
-            letters.set(cable.a, { cable, color });
-            letters.set(cable.b, { cable, color });
+            const color = getCableColor(index, colorblindMode);
+            const identifier = ROMAN_NUMERALS[index] || String(index + 1);
+            letters.set(cable.a, { cable, color, identifier });
+            letters.set(cable.b, { cable, color, identifier });
         });
         return letters;
-    }, [cablePairs]);
+    }, [cablePairs, colorblindMode]);
 
     const latestSteps = useMemo(() => {
         return lastSteps.length ? lastSteps : normaliseSteps(sessionHistory[0]?.steps);
@@ -380,6 +428,7 @@ export default function Home() {
         setHistoryOpen(false);
         setStepsOpen(false);
         setAccountMenuOpen(false);
+        setAccessibilityOpen(false);
     }, [historyStorageKey]);
 
     useEffect(() => {
@@ -394,13 +443,17 @@ export default function Home() {
     }, [allTimeHistory, historyStorageKey]);
 
     useEffect(() => {
-        if (!accountMenuOpen && !historyOpen) {
+        if (!accountMenuOpen && !accessibilityOpen && !historyOpen) {
             return undefined;
         }
 
         const closeOpenPanels = (event) => {
-            if (accountMenuOpen && !userAreaRef.current?.contains(event.target)) {
+            if (
+                (accountMenuOpen || accessibilityOpen) &&
+                !userAreaRef.current?.contains(event.target)
+            ) {
                 setAccountMenuOpen(false);
+                setAccessibilityOpen(false);
             }
 
             if (historyOpen && !historyPanelRef.current?.contains(event.target)) {
@@ -410,7 +463,20 @@ export default function Home() {
 
         document.addEventListener("pointerdown", closeOpenPanels);
         return () => document.removeEventListener("pointerdown", closeOpenPanels);
-    }, [accountMenuOpen, historyOpen]);
+    }, [accountMenuOpen, accessibilityOpen, historyOpen]);
+
+    useEffect(() => {
+        localStorage.setItem("enigma-accessibility-light", String(lightMode));
+        localStorage.setItem("enigma-accessibility-colorblind", String(colorblindMode));
+        localStorage.setItem("enigma-accessibility-font-scale", String(fontScale));
+        document.documentElement.style.fontSize = `${fontScale}%`;
+    }, [lightMode, colorblindMode, fontScale]);
+
+    const changeFontScale = (difference) => {
+        setFontScale((current) =>
+            Math.min(FONT_SCALE_MAX, Math.max(FONT_SCALE_MIN, current + difference))
+        );
+    };
 
     const loginWithGoogle = () => {
         window.location.href = `${API_URL}/oauth2/authorization/google`;
@@ -680,7 +746,13 @@ export default function Home() {
     };
 
     return (
-        <main className="enigma-page">
+        <main
+            className={[
+                "enigma-page",
+                lightMode ? "light-mode" : "",
+                colorblindMode ? "colorblind-mode" : ""
+            ].filter(Boolean).join(" ")}
+        >
             <header className="topbar">
                 <nav className="main-tabs" aria-label="Navegacion principal">
                     <button type="button" onClick={() => setActivePage("machine")}>
@@ -703,7 +775,10 @@ export default function Home() {
                                 <span className="session-dot" aria-label="Sesion iniciada" />
                                 <button
                                     className="account-button"
-                                    onClick={() => setAccountMenuOpen((open) => !open)}
+                                    onClick={() => {
+                                        setAccountMenuOpen((open) => !open);
+                                        setAccessibilityOpen(false);
+                                    }}
                                     title={userEmail || "Cuenta"}
                                 >
                                     <span>{userEmail}</span>
@@ -729,9 +804,66 @@ export default function Home() {
                             </>
                         )}
                     </div>
-                    <button className="accessibility-button" type="button" aria-label="Accesibilidad">
-                        <span aria-hidden="true" />
+                    <button
+                        className="accessibility-button"
+                        type="button"
+                        aria-label="Accesibilidad"
+                        aria-expanded={accessibilityOpen}
+                        onClick={() => {
+                            setAccessibilityOpen((open) => !open);
+                            setAccountMenuOpen(false);
+                        }}
+                    >
+                        <img src={accessibilityIcon} alt="" aria-hidden="true" />
                     </button>
+                    {accessibilityOpen && (
+                        <div className="accessibility-menu">
+                            <button
+                                type="button"
+                                aria-pressed={lightMode}
+                                onClick={() => setLightMode((active) => !active)}
+                            >
+                                <span>Modo claro</span>
+                                <strong>{lightMode ? "Activado" : "Desactivado"}</strong>
+                            </button>
+                            <button
+                                type="button"
+                                aria-pressed={colorblindMode}
+                                onClick={() => setColorblindMode((active) => !active)}
+                            >
+                                <span>Colores accesibles</span>
+                                <strong>{colorblindMode ? "Activado" : "Desactivado"}</strong>
+                            </button>
+                            <div className="font-controls">
+                                <span>Tamano de letra</span>
+                                <div>
+                                    <button
+                                        type="button"
+                                        aria-label="Disminuir tamano de letra"
+                                        disabled={fontScale === FONT_SCALE_MIN}
+                                        onClick={() => changeFontScale(-FONT_SCALE_STEP)}
+                                    >
+                                        A-
+                                    </button>
+                                    <button
+                                        type="button"
+                                        aria-label="Restablecer tamano de letra"
+                                        onClick={() => setFontScale(100)}
+                                    >
+                                        {fontScale}%
+                                    </button>
+                                    <button
+                                        type="button"
+                                        aria-label="Aumentar tamano de letra"
+                                        disabled={fontScale === FONT_SCALE_MAX}
+                                        onClick={() => changeFontScale(FONT_SCALE_STEP)}
+                                    >
+                                        A+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </header>
 
@@ -739,14 +871,22 @@ export default function Home() {
                 <HowWorksPage />
             ) : (
                 <>
-            <section className="intro-panel" aria-label="Introduccion">
-                <div>
+            <section className="intro-panel machine-intro" aria-label="Introduccion">
+                <div className="intro-heading">
                     <p className="eyebrow">Simulador interactivo</p>
                     <h1>Enigma M3</h1>
+                </div>
+                <div className="intro-copy">
                     <p>
                         Una máquina de cifrado por rotores donde cada letra atraviesa el
                         teclado, el panel de conexiones, los rotores y el reflector antes de
                         volver transformada.
+                    </p>
+                    <p>
+                        Antes de clicar nada. Puedes modificar los ajustes de la máquina en el botón
+                        "Rotores". Está especificado qué significan estos ajustes en la sección
+                        "¿Cómo funciona?". También tienes un botón de accesibilidad arriba a la derecha de la pantalla
+                        en caso de querer realizar cambios sobre la página.
                     </p>
                 </div>
                 <div className="intro-notes">
@@ -917,7 +1057,12 @@ export default function Home() {
                                                 : "Conectar cable"
                                         }
                                     >
-                                        {letter}
+                                        <span>{letter}</span>
+                                        {colorblindMode && connectedLetters.has(index) && (
+                                            <small className="cable-identifier" aria-hidden="true">
+                                                {connectedLetters.get(index).identifier}
+                                            </small>
+                                        )}
                                     </button>
                                 ))}
                             </div>
@@ -931,10 +1076,17 @@ export default function Home() {
                                                 className="cable-chip"
                                                 key={getCableKey(cable)}
                                                 onClick={() => removeCable(cable)}
-                                                style={{"--cable-color": getCableColor(index)}}
+                                                style={{
+                                                    "--cable-color": getCableColor(index, colorblindMode)
+                                                }}
                                                 title="Quitar cable"
                                             >
                                                 {letters.a}-{letters.b}
+                                                {colorblindMode && (
+                                                    <small className="cable-identifier" aria-hidden="true">
+                                                        {ROMAN_NUMERALS[index] || index + 1}
+                                                    </small>
+                                                )}
                                             </button>
                                         );
                                     })
