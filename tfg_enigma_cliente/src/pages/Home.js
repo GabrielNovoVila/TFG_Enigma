@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { fetchWithAuth } from "../services/api";
 import { useAuth } from "../auth/AuthContext";
-import rotorPreview from "../assets/fondo_rugoso.png";
+import rotorPreview from "../assets/Enigma_rotor_set.png";
 import rotorWheel from "../assets/rueda.png";
+import rotorSettingsPreview from "../assets/mis_rotores.png";
 import accessibilityIcon from "../assets/accesibilidad.png";
 import keyA from "../assets/a.png";
 import keyB from "../assets/b.png";
@@ -245,6 +246,19 @@ function normaliseSteps(steps) {
 
 function HowWorksPage() {
     const [activeInfo, setActiveInfo] = useState(null);
+    const [pulseTarget, setPulseTarget] = useState("");
+
+    const jumpToComponent = (target) => {
+        setPulseTarget("");
+        requestAnimationFrame(() => {
+            document.getElementById(`how-${target}`)?.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+            setPulseTarget(target);
+            window.setTimeout(() => setPulseTarget(""), 900);
+        });
+    };
 
     return (
         <section
@@ -266,16 +280,23 @@ function HowWorksPage() {
                     </p>
                 </div>
                 <div className="intro-notes how-jump-buttons">
-                    {Array.from({ length: 6 }, (_, index) => (
-                        <button type="button" key={`how-button-${index + 1}`}>
-                            Boton {index + 1}
+                    <button type="button" onClick={() => jumpToComponent("rotors")}>
+                        Rotores
+                    </button>
+                    {Array.from({ length: 5 }, (_, index) => (
+                        <button type="button" key={`how-button-${index + 2}`}>
+                            Boton {index + 2}
                         </button>
                     ))}
                 </div>
             </section>
 
             <div
-                className="component-row"
+                className={[
+                    "component-row",
+                    "rotor-component-row",
+                    pulseTarget === "rotors" ? "jump-pulse" : ""
+                ].filter(Boolean).join(" ")}
                 id="how-rotors"
             >
                 <article
@@ -284,30 +305,73 @@ function HowWorksPage() {
                     onMouseLeave={() => setActiveInfo(null)}
                 >
                     <h2>Rotores</h2>
+                    <div className="component-copy">
                     <p>
-                        Los rotores cambian la letra segun su cableado interno, su ajuste
-                        de anillo y la posicion actual.
+                        Cada rotor contiene un tipo, un alfabeto propio, una posición inicial,
+                        una actual y una posición de cambio. Dependiendo del tipo de máquina,
+                        hay unos tipos de rotor u otros y este influye en su alfabeto y en la posición de cambio.
                     </p>
                     <p>
-                        En nuestra maquina son las tres ruedas superiores que avanzan al
-                        cifrar o descifrar.
+                        El efecto del rotor es cifrar una letra en base al alfabeto que contiene.
+                        Cada letra tiene asociada otra, de forma que, sin tener en cuenta las
+                        posiciones inicial y actual, si a un rotor de cierto tipo le llega una A,
+                        siempre devolverá B.
+                    </p>
+                    <p>
+                        Ahora vamos a complicarlo un poco más, los rotores de las máquinas enigma giran para cambiar de posición.
+                        Cada vez que pulsas una letra en el teclado, el rotor más a la derecha, gira.
+                        Si, por ejemplo, los rotores están en una posición A A A
+                        (La letra asociada a la posición del primer rotor es A, la del segundo, es A y la del tercero, es A),
+                        si cifras o descifras una letra, pasarán a A A B. Luego a A A C y así continuamente.
+                        Dependiendo del tipo de rotor, este tendrá una posición de cambio. Si la posición de cambio es H,
+                        al llegar a H, cambiará el siguiente rotor. Así, tendríamos la siguiente secuencia:
+                        A A F → A A G → A B H → A B I, cuando vuelva a llegar a H, volverá a cambiar el siguiente.
+                    </p>
+                    <p>
+                        ¿Cuál es el efecto de estas posiciones?
+                        Pues bien, además de estas, existe una posición inicial para cada rotor,
+                        que nos indica el desplazamiento para el alfabeto.
+                        La forma más fácil de entenderlo es pasando las letras a números.
+                        Imaginemos que al rotor llega la letra 1 (A).
+                        Este rotor está en una posición 3 (C) y su posición inicial era 2 (B).
+                        Como hay un cambio de 1 posición entre la actual y la inicial (3-2=1),
+                        el rotor actúa como si, en lugar de llegar la letra A, llegara la letra B (1+1=2).
+                        Se devuelve la letra asociada a la B. Imaginemos que es la M la letra asociada a la B.
+                        Ahora, se le restaría la diferencia que antes se sumó. Antes sumamos la letra que llegó (A+1=B),
+                        ahora lo restamos (M-1=N), en este ejemplo, si entrara una A,
+                        devolvería una N. Este ejemplo era de cifrado.
+                        En un caso de descifrado, primero se resta y luego se suma.
                     </p>
 
+                    </div>
+
                     <aside className="component-tab" aria-hidden={activeInfo !== "rotors"}>
-                        <img src={rotorPreview} alt="" />
-                        <div>
-                            <h3>En nuestra maquina</h3>
+                        <figure>
+                            <img
+                                src={rotorSettingsPreview}
+                                alt="Tabla de ajustes de rotores de nuestra maquina"
+                            />
+                            <figcaption>Ajustes de los rotores en nuestra máquina M3</figcaption>
+                        </figure>
+                        <div className="component-tab-copy">
+                            <h3>En nuestra máquina</h3>
                             <p>
-                                Esta zona representa los tres rotores: tipo, posicion visible
-                                y avance de la senal.
+                                Al ser una Enigma M3, puedes elegir entre cinco tipos de rotor:
+                                I, II, III, IV y V.
+                            </p>
+                            <p>
+                                Cada columna corresponde a uno de los tres rotores. La primera
+                                fila selecciona su tipo, la segunda configura la posición
+                                inicial del anillo y la tercera cambia su posición actual.
                             </p>
                         </div>
                     </aside>
                 </article>
 
-                <div className="component-image panel-preview">
-                    <img src={rotorPreview} alt="Vista provisional de los rotores" />
-                </div>
+                <figure className="component-image panel-preview">
+                    <img src={rotorPreview} alt="Imagen de los rotores"/>
+                    <figcaption>Imagen representativa de los rotores de la máquina Enigma.</figcaption>
+                </figure>
             </div>
 
             <div
