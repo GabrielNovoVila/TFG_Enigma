@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { fetchWithAuth } from "../services/api";
 import { useAuth } from "../auth/AuthContext";
 import rotorPreview from "../assets/fondo_rugoso.png";
+import rotorWheel from "../assets/rueda.png";
 import keyA from "../assets/a.png";
 import keyB from "../assets/b.png";
 import keyC from "../assets/c.png";
@@ -315,6 +316,8 @@ export default function Home() {
     const [activePage, setActivePage] = useState("machine");
     const [pulseTarget, setPulseTarget] = useState("");
     const skipNextHistorySave = useRef(false);
+    const userAreaRef = useRef(null);
+    const historyPanelRef = useRef(null);
     const isLoggedIn = Boolean(accessToken);
     const userEmail = useMemo(() => getTokenSubject(accessToken), [accessToken]);
     const userPicture = useMemo(() => getTokenPicture(accessToken), [accessToken]);
@@ -389,6 +392,25 @@ export default function Home() {
             localStorage.setItem(historyStorageKey, JSON.stringify(allTimeHistory.slice(0, HISTORY_LIMIT)));
         }
     }, [allTimeHistory, historyStorageKey]);
+
+    useEffect(() => {
+        if (!accountMenuOpen && !historyOpen) {
+            return undefined;
+        }
+
+        const closeOpenPanels = (event) => {
+            if (accountMenuOpen && !userAreaRef.current?.contains(event.target)) {
+                setAccountMenuOpen(false);
+            }
+
+            if (historyOpen && !historyPanelRef.current?.contains(event.target)) {
+                setHistoryOpen(false);
+            }
+        };
+
+        document.addEventListener("pointerdown", closeOpenPanels);
+        return () => document.removeEventListener("pointerdown", closeOpenPanels);
+    }, [accountMenuOpen, historyOpen]);
 
     const loginWithGoogle = () => {
         window.location.href = `${API_URL}/oauth2/authorization/google`;
@@ -674,7 +696,7 @@ export default function Home() {
 
                 <div className="title-strip">MAQUINA ENIGMA M3</div>
 
-                <div className="user-area">
+                <div className="user-area" ref={userAreaRef}>
                     <div className="auth-row">
                         {accessToken ? (
                             <>
@@ -783,6 +805,7 @@ export default function Home() {
                     >
                         {machine.rotores.map((rotor, index) => (
                             <div className="rotor" key={`rotor-${index}`}>
+                                <img className="rotor-wheel" src={rotorWheel} alt="" />
                                 <span>{rotorNames[rotor]}</span>
                                 <strong>
                                     {ALPHABET[machine.rotores_posiciones[index] || 0] ||
@@ -978,7 +1001,11 @@ export default function Home() {
             )}
 
             {historyOpen && (
-                <section className="history-panel" aria-label="Historial completo">
+                <section
+                    className="history-panel"
+                    aria-label="Historial completo"
+                    ref={historyPanelRef}
+                >
                     <div className="history-panel-header">
                         <h2>Historial</h2>
                         <button onClick={() => setHistoryOpen(false)}>Cerrar</button>
@@ -986,27 +1013,31 @@ export default function Home() {
                     <div className="history-columns">
                         <div>
                             <h3>Sesion</h3>
-                            {sessionHistory.length ? (
-                                sessionHistory.map((item, index) => (
-                                    <span key={`session-history-${index}`}>
-                                        {item.input}-{item.output}
-                                    </span>
-                                ))
-                            ) : (
-                                <p>Sin letras en esta sesion</p>
-                            )}
+                            <div className="history-list">
+                                {sessionHistory.length ? (
+                                    sessionHistory.map((item, index) => (
+                                        <span key={`session-history-${index}`}>
+                                            {item.input}-{item.output}
+                                        </span>
+                                    ))
+                                ) : (
+                                    <p>Sin letras en esta sesion</p>
+                                )}
+                            </div>
                         </div>
                         <div>
                             <h3>Todos</h3>
-                            {allTimeHistory.length ? (
-                                allTimeHistory.map((item, index) => (
-                                    <span key={`all-history-${index}`}>
-                                        {item.input}-{item.output}
-                                    </span>
-                                ))
-                            ) : (
-                                <p>Sin historial guardado</p>
-                            )}
+                            <div className="history-list">
+                                {allTimeHistory.length ? (
+                                    allTimeHistory.map((item, index) => (
+                                        <span key={`all-history-${index}`}>
+                                            {item.input}-{item.output}
+                                        </span>
+                                    ))
+                                ) : (
+                                    <p>Sin historial guardado</p>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </section>
