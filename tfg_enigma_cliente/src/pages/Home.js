@@ -5,6 +5,13 @@ import rotorPreview from "../assets/Enigma_rotor_set.png";
 import rotorWheel from "../assets/rueda.png";
 import rotorSettingsPreview from "../assets/mis_rotores.png";
 import reflectorPreview from "../assets/reflector.png";
+import keyboardPreview from "../assets/teclado.jpg";
+import plugboardPreview from "../assets/espacio_conexiones.png";
+import lampsPreview from "../assets/bombillas.jpg";
+import myKeyboardPreview from "../assets/mi_teclado.png";
+import myPlugboardEmptyPreview from "../assets/mis_cables_no.png";
+import myPlugboardActivePreview from "../assets/mis_cables_si.png";
+import myOutputPreview from "../assets/mi_salida.png";
 import accessibilityIcon from "../assets/accesibilidad.png";
 import keyA from "../assets/a.png";
 import keyB from "../assets/b.png";
@@ -245,8 +252,106 @@ function normaliseSteps(steps) {
     return [];
 }
 
+function GuideSection({
+    number,
+    id,
+    title,
+    description,
+    summary,
+    paragraphs,
+    preview,
+    previewAlt,
+    previewCaption,
+    machineImages = [],
+    machineText,
+    activeInfo,
+    setActiveInfo,
+    openCard,
+    setOpenCard,
+    pulseTarget
+}) {
+    const isOpen = openCard === id;
+    const isActive = activeInfo === id;
+
+    return (
+        <>
+            <header className="component-section-heading">
+                <span>{number}</span>
+                <div>
+                    <h2>{title}</h2>
+                    <p>{description}</p>
+                </div>
+            </header>
+
+            <div
+                className={[
+                    "component-row",
+                    "guide-component-row",
+                    isOpen ? "has-open-card" : "",
+                    pulseTarget === id ? "jump-pulse" : ""
+                ].filter(Boolean).join(" ")}
+                id={`how-${id}`}
+            >
+                <article
+                    className={[
+                        "component-card",
+                        "guide-card",
+                        "folded-card",
+                        isOpen ? "is-open" : ""
+                    ].filter(Boolean).join(" ")}
+                    onClick={() => setOpenCard((current) => current === id ? null : id)}
+                    onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            setOpenCard((current) => current === id ? null : id);
+                        }
+                    }}
+                    role="button"
+                    tabIndex="0"
+                >
+                    <h2>{title}</h2>
+                    <p className="open-card-summary">{summary}</p>
+                    {!isOpen && <span className="folded-card-hint">Ver más sobre {title.toLowerCase()}</span>}
+                    <div className="component-copy">
+                        {paragraphs.map((paragraph, index) => <p key={`${id}-paragraph-${index}`}>{paragraph}</p>)}
+                    </div>
+                </article>
+
+                <figure
+                    className="component-image panel-preview"
+                    onMouseEnter={() => setActiveInfo(id)}
+                    onMouseLeave={() => setActiveInfo(null)}
+                >
+                    <img src={preview} alt={previewAlt} />
+                    <figcaption>{previewCaption}</figcaption>
+                    <aside
+                        className={isActive ? "component-tab image-info-tab is-visible" : "component-tab image-info-tab"}
+                        aria-hidden={!isActive}
+                    >
+                        {machineImages.length > 0 && (
+                            <div className="component-tab-gallery">
+                                {machineImages.map((image) => (
+                                    <figure key={image.caption}>
+                                        <img src={image.src} alt={image.alt} />
+                                        <figcaption>{image.caption}</figcaption>
+                                    </figure>
+                                ))}
+                            </div>
+                        )}
+                        <div className="component-tab-copy">
+                            <h3>En nuestra máquina</h3>
+                            {machineText.map((paragraph, index) => <p key={`${id}-machine-${index}`}>{paragraph}</p>)}
+                        </div>
+                    </aside>
+                </figure>
+            </div>
+        </>
+    );
+}
+
 function HowWorksPage() {
     const [activeInfo, setActiveInfo] = useState(null);
+    const [openCard, setOpenCard] = useState(null);
     const [pulseTarget, setPulseTarget] = useState("");
 
     const jumpToComponent = (target) => {
@@ -263,9 +368,17 @@ function HowWorksPage() {
 
     return (
         <section
-            className={activeInfo ? "how-page is-inspecting" : "how-page"}
+            className={activeInfo || openCard ? "how-page is-inspecting" : "how-page"}
             aria-label="Como funciona"
         >
+            {openCard && (
+                <button
+                    className="open-card-backdrop"
+                    type="button"
+                    aria-label="Cerrar explicación"
+                    onClick={() => setOpenCard(null)}
+                />
+            )}
             <section className="intro-panel how-intro" aria-label="Introduccion">
                 <div>
                     <p className="eyebrow">Guía de componentes</p>
@@ -287,28 +400,64 @@ function HowWorksPage() {
                     <button type="button" onClick={() => jumpToComponent("reflector")}>
                         Reflector
                     </button>
-                    {Array.from({ length: 4 }, (_, index) => (
-                        <button type="button" key={`how-button-${index + 3}`}>
-                            Boton {index + 3}
-                        </button>
-                    ))}
+                    <button type="button" onClick={() => jumpToComponent("keyboard")}>
+                        Teclado
+                    </button>
+                    <button type="button" onClick={() => jumpToComponent("plugboard")}>
+                        Espacio de conexiones
+                    </button>
+                    <button type="button" onClick={() => jumpToComponent("output")}>
+                        Salida
+                    </button>
+                    <button type="button" onClick={() => jumpToComponent("flow")}>
+                        Flujo completo
+                    </button>
                 </div>
             </section>
+
+            <header className="component-section-heading">
+                <span>01</span>
+                <div>
+                    <h2>Rotores</h2>
+                    <p>
+                        Los componentes móviles que transforman cada letra y avanzan con cada pulsación.
+                    </p>
+                </div>
+            </header>
 
             <div
                 className={[
                     "component-row",
                     "rotor-component-row",
+                    openCard === "rotors" ? "has-open-card" : "",
                     pulseTarget === "rotors" ? "jump-pulse" : ""
                 ].filter(Boolean).join(" ")}
                 id="how-rotors"
             >
                 <article
-                    className="component-card rotor-card"
-                    onMouseEnter={() => setActiveInfo("rotors")}
-                    onMouseLeave={() => setActiveInfo(null)}
+                    className={[
+                        "component-card",
+                        "rotor-card",
+                        "folded-card",
+                        openCard === "rotors" ? "is-open" : ""
+                    ].filter(Boolean).join(" ")}
+                    onClick={() => setOpenCard((current) => current === "rotors" ? null : "rotors")}
+                    onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            setOpenCard((current) => current === "rotors" ? null : "rotors");
+                        }
+                    }}
+                    role="button"
+                    tabIndex="0"
                 >
                     <h2>Rotores</h2>
+                    <p className="open-card-summary">
+                        Cómo transforman las letras, avanzan con cada pulsación y modifican el cifrado.
+                    </p>
+                    {openCard !== "rotors" && (
+                        <span className="folded-card-hint">Ver más sobre los rotores</span>
+                    )}
                     <div className="component-copy">
                     <p>
                         Cada rotor contiene un tipo, un alfabeto propio, una posición inicial,
@@ -348,7 +497,19 @@ function HowWorksPage() {
 
                     </div>
 
-                    <aside className="component-tab" aria-hidden={activeInfo !== "rotors"}>
+                </article>
+
+                <figure
+                    className="component-image panel-preview"
+                    onMouseEnter={() => setActiveInfo("rotors")}
+                    onMouseLeave={() => setActiveInfo(null)}
+                >
+                    <img src={rotorPreview} alt="Imagen de los rotores"/>
+                    <figcaption>Imagen representativa de los rotores de la máquina Enigma.</figcaption>
+                    <aside
+                        className={activeInfo === "rotors" ? "component-tab image-info-tab is-visible" : "component-tab image-info-tab"}
+                        aria-hidden={activeInfo !== "rotors"}
+                    >
                         <figure>
                             <img
                                 src={rotorSettingsPreview}
@@ -369,34 +530,52 @@ function HowWorksPage() {
                             </p>
                         </div>
                     </aside>
-                </article>
-
-                <figure className="component-image panel-preview">
-                    <img src={rotorPreview} alt="Imagen de los rotores"/>
-                    <figcaption>Imagen representativa de los rotores de la máquina Enigma.</figcaption>
                 </figure>
             </div>
+
+            <header className="component-section-heading">
+                <span>02</span>
+                <div>
+                    <h2>Reflector</h2>
+                    <p>
+                        El componente fijo que devuelve la señal para completar el recorrido de cifrado.
+                    </p>
+                </div>
+            </header>
 
             <div
                 className={[
                     "component-row",
-                    "reverse",
                     "reflector-component-row",
+                    openCard === "reflector" ? "has-open-card" : "",
                     pulseTarget === "reflector" ? "jump-pulse" : ""
                 ].filter(Boolean).join(" ")}
                 id="how-reflector"
             >
-                <figure className="component-image panel-preview">
-                    <img src={reflectorPreview} alt="Imagen de un reflector Enigma" />
-                    <figcaption>Imagen representativa de un reflector de la máquina Enigma.</figcaption>
-                </figure>
-
                 <article
-                    className="component-card reflector-card"
-                    onMouseEnter={() => setActiveInfo("reflector")}
-                    onMouseLeave={() => setActiveInfo(null)}
+                    className={[
+                        "component-card",
+                        "reflector-card",
+                        "folded-card",
+                        openCard === "reflector" ? "is-open" : ""
+                    ].filter(Boolean).join(" ")}
+                    onClick={() => setOpenCard((current) => current === "reflector" ? null : "reflector")}
+                    onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            setOpenCard((current) => current === "reflector" ? null : "reflector");
+                        }
+                    }}
+                    role="button"
+                    tabIndex="0"
                 >
                     <h2>Reflector</h2>
+                    <p className="open-card-summary">
+                        Cómo devuelve la señal hacia los rotores y permite que la máquina también descifre.
+                    </p>
+                    {openCard !== "reflector" && (
+                        <span className="folded-card-hint">Ver más sobre el reflector</span>
+                    )}
                     <div className="component-copy">
                     <p>
                         El reflector es un elemento que el lector
@@ -424,8 +603,17 @@ function HowWorksPage() {
 
                     </div>
 
+                </article>
+
+                <figure
+                    className="component-image panel-preview"
+                    onMouseEnter={() => setActiveInfo("reflector")}
+                    onMouseLeave={() => setActiveInfo(null)}
+                >
+                    <img src={reflectorPreview} alt="Imagen de un reflector Enigma" />
+                    <figcaption>Imagen representativa de un reflector de la máquina Enigma.</figcaption>
                     <aside
-                        className="component-tab reflector-tab"
+                        className={activeInfo === "reflector" ? "component-tab image-info-tab single-info-tab is-visible" : "component-tab image-info-tab single-info-tab"}
                         aria-hidden={activeInfo !== "reflector"}
                     >
                         <div className="component-tab-copy">
@@ -441,8 +629,130 @@ function HowWorksPage() {
                             </p>
                         </div>
                     </aside>
-                </article>
+                </figure>
             </div>
+
+            <GuideSection
+                number="03"
+                id="keyboard"
+                title="Teclado"
+                description="El punto de entrada: cada pulsación inicia un nuevo recorrido por la máquina."
+                summary="Cómo una letra pulsada se convierte en la señal que recorrerá el resto de componentes."
+                paragraphs={[
+                    "El teclado de la máquina Enigma contiene una tecla para cada letra del alfabeto. Al pulsar una de ellas se cierra un circuito eléctrico y comienza el cifrado.",
+                    "La tecla no escribe directamente la letra introducida. Su función es enviar la señal inicial hacia el espacio de conexiones y, después, hacia los rotores.",
+                    "Cada pulsación también provoca el avance de los rotores, por lo que repetir una misma letra puede producir resultados distintos."
+                ]}
+                preview={keyboardPreview}
+                previewAlt="Teclado de una máquina Enigma"
+                previewCaption="Teclado representativo de una máquina Enigma."
+                machineImages={[
+                    {
+                        src: myKeyboardPreview,
+                        alt: "Teclado del simulador Enigma M3",
+                        caption: "Teclado de nuestra máquina M3"
+                    }
+                ]}
+                machineText={[
+                    "Puedes pulsar las letras con el ratón para iniciar el cifrado o descifrado.",
+                    "Las teclas mantienen la estética de una máquina de escribir y solo permanecen hundidas mientras las estás pulsando."
+                ]}
+                activeInfo={activeInfo}
+                setActiveInfo={setActiveInfo}
+                openCard={openCard}
+                setOpenCard={setOpenCard}
+                pulseTarget={pulseTarget}
+            />
+
+            <GuideSection
+                number="04"
+                id="plugboard"
+                title="Espacio de conexiones"
+                description="Una primera sustitución configurable antes y después del paso por los rotores."
+                summary="Cómo los cables permiten intercambiar parejas de letras y personalizar todavía más el cifrado."
+                paragraphs={[
+                    "El panel de conexiones permite unir dos letras mediante un cable. Cuando una señal entra por una letra conectada, continúa su recorrido como la letra situada al otro extremo.",
+                    "Esta sustitución sucede dos veces: antes de entrar en los rotores y después de regresar desde el reflector. Una letra sin cable continúa sin cambios.",
+                    "Las conexiones se realizan por parejas y una misma letra no puede estar conectada simultáneamente con varias letras."
+                ]}
+                preview={plugboardPreview}
+                previewAlt="Panel de conexiones de una máquina Enigma"
+                previewCaption="Espacio de conexiones representativo de una máquina Enigma."
+                machineImages={[
+                    {
+                        src: myPlugboardEmptyPreview,
+                        alt: "Panel de conexiones sin cables",
+                        caption: "Panel sin conexiones"
+                    },
+                    {
+                        src: myPlugboardActivePreview,
+                        alt: "Selección de letras para crear una conexión",
+                        caption: "Selección y conexiones activas"
+                    }
+                ]}
+                machineText={[
+                    "En nuestra máquina puedes seleccionar dos letras para unirlas. Las parejas activas aparecen identificadas en el propio panel.",
+                    "El modo para daltónicos añade números romanos para reconocer cada pareja sin depender únicamente del color."
+                ]}
+                activeInfo={activeInfo}
+                setActiveInfo={setActiveInfo}
+                openCard={openCard}
+                setOpenCard={setOpenCard}
+                pulseTarget={pulseTarget}
+            />
+
+            <GuideSection
+                number="05"
+                id="output"
+                title="Salida"
+                description="La letra resultante se muestra después de completar todo el recorrido eléctrico."
+                summary="Cómo la máquina comunica el resultado final del cifrado o descifrado."
+                paragraphs={[
+                    "Las máquinas Enigma originales utilizaban un panel de bombillas. Tras completar el recorrido, se iluminaba la bombilla correspondiente a la letra obtenida.",
+                    "La letra iluminada es el resultado final. Para formar un mensaje completo, el operador debía anotar cada salida y repetir el proceso letra por letra.",
+                    "Como el recorrido es reversible cuando la configuración coincide, la salida cifrada puede introducirse de nuevo para recuperar el texto original."
+                ]}
+                preview={lampsPreview}
+                previewAlt="Panel de bombillas de una máquina Enigma"
+                previewCaption="Panel de salida con bombillas de una máquina Enigma."
+                machineImages={[
+                    {
+                        src: myOutputPreview,
+                        alt: "Salida de letra del simulador",
+                        caption: "Salida de nuestra máquina M3"
+                    }
+                ]}
+                machineText={[
+                    "En el simulador, la letra resultante aparece en la gran hoja situada debajo de los rotores.",
+                    "El historial de sesión permite consultar las transformaciones realizadas durante el uso de la máquina."
+                ]}
+                activeInfo={activeInfo}
+                setActiveInfo={setActiveInfo}
+                openCard={openCard}
+                setOpenCard={setOpenCard}
+                pulseTarget={pulseTarget}
+            />
+
+            <header className="component-section-heading">
+                <span>06</span>
+                <div>
+                    <h2>Flujo completo</h2>
+                    <p>El recorrido entero que sigue una letra desde que se pulsa hasta que aparece transformada.</p>
+                </div>
+            </header>
+
+            <section
+                className={pulseTarget === "flow" ? "full-flow jump-pulse" : "full-flow"}
+                id="how-flow"
+                aria-label="Flujo completo de una letra"
+            >
+                {["Teclado", "Conexiones", "Rotores", "Reflector", "Rotores", "Conexiones", "Salida"].map((step, index) => (
+                    <div className="flow-step" key={`${step}-${index}`}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <strong>{step}</strong>
+                    </div>
+                ))}
+            </section>
         </section>
     );
 }

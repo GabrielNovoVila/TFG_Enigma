@@ -253,6 +253,15 @@ h1 {
   background: rgba(0, 0, 0, 0.48);
 }
 
+.open-card-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 7;
+  border: 0;
+  background: transparent;
+  cursor: default;
+}
+
 .how-intro {
   width: min(900px, 100%);
   margin-top: 0;
@@ -260,6 +269,43 @@ h1 {
 
 .how-jump-buttons {
   align-self: end;
+}
+
+.component-section-heading {
+  width: min(820px, 100%);
+  margin: clamp(18px, 3vw, 34px) auto 0;
+  padding: 0 0 14px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: end;
+  gap: 14px;
+  border-bottom: 2px solid rgba(181, 155, 84, 0.72);
+}
+
+.component-section-heading > span {
+  min-width: 46px;
+  padding: 5px 8px;
+  background: #4d4d49;
+  color: #d8c092;
+  box-shadow: inset 4px 0 0 var(--brass);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.component-section-heading h2 {
+  margin: 0 0 3px;
+  color: #f2f2ef;
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  text-transform: uppercase;
+}
+
+.component-section-heading p {
+  max-width: 660px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(0.82rem, 1.2vw, 0.96rem);
+  line-height: 1.4;
 }
 
 .component-row {
@@ -275,14 +321,24 @@ h1 {
 }
 
 .rotor-component-row {
-  grid-template-columns: minmax(0, 3.4fr) minmax(240px, 0.8fr);
-  gap: clamp(12px, 2vw, 26px);
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(280px, 370px));
+  justify-content: center;
+  gap: clamp(14px, 2vw, 24px);
 }
 
 .reflector-component-row {
   width: 100%;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-  gap: clamp(12px, 2vw, 26px);
+  grid-template-columns: repeat(2, minmax(280px, 370px));
+  justify-content: center;
+  gap: clamp(14px, 2vw, 24px);
+}
+
+.guide-component-row {
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(280px, 370px));
+  justify-content: center;
+  gap: clamp(14px, 2vw, 24px);
 }
 
 .component-card {
@@ -293,11 +349,162 @@ h1 {
   background-repeat: no-repeat;
   color: #21170f;
   position: relative;
-  z-index: 3;
   display: grid;
   align-content: start;
   gap: 18px;
-  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.28));
+}
+
+.folded-card {
+  cursor: zoom-in;
+  transition:
+    filter 220ms ease,
+    transform 220ms ease;
+}
+
+.folded-card:not(.is-open) {
+  width: min(360px, 100%);
+  min-height: 230px;
+  max-height: none;
+  padding: 68px 58px;
+  justify-self: center;
+  align-content: center;
+  overflow: visible;
+  background-size: 100% 100%;
+  text-align: center;
+}
+
+.folded-card:not(.is-open) .component-copy {
+  display: none;
+}
+
+.folded-card-hint {
+  color: #654926;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.folded-card:hover {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.36));
+}
+
+.folded-card.is-open {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 8;
+  width: min(1020px, 94vw);
+  max-height: none;
+  min-height: 0;
+  padding: clamp(30px, 3.5vw, 46px) clamp(58px, 7vw, 92px);
+  gap: 8px;
+  overflow: visible;
+  transform: translate(-50%, -50%);
+  cursor: zoom-out;
+  filter: drop-shadow(0 26px 50px rgba(0, 0, 0, 0.5));
+}
+
+.folded-card.is-open:hover {
+  transform: translate(-50%, -50%);
+}
+
+.folded-card.is-open > h2 {
+  padding-bottom: 7px;
+  border-bottom: 2px solid rgba(101, 73, 38, 0.55);
+  color: #21170f;
+  text-transform: uppercase;
+}
+
+.folded-card.is-open .component-copy {
+  column-gap: clamp(22px, 2.6vw, 36px);
+  margin-top: 8px;
+}
+
+.folded-card.is-open.rotor-card .component-copy {
+  columns: 2 320px;
+}
+
+.folded-card.is-open.reflector-card .component-copy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.folded-card.is-open.guide-card .component-copy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 22px);
+}
+
+.folded-card.is-open .component-copy p {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 12px 14px 10px;
+  border-top: 2px solid rgba(101, 73, 38, 0.5);
+  background: rgba(255, 248, 224, 0.13);
+  box-shadow: inset 3px 0 0 rgba(181, 155, 84, 0.8);
+  break-inside: avoid;
+  font-size: clamp(0.7rem, 0.82vw, 0.86rem);
+  line-height: 1.22;
+}
+
+.folded-card.is-open .component-copy p::before {
+  content: "SECCIÓN";
+  display: block;
+  margin-bottom: 5px;
+  color: #654926;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.folded-card.is-open.rotor-card .component-copy p:nth-child(1)::before {
+  content: "EL ROTOR";
+}
+
+.folded-card.is-open.rotor-card .component-copy p:nth-child(2)::before {
+  content: "TRANSFORMACIÓN";
+}
+
+.folded-card.is-open.rotor-card .component-copy p:nth-child(3)::before {
+  content: "MOVIMIENTO";
+}
+
+.folded-card.is-open.rotor-card .component-copy p:nth-child(4)::before {
+  content: "POSICIONES";
+}
+
+.folded-card.is-open.reflector-card .component-copy p:nth-child(1)::before {
+  content: "EL REFLECTOR";
+}
+
+.folded-card.is-open.reflector-card .component-copy p:nth-child(2)::before {
+  content: "ENTRADA Y SALIDA";
+}
+
+.folded-card.is-open.reflector-card .component-copy p:nth-child(3)::before {
+  content: "SU ALFABETO";
+}
+
+.folded-card.is-open.reflector-card .component-copy p:nth-child(4)::before {
+  content: "EJEMPLO";
+}
+
+.folded-card.is-open.reflector-card .component-copy p:nth-child(5)::before {
+  content: "LETRAS UNIDAS";
+}
+
+.open-card-summary {
+  display: none;
+}
+
+.folded-card.is-open .open-card-summary {
+  display: block;
+  max-width: 620px;
+  margin: 0 0 4px;
+  color: #654926;
+  font-size: clamp(0.72rem, 0.9vw, 0.9rem);
+  line-height: 1.3;
 }
 
 .rotor-card {
@@ -327,6 +534,23 @@ h1 {
   padding: clamp(48px, 6vw, 68px) clamp(48px, 5vw, 64px);
   background-size: 100% 100%;
   background-position: center;
+}
+
+.guide-card {
+  width: 100%;
+  min-height: 0;
+  padding: clamp(48px, 6vw, 68px) clamp(48px, 5vw, 64px);
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.guide-card .component-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.guide-card .component-copy p {
+  max-width: none;
 }
 
 .reflector-card .component-copy {
@@ -364,17 +588,24 @@ h1 {
 }
 
 .component-image {
+  position: relative;
+  z-index: 1;
+  width: min(370px, 100%);
   min-height: clamp(150px, 19vw, 230px);
   margin: 0;
   padding: clamp(22px, 4vw, 38px);
   background-image: url("./assets/arrugas_sepia_hd.png");
-  background-size: 116% auto;
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   display: grid;
   place-items: center;
   gap: 12px;
   filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.24));
+}
+
+.component-image:hover {
+  z-index: 5;
 }
 
 .panel-preview img {
@@ -417,9 +648,52 @@ h1 {
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.34);
 }
 
-.rotor-card:hover .component-tab {
+.component-tab.is-visible {
+  position: absolute;
+  top: 50%;
+  right: -14px;
+  left: auto;
+  border-left: 0;
+  border-right: 5px solid var(--brass);
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(-50%);
+  z-index: 9;
+}
+
+.image-info-tab {
+  top: 50%;
+  right: calc(100% - 10px);
+  left: auto;
+  width: min(600px, 54vw);
+  border-left: 0;
+  border-right: 5px solid var(--brass);
+  transform: translate(18px, -50%);
+}
+
+.image-info-tab.is-visible {
+  top: 50%;
+  right: calc(100% - 10px);
+  left: auto;
+  border-left: 0;
+  border-right: 5px solid var(--brass);
+  transform: translate(0, -50%);
+}
+
+.single-info-tab {
+  width: min(430px, 44vw);
+  min-height: 190px;
+  grid-template-columns: 1fr;
+}
+
+.component-tab-gallery {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.component-tab-gallery figure {
+  align-content: center;
 }
 
 .reflector-tab {
@@ -433,9 +707,12 @@ h1 {
   transform: translateX(18px);
 }
 
-.reflector-card:hover .reflector-tab {
-  opacity: 1;
-  transform: translateX(0);
+.reflector-tab.is-visible {
+  right: auto;
+  left: -14px;
+  border-right: 0;
+  border-left: 5px solid var(--brass);
+  transform: translateY(-50%);
 }
 
 .component-tab figure {
@@ -475,6 +752,52 @@ h1 {
   margin: 0;
   color: rgba(255, 255, 255, 0.84);
   font-size: 0.84rem;
+}
+
+.full-flow {
+  width: min(980px, 100%);
+  margin: -18px auto 0;
+  padding: clamp(18px, 3vw, 28px);
+  display: grid;
+  grid-template-columns: repeat(7, minmax(80px, 1fr));
+  gap: 2px;
+  background: #30302d;
+  border-left: 5px solid var(--brass);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.25);
+}
+
+.flow-step {
+  position: relative;
+  min-height: 86px;
+  padding: 12px 8px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 7px;
+  background: #4d4d49;
+  color: #f2f2ef;
+  text-align: center;
+}
+
+.flow-step:not(:last-child)::after {
+  content: ">";
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  z-index: 1;
+  color: #d8c092;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  transform: translateY(-50%);
+}
+
+.flow-step span {
+  color: #d8c092;
+  font-size: 0.72rem;
+}
+
+.flow-step strong {
+  font-size: clamp(0.72rem, 1vw, 0.88rem);
 }
 
 .user-area {
@@ -1402,6 +1725,11 @@ h1 {
     gap: 12px;
   }
 
+  .component-section-heading {
+    margin-top: 10px;
+    align-items: start;
+  }
+
   .component-row.reverse .component-image {
     order: 2;
   }
@@ -1430,6 +1758,10 @@ h1 {
     border-right: 0;
   }
 
+  .folded-card.is-open.guide-card .component-copy {
+    grid-template-columns: 1fr;
+  }
+
   .component-tab {
     left: 18px;
     right: 18px;
@@ -1438,10 +1770,44 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .image-info-tab,
+  .image-info-tab.is-visible {
+    top: calc(100% - 24px);
+    right: 12px;
+    left: 12px;
+    width: auto;
+    border-right: 0;
+    border-left: 5px solid var(--brass);
+    transform: translateY(0);
+  }
+
   .component-tab img {
     width: 100%;
     height: auto;
     max-height: 150px;
+  }
+
+  .component-tab-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .full-flow {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .flow-step {
+    min-height: 58px;
+    grid-template-columns: 34px 1fr;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .flow-step:not(:last-child)::after {
+    top: auto;
+    right: 50%;
+    bottom: -9px;
+    transform: translateX(50%) rotate(90deg);
   }
 
   .title-strip {
