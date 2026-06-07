@@ -4,6 +4,7 @@ import { useAuth } from "../auth/AuthContext";
 import rotorPreview from "../assets/Enigma_rotor_set.png";
 import rotorWheel from "../assets/rueda.png";
 import rotorSettingsPreview from "../assets/mis_rotores.png";
+import reflectorPreview from "../assets/reflector.png";
 import accessibilityIcon from "../assets/accesibilidad.png";
 import keyA from "../assets/a.png";
 import keyB from "../assets/b.png";
@@ -283,9 +284,12 @@ function HowWorksPage() {
                     <button type="button" onClick={() => jumpToComponent("rotors")}>
                         Rotores
                     </button>
-                    {Array.from({ length: 5 }, (_, index) => (
-                        <button type="button" key={`how-button-${index + 2}`}>
-                            Boton {index + 2}
+                    <button type="button" onClick={() => jumpToComponent("reflector")}>
+                        Reflector
+                    </button>
+                    {Array.from({ length: 4 }, (_, index) => (
+                        <button type="button" key={`how-button-${index + 3}`}>
+                            Boton {index + 3}
                         </button>
                     ))}
                 </div>
@@ -312,10 +316,9 @@ function HowWorksPage() {
                         hay unos tipos de rotor u otros y este influye en su alfabeto y en la posición de cambio.
                     </p>
                     <p>
-                        El efecto del rotor es cifrar una letra en base al alfabeto que contiene.
-                        Cada letra tiene asociada otra, de forma que, sin tener en cuenta las
-                        posiciones inicial y actual, si a un rotor de cierto tipo le llega una A,
-                        siempre devolverá B.
+                        La función del rotor es cifrar una letra en base al alfabeto que contiene.
+                        A este le llega una entrada, que es una letra y devolverá una distinta.
+                        Cada letra de entrada tiene asociada otra de salida, de forma que podemos tener A → H, B → D, etc.
                     </p>
                     <p>
                         Ahora vamos a complicarlo un poco más, los rotores de las máquinas enigma giran para cambiar de posición.
@@ -375,23 +378,69 @@ function HowWorksPage() {
             </div>
 
             <div
-                className="component-row reverse"
+                className={[
+                    "component-row",
+                    "reverse",
+                    "reflector-component-row",
+                    pulseTarget === "reflector" ? "jump-pulse" : ""
+                ].filter(Boolean).join(" ")}
                 id="how-reflector"
             >
-                <div className="component-image panel-preview">
-                    <img src={rotorPreview} alt="Vista provisional del reflector" />
-                </div>
+                <figure className="component-image panel-preview">
+                    <img src={reflectorPreview} alt="Imagen de un reflector Enigma" />
+                    <figcaption>Imagen representativa de un reflector de la máquina Enigma.</figcaption>
+                </figure>
 
-                <article className="component-card">
+                <article
+                    className="component-card reflector-card"
+                    onMouseEnter={() => setActiveInfo("reflector")}
+                    onMouseLeave={() => setActiveInfo(null)}
+                >
                     <h2>Reflector</h2>
+                    <div className="component-copy">
                     <p>
-                        El reflector devuelve la senal por el camino inverso, haciendo que
-                        el proceso pueda usarse para cifrar y descifrar.
+                        El reflector es un elemento que el lector
+                        puede pensar como un rotor muy simple,
+                        como uno que no gira. Los únicos elementos de un reflector son su tipo y su alfabeto,
+                        dependiente del tipo del mismo.
                     </p>
                     <p>
-                        En el simulador puedes alternar entre los dos reflectores desde el
-                        control de la maquina.
+                        A este también llega una letra como entrada y devuelve otra.
                     </p>
+                    <p>
+                        Para entenderlo bien, un reflector tiene un alfabeto como el de un rotor:
+                    </p>
+                    <p>
+                        En lugar de ser ABCDEF... podría ser PLTHYA...,
+                        en este ejemplo, si llega una A, devuelve una P, si llega una B, devuelve una L, etc.
+                    </p>
+                    <p>
+                        La cualidad que no comparte con el rotor,
+                        además de que es un elemento fijo que no tiene posiciones,
+                        es que las letras están “unidas”. En el ejemplo anterior, si llega una A,
+                        devuelve una P. Si llegara una P, este devolvería una A.
+                        Esto no tien por qué pasar en un rotor, pero es una cualidad necesaria en el reflector.
+                    </p>
+
+                    </div>
+
+                    <aside
+                        className="component-tab reflector-tab"
+                        aria-hidden={activeInfo !== "reflector"}
+                    >
+                        <div className="component-tab-copy">
+                            <h3>En nuestra máquina</h3>
+                            <p>
+                                La Enigma M3 de este simulador dispone de dos tipos de
+                                reflector entre los que puedes alternar.
+                            </p>
+                            <p>
+                                Otros modelos de máquina Enigma cuentan con más reflectores.
+                                Puedes conocer mejor estas diferencias en la sección
+                                &quot;Historia&quot;.
+                            </p>
+                        </div>
+                    </aside>
                 </article>
             </div>
         </section>
@@ -399,7 +448,7 @@ function HowWorksPage() {
 }
 
 export default function Home() {
-    const { accessToken, logout } = useAuth();
+    const {accessToken, logout} = useAuth();
     const [settingsOpen, setSettingsOpen] = useState(false);
     const [plugboardOpen, setPlugboardOpen] = useState(false);
     const [machine, setMachine] = useState(emptyMachine);

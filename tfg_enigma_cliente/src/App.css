@@ -275,7 +275,13 @@ h1 {
 }
 
 .rotor-component-row {
-  grid-template-columns: minmax(680px, 3fr) minmax(300px, 0.95fr);
+  grid-template-columns: minmax(0, 3.4fr) minmax(240px, 0.8fr);
+  gap: clamp(12px, 2vw, 26px);
+}
+
+.reflector-component-row {
+  width: 100%;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
   gap: clamp(12px, 2vw, 26px);
 }
 
@@ -297,19 +303,50 @@ h1 {
 .rotor-card {
   width: 100%;
   min-height: 0;
+  padding: clamp(38px, 4.5vw, 54px) clamp(40px, 4.5vw, 56px);
+  gap: 12px;
   background-size: 100% 100%;
   background-position: center;
 }
 
 .rotor-card .component-copy {
-  columns: 3 210px;
-  column-gap: clamp(24px, 3vw, 42px);
+  columns: 4 155px;
+  column-gap: clamp(18px, 2vw, 28px);
   column-rule: 1px solid rgba(70, 48, 27, 0.18);
 }
 
 .rotor-card .component-copy p {
   max-width: none;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.reflector-card {
+  width: 100%;
+  min-height: 0;
+  padding: clamp(48px, 6vw, 68px) clamp(48px, 5vw, 64px);
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.reflector-card .component-copy {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  align-items: start;
+  gap: clamp(18px, 2.5vw, 34px);
+}
+
+.reflector-card .component-copy p {
+  max-width: none;
+  padding-right: clamp(8px, 1vw, 14px);
+  border-right: 1px solid rgba(70, 48, 27, 0.18);
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.reflector-card .component-copy p:last-child {
+  padding-right: 0;
+  border-right: 0;
 }
 
 .component-card h2 {
@@ -381,6 +418,22 @@ h1 {
 }
 
 .rotor-card:hover .component-tab {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reflector-tab {
+  left: auto;
+  right: calc(100% - 10px);
+  width: min(380px, 42vw);
+  min-height: 190px;
+  grid-template-columns: 1fr;
+  border-left: 0;
+  border-right: 5px solid var(--brass);
+  transform: translateX(18px);
+}
+
+.reflector-card:hover .reflector-tab {
   opacity: 1;
   transform: translateX(0);
 }
@@ -1365,6 +1418,16 @@ h1 {
   .rotor-card .component-copy {
     columns: 1;
     column-rule: 0;
+  }
+
+  .reflector-card .component-copy {
+    display: block;
+  }
+
+  .reflector-card .component-copy p {
+    margin-bottom: 18px;
+    padding-right: 0;
+    border-right: 0;
   }
 
   .component-tab {
