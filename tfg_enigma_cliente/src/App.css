@@ -458,6 +458,10 @@ h1 {
   text-transform: uppercase;
 }
 
+.folded-card.is-open.guide-card .component-copy p::before {
+  content: attr(data-title);
+}
+
 .folded-card.is-open.rotor-card .component-copy p:nth-child(1)::before {
   content: "EL ROTOR";
 }
@@ -487,7 +491,7 @@ h1 {
 }
 
 .folded-card.is-open.reflector-card .component-copy p:nth-child(4)::before {
-  content: "EJEMPLO";
+  content: "DIFERENCIAS CON EL ROTOR";
 }
 
 .folded-card.is-open.reflector-card .component-copy p:nth-child(5)::before {
@@ -798,6 +802,194 @@ h1 {
 
 .flow-step strong {
   font-size: clamp(0.72rem, 1vw, 0.88rem);
+}
+
+.history-page {
+  width: min(1120px, 92vw);
+  margin: 18px auto 0;
+  padding: 10px 0 72px;
+  display: grid;
+  gap: clamp(54px, 8vw, 96px);
+  color: #f2f2ef;
+}
+
+.history-intro {
+  width: min(900px, 100%);
+  margin-top: 0;
+}
+
+.history-jump-buttons {
+  align-self: end;
+}
+
+.history-section {
+  display: grid;
+  gap: clamp(22px, 3vw, 34px);
+  scroll-margin-top: 30px;
+}
+
+.history-section-heading {
+  width: min(940px, 100%);
+  padding-bottom: 14px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: end;
+  gap: 15px;
+  border-bottom: 2px solid rgba(181, 155, 84, 0.72);
+}
+
+.history-section-heading > span {
+  min-width: 48px;
+  padding: 6px 8px;
+  background: #4d4d49;
+  color: #d8c092;
+  box-shadow: inset 4px 0 0 var(--brass);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.history-section-heading h2 {
+  margin: 2px 0 0;
+  color: #f2f2ef;
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+  text-transform: uppercase;
+}
+
+.history-section-heading p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.86rem;
+}
+
+.history-note,
+.history-paper {
+  background: transparent;
+  border-left: 0;
+  color: #f2f2ef;
+  box-shadow: none;
+}
+
+.history-note {
+  min-height: 0;
+  padding: 8px 0;
+}
+
+.history-note h3,
+.history-paper h3 {
+  margin: 0 0 12px;
+  color: #f2f2ef;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+}
+
+.history-note p,
+.history-paper p {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.45;
+}
+
+.history-paper {
+  width: min(760px, 100%);
+  min-height: 0;
+  padding: 8px 0;
+}
+
+.history-paper-wide {
+  width: min(920px, 100%);
+  justify-self: end;
+}
+
+.history-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 14px;
+  padding-top: 28px;
+}
+
+.history-timeline::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 8%;
+  right: 8%;
+  height: 3px;
+  background: var(--brass);
+}
+
+.timeline-event {
+  position: relative;
+  min-height: 190px;
+  padding: 22px 16px 18px;
+  background: #4d4d49;
+  border-left: 4px solid var(--brass);
+  color: #f2f2ef;
+}
+
+.timeline-event::before {
+  content: "";
+  position: absolute;
+  top: -23px;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  border: 3px solid #2a2a28;
+  border-radius: 50%;
+  background: var(--brass);
+  transform: translateX(-50%);
+}
+
+.timeline-event span {
+  color: #d8c092;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.timeline-event h3 {
+  margin: 9px 0;
+  font-size: 1rem;
+}
+
+.timeline-event p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.4;
+}
+
+.curiosity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.curiosity-grid article {
+  min-height: 150px;
+  padding: 22px 24px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  column-gap: 14px;
+  background: #4d4d49;
+  border-left: 5px solid var(--brass);
+  color: #f2f2ef;
+}
+
+.curiosity-grid span {
+  grid-row: span 2;
+  color: #d8c092;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.curiosity-grid h3 {
+  margin: 0 0 8px;
+}
+
+.curiosity-grid p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .user-area {
@@ -1808,6 +2000,55 @@ h1 {
     right: 50%;
     bottom: -9px;
     transform: translateX(50%) rotate(90deg);
+  }
+
+  .history-page {
+    width: min(560px, 100%);
+    gap: 48px;
+  }
+
+  .history-section-heading {
+    align-items: start;
+  }
+
+  .history-context-grid,
+  .curiosity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .history-note {
+    min-height: 0;
+  }
+
+  .history-paper,
+  .history-paper-wide {
+    width: 100%;
+    padding: 8px 0;
+  }
+
+  .history-timeline {
+    grid-template-columns: 1fr;
+    padding-top: 0;
+    padding-left: 24px;
+  }
+
+  .history-timeline::before {
+    top: 8%;
+    right: auto;
+    bottom: 8%;
+    left: 7px;
+    width: 3px;
+    height: auto;
+  }
+
+  .timeline-event {
+    min-height: 130px;
+  }
+
+  .timeline-event::before {
+    top: 50%;
+    left: -25px;
+    transform: translateY(-50%);
   }
 
   .title-strip {

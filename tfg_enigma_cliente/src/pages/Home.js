@@ -259,6 +259,7 @@ function GuideSection({
     description,
     summary,
     paragraphs,
+    subsectionTitles,
     preview,
     previewAlt,
     previewCaption,
@@ -313,7 +314,14 @@ function GuideSection({
                     <p className="open-card-summary">{summary}</p>
                     {!isOpen && <span className="folded-card-hint">Ver más sobre {title.toLowerCase()}</span>}
                     <div className="component-copy">
-                        {paragraphs.map((paragraph, index) => <p key={`${id}-paragraph-${index}`}>{paragraph}</p>)}
+                        {paragraphs.map((paragraph, index) => (
+                            <p
+                                data-title={subsectionTitles[index]}
+                                key={`${id}-paragraph-${index}`}
+                            >
+                                {paragraph}
+                            </p>
+                        ))}
                     </div>
                 </article>
 
@@ -471,7 +479,7 @@ function HowWorksPage() {
                     </p>
                     <p>
                         Ahora vamos a complicarlo un poco más, los rotores de las máquinas enigma giran para cambiar de posición.
-                        Cada vez que pulsas una letra en el teclado, el rotor más a la derecha, gira.
+                        Cada vez que pulsas una letra en el teclado, el que llamaremos el primer rotor (el situado más a la derecha), gira.
                         Si, por ejemplo, los rotores están en una posición A A A
                         (La letra asociada a la posición del primer rotor es A, la del segundo, es A y la del tercero, es A),
                         si cifras o descifras una letra, pasarán a A A B. Luego a A A C y así continuamente.
@@ -584,12 +592,11 @@ function HowWorksPage() {
                         dependiente del tipo del mismo.
                     </p>
                     <p>
-                        A este también llega una letra como entrada y devuelve otra.
+                        Un reflector también tiene una señal de entrada y otra de salida. Esto significa
+                        que recibe una letra y, dependiendo del alfabeto del mismo, devolverá otra.
                     </p>
                     <p>
                         Para entenderlo bien, un reflector tiene un alfabeto como el de un rotor:
-                    </p>
-                    <p>
                         En lugar de ser ABCDEF... podría ser PLTHYA...,
                         en este ejemplo, si llega una A, devuelve una P, si llega una B, devuelve una L, etc.
                     </p>
@@ -639,9 +646,16 @@ function HowWorksPage() {
                 description="El punto de entrada: cada pulsación inicia un nuevo recorrido por la máquina."
                 summary="Cómo una letra pulsada se convierte en la señal que recorrerá el resto de componentes."
                 paragraphs={[
-                    "El teclado de la máquina Enigma contiene una tecla para cada letra del alfabeto. Al pulsar una de ellas se cierra un circuito eléctrico y comienza el cifrado.",
-                    "La tecla no escribe directamente la letra introducida. Su función es enviar la señal inicial hacia el espacio de conexiones y, después, hacia los rotores.",
-                    "Cada pulsación también provoca el avance de los rotores, por lo que repetir una misma letra puede producir resultados distintos."
+                    "En anteriores elementos comentamos que, dependiendo de la versión de la máquina, podíamos tener unos tipos u otros, esto no ocurre con el teclado. Siempre es el mismo.",
+                    "El teclado de la Máquina Enigma está basado en un QWERTZ. Para quien no esté familiarizado con los teclados, en la mayoría de países del mundo se usa el teclado QWERTY. Este nombre hace referencia a las 6 primeras letras del teclado. El primero mencionado es el utilizado en países con lenguas germánicas, pues la Z es una letra más común que la Y.",
+                    "Se mencionó que está “basado” en un QWERTZ y no que “sea” un QWERTZ por las ligeras diferencias que este presenta. Tiene una distribución muy curiosa de las teclas. Al no haber símbolos ni números, quedarían huecos, por lo que era necesaria una distribución algo distinta a la par que cómoda y usual para los usuarios.",
+                    "Desde este componente se decide qué letra va a ser la cifrada, es el comienzo de la señal que se enviará a través de los rotores, el reflector y el espacio de conexiones."
+                ]}
+                subsectionTitles={[
+                    "UN ÚNICO TECLADO",
+                    "DISTRIBUCIÓN QWERTZ",
+                    "PECULIARIDADES",
+                    "COMIENZO DE LA SEÑAL"
                 ]}
                 preview={keyboardPreview}
                 previewAlt="Teclado de una máquina Enigma"
@@ -671,9 +685,14 @@ function HowWorksPage() {
                 description="Una primera sustitución configurable antes y después del paso por los rotores."
                 summary="Cómo los cables permiten intercambiar parejas de letras y personalizar todavía más el cifrado."
                 paragraphs={[
-                    "El panel de conexiones permite unir dos letras mediante un cable. Cuando una señal entra por una letra conectada, continúa su recorrido como la letra situada al otro extremo.",
-                    "Esta sustitución sucede dos veces: antes de entrar en los rotores y después de regresar desde el reflector. Una letra sin cable continúa sin cambios.",
-                    "Las conexiones se realizan por parejas y una misma letra no puede estar conectada simultáneamente con varias letras."
+                    "Toda máquina Enigma contiene un espacio de conexiones cercano al teclado.",
+                    "Este espacio de conexiones consiste en una serie de entradas disponibles donde cada una representa una letra. Está pensado para conectar letras entre ellas.",
+                    "Cuando enviamos una letra con el teclado, antes de llegar a los rotores, pasa por el espacio de conexiones, es el primer paso. Es sencillo: si, con el teclado, pulsamos la A, primero mirará en este espacio si hay una conexión con la A; si no la hay, al primer rotor le llegará una A como entrada. En caso de que, por ejemplo, exista una conexión entre la entrada A y la entrada B, al rotor le llegará una B. Esta conexión funciona en ambos sentidos, es decir, si mantenemos esa conexión A-B e introducimos una B, al primer rotor llegará una A."
+                ]}
+                subsectionTitles={[
+                    "UBICACIÓN",
+                    "ENTRADAS Y CONEXIONES",
+                    "RECORRIDO DE UNA LETRA"
                 ]}
                 preview={plugboardPreview}
                 previewAlt="Panel de conexiones de una máquina Enigma"
@@ -711,6 +730,11 @@ function HowWorksPage() {
                     "Las máquinas Enigma originales utilizaban un panel de bombillas. Tras completar el recorrido, se iluminaba la bombilla correspondiente a la letra obtenida.",
                     "La letra iluminada es el resultado final. Para formar un mensaje completo, el operador debía anotar cada salida y repetir el proceso letra por letra.",
                     "Como el recorrido es reversible cuando la configuración coincide, la salida cifrada puede introducirse de nuevo para recuperar el texto original."
+                ]}
+                subsectionTitles={[
+                    "PANEL DE BOMBILLAS",
+                    "RESULTADO FINAL",
+                    "RECORRIDO REVERSIBLE"
                 ]}
                 preview={lampsPreview}
                 previewAlt="Panel de bombillas de una máquina Enigma"
@@ -752,6 +776,172 @@ function HowWorksPage() {
                         <strong>{step}</strong>
                     </div>
                 ))}
+            </section>
+        </section>
+    );
+}
+
+function HistoryPage() {
+    const [pulseTarget, setPulseTarget] = useState("");
+
+    const jumpToHistorySection = (target) => {
+        setPulseTarget("");
+        requestAnimationFrame(() => {
+            document.getElementById(`history-${target}`)?.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+            setPulseTarget(target);
+            window.setTimeout(() => setPulseTarget(""), 900);
+        });
+    };
+
+    const historySections = [
+        {id: "context", label: "Contexto histórico"},
+        {id: "machine", label: "¿Qué es Enigma?"},
+        {id: "timeline", label: "Línea temporal"},
+        {id: "deciphering", label: "Descifrado"},
+        {id: "curiosities", label: "Curiosidades"}
+    ];
+
+    return (
+        <section className="history-page" aria-label="Historia de la máquina Enigma">
+            <section className="intro-panel history-intro" aria-label="Introducción histórica">
+                <div>
+                    <p className="eyebrow">Archivo histórico</p>
+                    <h1>Historia</h1>
+                    <p>
+                        Un recorrido por el origen, la evolución y el descifrado de la máquina Enigma.
+                    </p>
+                </div>
+                <div className="intro-notes history-jump-buttons">
+                    {historySections.map((section) => (
+                        <button
+                            type="button"
+                            key={section.id}
+                            onClick={() => jumpToHistorySection(section.id)}
+                        >
+                            {section.label}
+                        </button>
+                    ))}
+                </div>
+            </section>
+
+            <section
+                className={pulseTarget === "context" ? "history-section jump-pulse" : "history-section"}
+                id="history-context"
+            >
+                <header className="history-section-heading">
+                    <span>01</span>
+                    <div>
+                        <p>Los acontecimientos que prepararon el terreno</p>
+                        <h2>Contexto histórico</h2>
+                    </div>
+                </header>
+                <div className="history-context-grid">
+                        <article className="history-note">
+                            <h3>Historia</h3>
+                            <p>
+                                La máquina Enigma fue la máquina utilizada por las Potencias del Eje en la Segunda Guerra Mundial para cifrar sus comunicaciones de una manera segura.
+                                Para entender la Máquina Enigma y sus orígenes tenemos que remontarnos al comienzo del siglo XX, antes de que el partido nazi alcanzara el poder.
+                                Arthur Scherbius, nacido en 1878 en Fráncfort del Meno y graduado en ingeniería eléctrica tanto en la Universidad Técnica de Munich como en la Universidad de Hannover,
+                                decide fundar una empresa bajo el nombre de Scherbius & Ritter. De esta forma, hizo múltiples inventos, entre los que estaba cierta máquina basada en ruedas cableadas giratorias,
+                                hoy día conocida como máquina de rotores.
+                                Los modelos creados se apodaban con letras. El primero fue el modelo A, el segundo el B y el tercero y último que creó, el modelo C. La máquina Enigma utilizada durante la guerra era del tamaño de una máquina de escribir y, de hecho, se parecía mucho en cuestiones
+                                como el teclado o la forma general de la máquina. Estos primeros modelos se asemejaban más a una máquina registradora.
+                                En 1918, Arthur patenta su máquina, pensada originalmente para actuar como cifradora para empresas importantes como bancos.
+                                En estos años nos enfrentamos a una situación de gran inestabilidad política y social. Es el nacimiento de la República de Weimar, el fin de la Gran Guerra.
+                                Ante esta situación, Scherbius dudaba de si realmente la patente de la máquina llegaría a dar frutos, la realidad era que nadie parecía mostrar interés ante esta máquina.
+                                Esto, si bien es correcto cuando hablamos del ciudadano promedio, no se aplica para el gobierno. El gobierno alemán estaba altamente interesado en una máquina codificadora
+                                plenamente funcional e indescifrable, pues un año antes, en 1917, se interceptó y decodificó el telegrama de Zimmermann, lo que puso a Estados Unidos en el mapa y cambió el transcurso de la batalla.
+                                En 1926, ya comercializada bajo el nombre "Enigma", fue adoptada por la Armada alemana y, unos años más tarde, en 1934, la versión M3 de la máquina fue adoptada por la armada naval.
+                                Para este entonces, Arthur Scherbius ya no estaba presente para ver el alcance de su invención, falleció en 1929 sin conocer la importancia que tuvo la existencia de su invento
+                                en una guerra que tampoco alcanzó a vislumbrar.
+                                En 1939, a punto de empezar la guerra, se crea la máquina enigma M4, que será la que usarán los aliados de Alemania durante toda la guerra, hasta que Alan Turing y su equipo logren descifrarla.
+                            </p>
+                        </article>
+                </div>
+            </section>
+
+            <section
+                className={pulseTarget === "machine" ? "history-section jump-pulse" : "history-section"}
+                id="history-machine"
+            >
+                <header className="history-section-heading">
+                    <span>02</span>
+                    <div>
+                        <p>Una introducción a su funcionamiento y propósito</p>
+                        <h2>¿Qué es la máquina Enigma?</h2>
+                    </div>
+                </header>
+                <article className="history-paper">
+                    <h3>La máquina</h3>
+                    <p>Insertar texto aquí.</p>
+                    <p>Insertar texto aquí.</p>
+                </article>
+            </section>
+
+            <section
+                className={pulseTarget === "timeline" ? "history-section jump-pulse" : "history-section"}
+                id="history-timeline"
+            >
+                <header className="history-section-heading">
+                    <span>03</span>
+                    <div>
+                        <p>Los momentos más importantes de su historia</p>
+                        <h2>Línea temporal de la máquina Enigma</h2>
+                    </div>
+                </header>
+                <div className="history-timeline">
+                    {["Fecha", "Fecha", "Fecha", "Fecha", "Fecha"].map((date, index) => (
+                        <article className="timeline-event" key={`timeline-${index}`}>
+                            <span>{date}</span>
+                            <h3>Acontecimiento {index + 1}</h3>
+                            <p>Insertar texto aquí.</p>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            <section
+                className={pulseTarget === "deciphering" ? "history-section jump-pulse" : "history-section"}
+                id="history-deciphering"
+            >
+                <header className="history-section-heading">
+                    <span>04</span>
+                    <div>
+                        <p>Las personas y métodos que permitieron comprender sus mensajes</p>
+                        <h2>Descifrado</h2>
+                    </div>
+                </header>
+                <article className="history-paper history-paper-wide">
+                    <h3>El reto de descifrar Enigma</h3>
+                    <p>Insertar texto aquí.</p>
+                    <p>Insertar texto aquí.</p>
+                    <p>Insertar texto aquí.</p>
+                </article>
+            </section>
+
+            <section
+                className={pulseTarget === "curiosities" ? "history-section jump-pulse" : "history-section"}
+                id="history-curiosities"
+            >
+                <header className="history-section-heading">
+                    <span>05</span>
+                    <div>
+                        <p>Detalles, anécdotas y datos menos conocidos</p>
+                        <h2>Curiosidades</h2>
+                    </div>
+                </header>
+                <div className="curiosity-grid">
+                    {[1, 2, 3, 4].map((number) => (
+                        <article key={number}>
+                            <span>{String(number).padStart(2, "0")}</span>
+                            <h3>Curiosidad</h3>
+                            <p>Insertar texto aquí.</p>
+                        </article>
+                    ))}
+                </div>
             </section>
         </section>
     );
@@ -1184,7 +1374,7 @@ export default function Home() {
                     <button type="button" onClick={() => setActivePage("how")}>
                         ¿Cómo funciona?
                     </button>
-                    <button type="button">Historia</button>
+                    <button type="button" onClick={() => setActivePage("history")}>Historia</button>
                     <button type="button">German Book</button>
                     <button type="button">Retos</button>
                 </nav>
@@ -1292,6 +1482,8 @@ export default function Home() {
 
             {activePage === "how" ? (
                 <HowWorksPage />
+            ) : activePage === "history" ? (
+                <HistoryPage />
             ) : (
                 <>
             <section className="intro-panel machine-intro" aria-label="Introduccion">
