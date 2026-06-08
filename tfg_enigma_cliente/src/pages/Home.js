@@ -842,22 +842,30 @@ function HistoryPage() {
                         <article className="history-note">
                             <h3>Historia</h3>
                             <p>
-                                La máquina Enigma fue la máquina utilizada por las Potencias del Eje en la Segunda Guerra Mundial para cifrar sus comunicaciones de una manera segura.
+                                La <strong>Máquina Enigma</strong> fue la máquina utilizada por las <strong>Potencias del Eje</strong> en la Segunda Guerra Mundial para cifrar sus comunicaciones de una manera segura.
                                 Para entender la Máquina Enigma y sus orígenes tenemos que remontarnos al comienzo del siglo XX, antes de que el partido nazi alcanzara el poder.
-                                Arthur Scherbius, nacido en 1878 en Fráncfort del Meno y graduado en ingeniería eléctrica tanto en la Universidad Técnica de Munich como en la Universidad de Hannover,
+                            </p>
+                            <p>
+                                <strong>Arthur Scherbius</strong>, nacido en <strong>1878</strong> en <strong>Fráncfort del Meno</strong> y graduado en ingeniería eléctrica tanto en la Universidad Técnica de Munich como en la Universidad de Hannover,
                                 decide fundar una empresa bajo el nombre de Scherbius & Ritter. De esta forma, hizo múltiples inventos, entre los que estaba cierta máquina basada en ruedas cableadas giratorias,
                                 hoy día conocida como máquina de rotores.
                                 Los modelos creados se apodaban con letras. El primero fue el modelo A, el segundo el B y el tercero y último que creó, el modelo C. La máquina Enigma utilizada durante la guerra era del tamaño de una máquina de escribir y, de hecho, se parecía mucho en cuestiones
                                 como el teclado o la forma general de la máquina. Estos primeros modelos se asemejaban más a una máquina registradora.
-                                En 1918, Arthur patenta su máquina, pensada originalmente para actuar como cifradora para empresas importantes como bancos.
+                            </p>
+                            <p>
+                                En <strong>1918</strong>, Arthur patenta su máquina, pensada originalmente para actuar como cifradora para empresas importantes como bancos.
                                 En estos años nos enfrentamos a una situación de gran inestabilidad política y social. Es el nacimiento de la República de Weimar, el fin de la Gran Guerra.
                                 Ante esta situación, Scherbius dudaba de si realmente la patente de la máquina llegaría a dar frutos, la realidad era que nadie parecía mostrar interés ante esta máquina.
-                                Esto, si bien es correcto cuando hablamos del ciudadano promedio, no se aplica para el gobierno. El gobierno alemán estaba altamente interesado en una máquina codificadora
-                                plenamente funcional e indescifrable, pues un año antes, en 1917, se interceptó y decodificó el telegrama de Zimmermann, lo que puso a Estados Unidos en el mapa y cambió el transcurso de la batalla.
-                                En 1926, ya comercializada bajo el nombre "Enigma", fue adoptada por la Armada alemana y, unos años más tarde, en 1934, la versión M3 de la máquina fue adoptada por la armada naval.
-                                Para este entonces, Arthur Scherbius ya no estaba presente para ver el alcance de su invención, falleció en 1929 sin conocer la importancia que tuvo la existencia de su invento
+                                Esto, si bien es correcto cuando hablamos del ciudadano promedio, no es de igual forma para el gobierno. El gobierno alemán estaba altamente interesado en una máquina codificadora
+                                plenamente funcional e indescifrable, pues un año antes, en <strong>1917</strong>, se interceptó y decodificó el <strong>Telegrama de Zimmermann</strong>, lo que puso a Estados Unidos en el mapa y cambió el transcurso de la batalla.
+                            </p>
+                            <p>
+                                En <strong>1926</strong>, ya comercializada bajo el nombre "Enigma", fue adoptada por la Armada alemana y, unos años más tarde, en <strong>1934</strong>, la versión M3 de la máquina fue adoptada por la armada naval.
+                                Para este entonces, Arthur Scherbius ya no estaba presente para ver el alcance de su invención, falleció en <strong>1929</strong> sin conocer la importancia que tuvo la existencia de su invento
                                 en una guerra que tampoco alcanzó a vislumbrar.
-                                En 1939, a punto de empezar la guerra, se crea la máquina enigma M4, que será la que usarán los aliados de Alemania durante toda la guerra, hasta que Alan Turing y su equipo logren descifrarla.
+                            </p>
+                            <p>
+                                En <strong>1939</strong>, a punto de empezar la guerra, se crea la máquina enigma M4, que será la que usarán los aliados de Alemania durante toda la guerra, hasta que Alan Turing y su equipo logren descifrarla.
                             </p>
                         </article>
                 </div>

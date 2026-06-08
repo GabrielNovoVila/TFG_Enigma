@@ -884,6 +884,7 @@ h1 {
 
 .history-note p,
 .history-paper p {
+  text-align: justify;
   margin: 0 0 12px;
   color: rgba(255, 255, 255, 0.72);
   line-height: 1.45;
