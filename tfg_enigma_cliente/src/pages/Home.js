@@ -883,9 +883,107 @@ function HistoryPage() {
                     </div>
                 </header>
                 <article className="history-paper">
-                    <h3>La máquina</h3>
-                    <p>Insertar texto aquí.</p>
-                    <p>Insertar texto aquí.</p>
+                    <h3>Orígenes de la criptografía</h3>
+                    <p>
+                        La respuesta simple es que la máquina Enigma es una máquina de cifrado por rotores, pero esa no
+                        sería una buena respuesta.
+                        Para poder responder adecuadamente a esta pregunta tenemos que preguntarnos "¿Qué es el
+                        cifrado?"
+                    </p>
+                    <p>
+                        Nos referimos a cifrar cuando hablamos del proceso de codificación de la información. Codificar
+                        la información, en palabras simples,
+                        es convertir el mensaje que queremos transmitir en otro. Este segundo mensaje puede tener
+                        sentido o puede que no lo tenga, lo normal es que no lo tenga.
+                        A la ciencia que estudia el cifrado de mensajes se le llama Criptografía. Si queremos hablar de
+                        esta ciencia, nos remontaremos al siglo V aC, nos remontamos a la guerra del Peloponeso.
+                    </p>
+                    <p>
+                        La criptografía se cree que nace en la guerra de Esparta y Atenas. La comunicación entre los distintos
+                        aliados de un bando siempre fue algo de suma importancia en una contienda bélica y fue entonces cuando
+                        pensaron que la guerra podría dar una vuelta si, el mensaje, aunque fuera interceptado, solo lo pudieran
+                        entender ellos. Esto fue clave en el avance de la guerra por parte del bando griego, pues lograron
+                        crear el primer método registrado de cifrado.
+                    </p>
+                    <h4>
+                        La escítala
+                    </h4>
+                    <p>
+                        Los griegos usaban la llamada "Escítala", que constaba de un palo, rodillo o escalta que rodeaban de
+                        una tira de papel, ambos elementos de un tamaño adecuado y preciso. Existe un debate en la comunidad que menciona
+                        si este método de cifrado verdaderamente fue fruto de esta sociedad o si ya existía en otras polis. Como no es claro,
+                        lo trataremos como si hubiese surgido en la mencionada.
+                    </p>
+                    <p>
+                        La escítala era un método sencillo, no requería de memorización
+                        ni de algoritmos complejos. Si tenías 2 varas del mismo tamaño, tenías el mensaje.
+
+                        Usualmente se escogían varas hexagonales u octogonales por sus caras planas. Alrededor, se enrollaba
+                        la tira de papel y se escribía sobre ella, una línea en cada cara de la vara. Cuando desenrollabas la cinta,
+                        tenías una tira de papel con letras aparentemente aleatorias en ella. Así, solo quien tuviera
+                        una escalta del mismo tamaño podía descifrar el mensaje, volviendo a enrollar la tira sobre la misma.
+                    </p>
+                    <p>
+                        Si nos fijamos en el contexto histórico que este tenía detrás, podemos decir que no acababa de ser
+                        el mejor método de cifrado. En esta época todavía no existían los métodos de puntuación y no se utilizaban
+                        espacios para separar las palabras. Por si fuera poco, todas las palabras se escribían en mayúscula,
+                        por lo que era responsabilidad del lector identificar dónde empezaban y terminaban las palabras. Todo
+                        esto dificultaba la lectura del mensaje, aún siendo descifrado.
+
+                        Aristóteles decía que este método, además, era fácilmente descifrable: si alguien probaba con distintos
+                        grosores de vara y distintas formas, no había tantas posibilidades. De todas formas, esto requería tiempo
+                        y todos sabemos que, en la guerra, cada segundo cuenta.
+                    </p>
+
+                    <h4>
+                        Cifrado César
+                    </h4>
+                    <p>
+                        Cuanto más avanzamos en el tiempo, más tipos de cifrado nos podemos encontrar. El cifrado César
+                        fue el ideado por los romanos en el siglo I aC. Este era, de igual forma que el anterior, simple.
+                        Pero no requería de ningún artilugio, solo hacía falta conocer un número.
+                    </p>
+                    <p>
+                        El cifrado César consistía en coger el alfabeto y moverlo 3 letras a la derecha. Así, la A se
+                        convertía en la D, la B en la E, la C en la F y así progresivamente hasta volver a la A. Esto
+                        ocasiona mensajes aparentemente sin sentido, pero sigue manteniendo los patrones del habla.
+                        Si una palabra es corta, véase artículos como "el" o "la" en castellano, seguirán siendo así.
+                        Como son palabras muy comunes, es sencillo asociar palabras, esto asociará letras y poco a poco
+                        nos dará el alfabeto entero. También, si una letra es muy común en el lenguaje, lo será su letra
+                        asociada bajo este cifrado.
+                    </p>
+                    <p>
+                        El número que se dijo que hacía falta conocer era el desplazamiento. Se mencionó que se movían las
+                        letras 3 posiciones a la derecha, pero esto fue variando con el paso del tiempo.
+                    </p>
+                    <h4>
+                        La máquina Enigma
+                    </h4>
+                    <p>
+                        Ahora que hablamos de distintas formas de cifrado, podemos pasar a entender mejor qué hace la máquina Enigma
+                        y cómo funciona.
+                    </p>
+                    <p>
+                        En el cifrado César, se formaba un nuevo abecedario. Podemos pensarlo como que se hacía una
+                        asociación 1 a 1 con las letras de ambos. Así, teníamos ABCDEF... y DEFGHI... Donde la primera letra
+                        del primer abecedario se sustituía con la primera del segundo, la segunda letra con la segunda y así
+                        hasta terminar el abecedario. Esta es la base de la máquina Enigma.
+                    </p>
+                    <p>
+                        Una vez entendido lo anterior, podemos pasar a responder la pregunta "¿Qué es la máquina Enigma?".
+                        La máquina Enigma es una máquina de cifrado por rotores. Un rotor es, en resumidas cuentas, una pieza que rota.
+                        Se explicó el funcionamiento de esta pieza en la sección "¿Cómo funciona?". Lo importante ahora es
+                        entender que cada rotor tiene un abecedario nuevo, como si tuviéramos un pequeño cifrado César metido
+                        en cada pieza. Este abecedario no sigue un patrón como los anteriores, no son 3 posiciones a la derecha,
+                        sino que es una selección sin patrón del orden de las letras. De igual forma, se hace una asociación
+                        1 a 1 para las letras.
+                    </p>
+                    <p>
+                        Hablar de la "máquina Enigma" verdaderamente es un error de concepto. Hay múltiples versiones
+                        de la misma, por ende, hay múltiples máquinas Enigma. El simulador montado en esta página es la
+                        versión M3, que es la primera versión modificada por la armada. Esta incluía los tipos IV y V de rotores
+                        
+                    </p>
                 </article>
             </section>
 
