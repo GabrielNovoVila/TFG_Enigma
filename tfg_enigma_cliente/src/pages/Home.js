@@ -158,6 +158,11 @@ const rotorNames = {
     4: "V"
 };
 
+const reflectorNames = {
+    0: "B",
+    1: "C"
+};
+
 function normaliseMachine(machine) {
     if (!machine) {
         return emptyMachine;
@@ -799,8 +804,8 @@ function HistoryPage() {
     const historySections = [
         {id: "context", label: "Contexto histórico"},
         {id: "machine", label: "¿Qué es Enigma?"},
-        {id: "timeline", label: "Línea temporal"},
         {id: "deciphering", label: "Descifrado"},
+        {id: "timeline", label: "Línea temporal"},
         {id: "curiosities", label: "Curiosidades"}
     ];
 
@@ -899,39 +904,55 @@ function HistoryPage() {
                         esta ciencia, nos remontaremos al siglo V aC, nos remontamos a la guerra del Peloponeso.
                     </p>
                     <p>
-                        La criptografía se cree que nace en la guerra de Esparta y Atenas. La comunicación entre los distintos
-                        aliados de un bando siempre fue algo de suma importancia en una contienda bélica y fue entonces cuando
-                        pensaron que la guerra podría dar una vuelta si, el mensaje, aunque fuera interceptado, solo lo pudieran
-                        entender ellos. Esto fue clave en el avance de la guerra por parte del bando griego, pues lograron
+                        La criptografía se cree que nace en la guerra de Esparta y Atenas. La comunicación entre los
+                        distintos
+                        aliados de un bando siempre fue algo de suma importancia en una contienda bélica y fue entonces
+                        cuando
+                        pensaron que la guerra podría dar una vuelta si, el mensaje, aunque fuera interceptado, solo lo
+                        pudieran
+                        entender ellos. Esto fue clave en el avance de la guerra por parte del bando griego, pues
+                        lograron
                         crear el primer método registrado de cifrado.
                     </p>
                     <h4>
                         La escítala
                     </h4>
                     <p>
-                        Los griegos usaban la llamada "Escítala", que constaba de un palo, rodillo o escalta que rodeaban de
-                        una tira de papel, ambos elementos de un tamaño adecuado y preciso. Existe un debate en la comunidad que menciona
-                        si este método de cifrado verdaderamente fue fruto de esta sociedad o si ya existía en otras polis. Como no es claro,
+                        Los griegos usaban la llamada "Escítala", que constaba de un palo, rodillo o escalta que
+                        rodeaban de
+                        una tira de papel, ambos elementos de un tamaño adecuado y preciso. Existe un debate en la
+                        comunidad que menciona
+                        si este método de cifrado verdaderamente fue fruto de esta sociedad o si ya existía en otras
+                        polis. Como no es claro,
                         lo trataremos como si hubiese surgido en la mencionada.
                     </p>
                     <p>
                         La escítala era un método sencillo, no requería de memorización
                         ni de algoritmos complejos. Si tenías 2 varas del mismo tamaño, tenías el mensaje.
 
-                        Usualmente se escogían varas hexagonales u octogonales por sus caras planas. Alrededor, se enrollaba
-                        la tira de papel y se escribía sobre ella, una línea en cada cara de la vara. Cuando desenrollabas la cinta,
+                        Usualmente se escogían varas hexagonales u octogonales por sus caras planas. Alrededor, se
+                        enrollaba
+                        la tira de papel y se escribía sobre ella, una línea en cada cara de la vara. Cuando
+                        desenrollabas la cinta,
                         tenías una tira de papel con letras aparentemente aleatorias en ella. Así, solo quien tuviera
-                        una escalta del mismo tamaño podía descifrar el mensaje, volviendo a enrollar la tira sobre la misma.
+                        una escalta del mismo tamaño podía descifrar el mensaje, volviendo a enrollar la tira sobre la
+                        misma.
                     </p>
                     <p>
-                        Si nos fijamos en el contexto histórico que este tenía detrás, podemos decir que no acababa de ser
-                        el mejor método de cifrado. En esta época todavía no existían los métodos de puntuación y no se utilizaban
-                        espacios para separar las palabras. Por si fuera poco, todas las palabras se escribían en mayúscula,
-                        por lo que era responsabilidad del lector identificar dónde empezaban y terminaban las palabras. Todo
+                        Si nos fijamos en el contexto histórico que este tenía detrás, podemos decir que no acababa de
+                        ser
+                        el mejor método de cifrado. En esta época todavía no existían los métodos de puntuación y no se
+                        utilizaban
+                        espacios para separar las palabras. Por si fuera poco, todas las palabras se escribían en
+                        mayúscula,
+                        por lo que era responsabilidad del lector identificar dónde empezaban y terminaban las palabras.
+                        Todo
                         esto dificultaba la lectura del mensaje, aún siendo descifrado.
 
-                        Aristóteles decía que este método, además, era fácilmente descifrable: si alguien probaba con distintos
-                        grosores de vara y distintas formas, no había tantas posibilidades. De todas formas, esto requería tiempo
+                        Aristóteles decía que este método, además, era fácilmente descifrable: si alguien probaba con
+                        distintos
+                        grosores de vara y distintas formas, no había tantas posibilidades. De todas formas, esto
+                        requería tiempo
                         y todos sabemos que, en la guerra, cada segundo cuenta.
                     </p>
 
@@ -940,7 +961,8 @@ function HistoryPage() {
                     </h4>
                     <p>
                         Cuanto más avanzamos en el tiempo, más tipos de cifrado nos podemos encontrar. El cifrado César
-                        fue el ideado por los romanos en el siglo I aC. Este era, de igual forma que el anterior, simple.
+                        fue el ideado por los romanos en el siglo I aC. Este era, de igual forma que el anterior,
+                        simple.
                         Pero no requería de ningún artilugio, solo hacía falta conocer un número.
                     </p>
                     <p>
@@ -953,36 +975,154 @@ function HistoryPage() {
                         asociada bajo este cifrado.
                     </p>
                     <p>
-                        El número que se dijo que hacía falta conocer era el desplazamiento. Se mencionó que se movían las
+                        El número que se dijo que hacía falta conocer era el desplazamiento. Se mencionó que se movían
+                        las
                         letras 3 posiciones a la derecha, pero esto fue variando con el paso del tiempo.
                     </p>
                     <h4>
                         La máquina Enigma
                     </h4>
                     <p>
-                        Ahora que hablamos de distintas formas de cifrado, podemos pasar a entender mejor qué hace la máquina Enigma
+                        Ahora que hablamos de distintas formas de cifrado, podemos pasar a entender mejor qué hace la
+                        máquina Enigma
                         y cómo funciona.
                     </p>
                     <p>
                         En el cifrado César, se formaba un nuevo abecedario. Podemos pensarlo como que se hacía una
-                        asociación 1 a 1 con las letras de ambos. Así, teníamos ABCDEF... y DEFGHI... Donde la primera letra
-                        del primer abecedario se sustituía con la primera del segundo, la segunda letra con la segunda y así
+                        asociación 1 a 1 con las letras de ambos. Así, teníamos ABCDEF... y DEFGHI... Donde la primera
+                        letra
+                        del primer abecedario se sustituía con la primera del segundo, la segunda letra con la segunda y
+                        así
                         hasta terminar el abecedario. Esta es la base de la máquina Enigma.
                     </p>
                     <p>
-                        Una vez entendido lo anterior, podemos pasar a responder la pregunta "¿Qué es la máquina Enigma?".
-                        La máquina Enigma es una máquina de cifrado por rotores. Un rotor es, en resumidas cuentas, una pieza que rota.
-                        Se explicó el funcionamiento de esta pieza en la sección "¿Cómo funciona?". Lo importante ahora es
-                        entender que cada rotor tiene un abecedario nuevo, como si tuviéramos un pequeño cifrado César metido
-                        en cada pieza. Este abecedario no sigue un patrón como los anteriores, no son 3 posiciones a la derecha,
-                        sino que es una selección sin patrón del orden de las letras. De igual forma, se hace una asociación
+                        Una vez entendido lo anterior, podemos pasar a responder la pregunta "¿Qué es la máquina
+                        Enigma?".
+                        La máquina Enigma es una máquina de cifrado por rotores. Un rotor es, en resumidas cuentas, una
+                        pieza que rota.
+                        Se explicó el funcionamiento de esta pieza en la sección "¿Cómo funciona?". Lo importante ahora
+                        es
+                        entender que cada rotor tiene un abecedario nuevo, como si tuviéramos un pequeño cifrado César
+                        metido
+                        en cada pieza. Este abecedario no sigue un patrón como los anteriores, no son 3 posiciones a la
+                        derecha,
+                        sino que es una selección sin patrón del orden de las letras. De igual forma, se hace una
+                        asociación
                         1 a 1 para las letras.
                     </p>
                     <p>
-                        Hablar de la "máquina Enigma" verdaderamente es un error de concepto. Hay múltiples versiones
+                        Hablar de la "máquina Enigma" como entidad universal es un error de concepto. Hay múltiples
+                        versiones
                         de la misma, por ende, hay múltiples máquinas Enigma. El simulador montado en esta página es la
-                        versión M3, que es la primera versión modificada por la armada. Esta incluía los tipos IV y V de rotores
-                        
+                        versión M3, que es la primera versión modificada por la armada. Esta, como nuevas adiciones,
+                        incluía los tipos IV y V de rotores y los tipos B y C del reflector
+                    </p>
+                    <p>
+                        Más tarde en la guerra, en 1942 se creó la versión M4 de la máquina, que incluía nuevos tipos de rotores,
+                        nuevos reflectores y un rotor adicional. Ahora, en vez de 3 rotores simultáneamente, tenía 4. Este rotor
+                        extra le daba una complejidad extra a la decodificación de los británicos de unas 50 a 100 veces, es esta
+                        la razón dentrás de la adición del nuevo rotor. De todas formas, un error en el cifrado hizo que
+                        el descubrimiento del funcionamiento de este nuevo rotor fuera posible, por lo que, realmente,
+                        no tuvo el efecto deseado.
+                    </p>
+                </article>
+            </section>
+
+            <section
+                className={pulseTarget === "deciphering" ? "history-section jump-pulse" : "history-section"}
+                id="history-deciphering"
+            >
+                <header className="history-section-heading">
+                    <span>03</span>
+                    <div>
+                        <p>Las personas y métodos que permitieron comprender sus mensajes</p>
+                        <h2>Descifrado</h2>
+                    </div>
+                </header>
+                <article className="history-paper history-paper-wide">
+                    <h3>El reto de descifrar Enigma</h3>
+                    <p>
+                        Tener una Máquina Enigma no era suficiente para poder leer los mensajes del bando alemán. Para
+                        cifrar y descifrar un mensaje era necesario que ambas máquinas estuvieran configuradas
+                        exactamente de la misma forma. Los operadores alemanes utilizaban libros de claves donde
+                        aparecían los ajustes correspondientes a cada día del mes, como los rotores que debían utilizar
+                        y sus posiciones iniciales. Esta configuración cambiaba diariamente, por lo que descubrir la
+                        clave de un día no solucionaba el problema para siempre: al día siguiente, el trabajo comenzaba
+                        de nuevo.
+                    </p>
+                    <p>
+                        Estos libros eran, por tanto, información de enorme valor. La captura de material alemán, como
+                        máquinas, manuales o libros de códigos, permitió conocer mejor el funcionamiento de sus redes de
+                        comunicación y facilitó el trabajo de los equipos de descifrado. Aun así, seguía siendo
+                        necesario encontrar la configuración concreta utilizada en cada jornada entre una cantidad
+                        inmensa de posibilidades.
+                    </p>
+
+                    <h4>Bletchley Park</h4>
+                    <p>
+                        El principal centro británico dedicado al descifrado se encontraba en <strong>Bletchley
+                        Park</strong>, una propiedad situada al norte de Londres que durante la guerra pasó a ser
+                        conocida también como la <strong>Estación X</strong>. Allí se reunieron matemáticos,
+                        criptógrafos, lingüistas, ingenieros, jugadores de ajedrez, personas aficionadas a los
+                        crucigramas y muchos otros perfiles que podían aportar una manera distinta de enfrentarse al
+                        problema.
+                    </p>
+                    <p>
+                        El descifrado de Enigma no consistía únicamente en observar una máquina y descubrir su
+                        funcionamiento. Primero se interceptaban los mensajes enviados por radio, después se buscaban
+                        posibles fragmentos del texto original y, finalmente, se probaban y descartaban configuraciones
+                        hasta encontrar una que tuviera sentido. Todo este proceso se realizaba bajo un secreto
+                        absoluto y de forma continua, mediante distintos turnos de trabajo.
+                    </p>
+
+                    <h4>Alan Turing y un mérito compartido</h4>
+                    <p>
+                        Cuando se habla del descifrado de Enigma, el nombre que más se repite es el de <strong>Alan
+                        Turing</strong>. Su mérito es indiscutible: fue una figura fundamental en Bletchley Park y
+                        participó en el diseño de la <strong>Bombe</strong>, una máquina electromecánica que permitía
+                        descartar rápidamente configuraciones incompatibles con un mensaje y reducir el número de
+                        posibilidades que debían comprobarse manualmente.
+                    </p>
+                    <p>
+                        Sin embargo, presentar esta historia como el logro de una sola persona sería injusto. La Bombe
+                        británica partía del trabajo previo de los criptógrafos polacos, entre los que destacó <strong>Marian Rejewski</strong>.
+                        En su desarrollo también fueron esenciales las mejoras de <strong>Gordon Welchman</strong> y
+                        el trabajo de ingeniería de <strong>Harold Keen</strong>.
+                        Junto a ellos participaron miles de personas encargadas de interceptar, organizar, estudiar y
+                        comprobar mensajes. Alan Turing merece ser recordado, pero también lo merece el equipo que hizo
+                        posible convertir sus ideas en resultados diarios.
+                    </p>
+
+                    <h4>Las descodificadoras invisibles</h4>
+                    <p>
+                        Las mujeres formaban aproximadamente tres cuartas partes del personal de Bletchley Park, aunque
+                        durante décadas su participación quedó oculta tras una historia contada principalmente a través
+                        de figuras masculinas. No se limitaron a realizar tareas auxiliares: operaron máquinas,
+                        analizaron mensajes y formaron parte directa de los equipos de criptografía.
+                    </p>
+                    <p>
+                        <strong>Joan Clarke</strong> trabajó en el equipo de Alan Turing y llegó a ser subdirectora de
+                        la cabaña 8, dedicada a los mensajes de la armada alemana. <strong>Mavis Lever</strong> y <strong>Margaret Rock</strong> formaron
+                        parte del equipo dirigido por Dilly Knox y ayudaron a
+                        romper el código utilizado por el servicio de inteligencia alemán. Estos nombres representan a
+                        muchas otras mujeres cuyo trabajo permaneció en secreto y que también fueron responsables del
+                        éxito de Bletchley Park.
+                    </p>
+
+                    <h4>Descifrando Enigma</h4>
+                    <p>
+                        En <strong>2014</strong> se estrenó <em>The Imitation Game</em>, conocida en España como
+                        <em>Descifrando Enigma</em>. La película fue dirigida por Morten Tyldum, está basada en la
+                        biografía de Alan Turing escrita por Andrew Hodges y cuenta con Benedict Cumberbatch en el papel
+                        protagonista. Su estreno ayudó a que una gran cantidad de personas conocieran la historia de
+                        Turing y el trabajo realizado en Bletchley Park.
+                    </p>
+                    <p>
+                        De todas formas, debe entenderse como una dramatización y no como un documental. La película
+                        modifica o simplifica ciertos acontecimientos y concentra gran parte del relato en la figura de
+                        Turing. Es una buena puerta de entrada a esta historia, pero el descifrado real de Enigma fue un
+                        esfuerzo colectivo mucho más amplio, construido sobre el trabajo de polacos, británicos,
+                        hombres y mujeres cuyos nombres no siempre aparecen en pantalla.
                     </p>
                 </article>
             </section>
@@ -992,40 +1132,47 @@ function HistoryPage() {
                 id="history-timeline"
             >
                 <header className="history-section-heading">
-                    <span>03</span>
+                    <span>04</span>
                     <div>
                         <p>Los momentos más importantes de su historia</p>
                         <h2>Línea temporal de la máquina Enigma</h2>
                     </div>
                 </header>
                 <div className="history-timeline">
-                    {["Fecha", "Fecha", "Fecha", "Fecha", "Fecha"].map((date, index) => (
-                        <article className="timeline-event" key={`timeline-${index}`}>
-                            <span>{date}</span>
-                            <h3>Acontecimiento {index + 1}</h3>
-                            <p>Insertar texto aquí.</p>
+                    {[
+                        {
+                            date: "1918",
+                            title: "Creación de Enigma",
+                            text: "Arthur Scherbius patenta una máquina de cifrado por rotores que terminará siendo conocida como Máquina Enigma."
+                        },
+                        {
+                            date: "1934",
+                            title: "Adopción por la armada",
+                            text: "La versión M3 de la Máquina Enigma es adoptada por la armada alemana para proteger sus comunicaciones."
+                        },
+                        {
+                            date: "1939",
+                            title: "Comienza la guerra",
+                            text: "El comienzo de la Segunda Guerra Mundial convierte las comunicaciones cifradas con Enigma en un elemento fundamental."
+                        },
+                        {
+                            date: "1939",
+                            title: "Bletchley Park",
+                            text: "El equipo británico de descifrado se instala en Bletchley Park, que se convierte en el principal centro aliado de criptografía."
+                        },
+                        {
+                            date: "1945",
+                            title: "Final de la guerra",
+                            text: "Termina la Segunda Guerra Mundial. El trabajo realizado para descifrar las comunicaciones de Enigma permanece en secreto durante años."
+                        }
+                    ].map((event) => (
+                        <article className="timeline-event" key={`${event.date}-${event.title}`}>
+                            <span>{event.date}</span>
+                            <h3>{event.title}</h3>
+                            <p>{event.text}</p>
                         </article>
                     ))}
                 </div>
-            </section>
-
-            <section
-                className={pulseTarget === "deciphering" ? "history-section jump-pulse" : "history-section"}
-                id="history-deciphering"
-            >
-                <header className="history-section-heading">
-                    <span>04</span>
-                    <div>
-                        <p>Las personas y métodos que permitieron comprender sus mensajes</p>
-                        <h2>Descifrado</h2>
-                    </div>
-                </header>
-                <article className="history-paper history-paper-wide">
-                    <h3>El reto de descifrar Enigma</h3>
-                    <p>Insertar texto aquí.</p>
-                    <p>Insertar texto aquí.</p>
-                    <p>Insertar texto aquí.</p>
-                </article>
             </section>
 
             <section
@@ -1040,11 +1187,28 @@ function HistoryPage() {
                     </div>
                 </header>
                 <div className="curiosity-grid">
-                    {[1, 2, 3, 4].map((number) => (
-                        <article key={number}>
-                            <span>{String(number).padStart(2, "0")}</span>
-                            <h3>Curiosidad</h3>
-                            <p>Insertar texto aquí.</p>
+                    {[
+                        {
+                            title: "Enigma fuera de Alemania",
+                            text: "Aunque suele relacionarse únicamente con Alemania, otros países también utilizaron máquinas Enigma. Durante la Guerra Civil española se emplearon modelos comerciales en el bando sublevado y algunas de estas máquinas todavía se conservan en museos españoles. La Marina italiana también utilizó una variante comercial, conocida como Navy Cipher D, y posteriormente otros modelos de Enigma para proteger parte de sus comunicaciones."
+                        },
+                        {
+                            title: "Parecida a una máquina de escribir",
+                            text: "Su teclado, su tamaño y la caja utilizada para transportarla hacían que la Máquina Enigma recordase a una máquina de escribir. Este aspecto familiar facilitaba su uso y permitía que fuese transportada y utilizada de una forma relativamente discreta, sin parecer a primera vista una compleja herramienta criptográfica."
+                        },
+                        {
+                            title: "El significado de M3",
+                            text: "El nombre M3 identifica la versión naval de tres rotores de la Máquina Enigma. La letra M hace referencia a Marine, marina en alemán, mientras que el número 3 permite distinguirla como el modelo que utilizaba tres rotores simultáneamente. Más tarde apareció la M4, preparada para trabajar con un cuarto rotor."
+                        },
+                        {
+                            title: "Bletchley Park y el primer ordenador",
+                            text: "En Bletchley Park no solo se trabajó con la Bombe utilizada contra Enigma. Allí también se instaló Colossus, considerado el primer ordenador digital electrónico programable. Colossus no descifraba mensajes de Enigma, sino los producidos por el sistema Lorenz, utilizado para comunicaciones alemanas de alto nivel."
+                        }
+                    ].map((curiosity, index) => (
+                        <article key={curiosity.title}>
+                            <span>{String(index + 1).padStart(2, "0")}</span>
+                            <h3>{curiosity.title}</h3>
+                            <p>{curiosity.text}</p>
                         </article>
                     ))}
                 </div>
@@ -1363,7 +1527,7 @@ export default function Home() {
         if (!machine.id) {
             setMachine((current) => ({
                 ...current,
-                reflector: current.reflector === 3 ? 1 : current.reflector + 1
+                reflector: current.reflector === 0 ? 1 : 0
             }));
             return;
         }
@@ -1654,7 +1818,9 @@ export default function Home() {
                         >
                             Rotores
                         </button>
-                        <button onClick={changeReflector}>Reflector {machine.reflector}</button>
+                        <button onClick={changeReflector}>
+                            Reflector {reflectorNames[machine.reflector] ?? machine.reflector}
+                        </button>
                     </div>
 
                     <div

@@ -882,6 +882,14 @@ h1 {
   font-size: clamp(1.05rem, 1.8vw, 1.35rem);
 }
 
+.history-paper h4 {
+  margin: clamp(26px, 4vw, 42px) 0 10px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(181, 155, 84, 0.55);
+  color: #f2f2ef;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+}
+
 .history-note p,
 .history-paper p {
   text-align: justify;
@@ -891,14 +899,14 @@ h1 {
 }
 
 .history-paper {
-  width: min(760px, 100%);
+  width: 100%;
   min-height: 0;
   padding: 8px 0;
 }
 
 .history-paper-wide {
-  width: min(920px, 100%);
-  justify-self: end;
+  width: 100%;
+  justify-self: stretch;
 }
 
 .history-timeline {
