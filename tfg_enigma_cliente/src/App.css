@@ -89,6 +89,10 @@ select {
     box-shadow 150ms ease;
 }
 
+.main-tabs button:nth-child(4) {
+  width: clamp(132px, 9vw, 150px);
+}
+
 .main-tabs button:hover {
   background: #5a5a55;
   color: #ffffff;
@@ -1001,6 +1005,237 @@ h1 {
   color: rgba(255, 255, 255, 0.72);
 }
 
+.reference-page,
+.missions-page {
+  width: min(1120px, 92vw);
+  margin: 18px auto 0;
+  padding: 10px 0 72px;
+  display: grid;
+  gap: clamp(34px, 6vw, 70px);
+  color: #f2f2ef;
+}
+
+.reference-intro,
+.missions-intro {
+  width: min(940px, 100%);
+  margin-top: 0;
+}
+
+.reference-stamp {
+  padding: 14px 18px;
+  display: grid;
+  gap: 4px;
+  border: 2px solid rgba(181, 155, 84, 0.72);
+  color: #d8c092;
+  text-align: center;
+  transform: rotate(-2deg);
+}
+
+.reference-stamp strong {
+  font-size: 1.25rem;
+}
+
+.reference-stamp span {
+  font-size: 0.72rem;
+}
+
+.codebook-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(250px, 0.65fr);
+  align-items: center;
+  gap: clamp(22px, 4vw, 48px);
+}
+
+.codebook-document {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.codebook-document img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid rgba(181, 155, 84, 0.35);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.35);
+}
+
+.codebook-document figcaption {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.codebook-explanation {
+  padding-left: 20px;
+  border-left: 4px solid var(--brass);
+}
+
+.codebook-explanation h2 {
+  margin: 0 0 14px;
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+}
+
+.codebook-explanation p:not(.eyebrow) {
+  margin: 0 0 14px;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.5;
+}
+
+.codebook-columns {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.codebook-columns article {
+  min-height: 190px;
+  padding: 18px 15px;
+  background: #4d4d49;
+  border-top: 3px solid var(--brass);
+  color: #f2f2ef;
+}
+
+.codebook-columns span {
+  color: #d8c092;
+  font-size: 0.72rem;
+}
+
+.codebook-columns h3 {
+  margin: 8px 0;
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+
+.codebook-columns p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.mission-machine-button,
+.mission-card button {
+  border: 0;
+  background: #4d4d49;
+  color: #f2f2ef;
+  box-shadow: inset 0 -3px 0 var(--brass);
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.mission-machine-button {
+  min-height: 42px;
+  padding: 8px 18px;
+}
+
+.mission-machine-button:hover,
+.mission-card button:hover {
+  background: #5a5a55;
+  transform: translateY(-2px);
+}
+
+.mission-briefing {
+  width: min(900px, 100%);
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  background: #4d4d49;
+  border-left: 5px solid var(--brass);
+}
+
+.mission-briefing strong {
+  color: #d8c092;
+  font-size: 1.15rem;
+}
+
+.mission-briefing p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.45;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 26px);
+}
+
+.mission-card {
+  padding: clamp(18px, 3vw, 28px);
+  display: grid;
+  gap: 18px;
+  background: #30302d;
+  border-top: 4px solid var(--brass);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.25);
+}
+
+.mission-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #f2f2ef;
+}
+
+.mission-card header span {
+  color: #d8c092;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.mission-settings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.mission-settings p {
+  margin: 0;
+  padding: 8px 9px;
+  display: grid;
+  gap: 4px;
+  background: #4d4d49;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.8rem;
+}
+
+.mission-settings strong {
+  color: #d8c092;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.mission-card code {
+  padding: 14px;
+  background: #171717;
+  color: #f2f2ef;
+  font-family: "Special Elite", monospace;
+  font-size: clamp(0.86rem, 1.5vw, 1rem);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.mission-hint {
+  margin: 0;
+  padding: 10px 12px;
+  background: rgba(181, 155, 84, 0.14);
+  border-left: 3px solid var(--brass);
+  color: #f2f2ef;
+}
+
+.mission-actions {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.8fr) minmax(160px, 1.2fr);
+  gap: 8px;
+}
+
+.mission-actions button {
+  min-height: 38px;
+  padding: 7px 12px;
+}
+
 .user-area {
   justify-self: end;
   display: flex;
@@ -1694,7 +1929,14 @@ h1 {
   gap: 12px;
 }
 
-.steps-toggle {
+.steps-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.steps-toggle,
+.steps-clear {
   min-height: 36px;
   border: 0;
   background: #4d4d49;
@@ -1705,12 +1947,18 @@ h1 {
   box-shadow: inset 0 -3px 0 var(--brass);
 }
 
-.steps-toggle:hover:not(:disabled) {
+.steps-clear {
+  background: #3b3b38;
+}
+
+.steps-toggle:hover:not(:disabled),
+.steps-clear:hover:not(:disabled) {
   background: #5a5a55;
   transform: translateY(-1px);
 }
 
-.steps-toggle:disabled {
+.steps-toggle:disabled,
+.steps-clear:disabled {
   cursor: default;
   opacity: 0.45;
 }
@@ -2058,6 +2306,35 @@ h1 {
     top: 50%;
     left: -25px;
     transform: translateY(-50%);
+  }
+
+  .codebook-layout,
+  .mission-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .codebook-explanation {
+    padding: 0 0 0 14px;
+  }
+
+  .codebook-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .codebook-columns article {
+    min-height: 0;
+  }
+
+  .mission-briefing {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-settings {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-actions {
+    grid-template-columns: 1fr;
   }
 
   .title-strip {

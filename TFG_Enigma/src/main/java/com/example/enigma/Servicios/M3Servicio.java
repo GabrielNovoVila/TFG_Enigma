@@ -204,7 +204,7 @@ public class M3Servicio {
         int offset=rotor.posicion-rotor.ring_setting;
 
         // Convertimos la letra en base a ese offset (Se le suma el offset)
-        String nuevo=maquina.alfabeto_letras.get((maquina.alfabeto_letras.indexOf(a)+offset)%26);
+        String nuevo=maquina.alfabeto_letras.get(Math.floorMod(maquina.alfabeto_letras.indexOf(a)+offset, 26));
 
         // Aplicamos la traducción del rotor
         // Si estamos en el camino de ida se hace de manera distinta a si estuviéramos en el de vuelta
@@ -223,13 +223,7 @@ public class M3Servicio {
 
         // Convertimos la letra resultante en base al offset, de nuevo (Se le resta el offset)
         int letra=maquina.alfabeto_letras.indexOf(nuevo)-offset;
-
-        if(letra<0){
-            nuevo=maquina.alfabeto_letras.get(26+letra);
-        }else{
-            nuevo=maquina.alfabeto_letras.get(letra%26);
-
-        }
+        nuevo=maquina.alfabeto_letras.get(Math.floorMod(letra, 26));
         // Devolvemos la letra resultante
         return nuevo;
     }

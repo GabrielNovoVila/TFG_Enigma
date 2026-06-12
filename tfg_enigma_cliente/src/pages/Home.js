@@ -12,6 +12,7 @@ import myKeyboardPreview from "../assets/mi_teclado.png";
 import myPlugboardEmptyPreview from "../assets/mis_cables_no.png";
 import myPlugboardActivePreview from "../assets/mis_cables_si.png";
 import myOutputPreview from "../assets/mi_salida.png";
+import codeBookPreview from "../assets/libro_codificacion.png";
 import accessibilityIcon from "../assets/accesibilidad.png";
 import keyA from "../assets/a.png";
 import keyB from "../assets/b.png";
@@ -1217,6 +1218,159 @@ function HistoryPage() {
     );
 }
 
+function CodeBookPage() {
+    const columns = [
+        {
+            title: "Tag",
+            text: "Indica el día del mes para el que deben utilizarse los ajustes de esa fila."
+        },
+        {
+            title: "Walzenlage",
+            text: "Muestra el orden de los rotores que deben colocarse en la máquina."
+        },
+        {
+            title: "Ringstellung",
+            text: "Define la posición inicial del anillo de cada uno de los tres rotores."
+        },
+        {
+            title: "Steckerverbindungen",
+            text: "Enumera las parejas de letras que deben unirse mediante cables en el espacio de conexiones."
+        },
+        {
+            title: "Kenngruppen",
+            text: "Son grupos indicadores de tres letras utilizados para identificar la clave o el procedimiento aplicado al mensaje."
+        }
+    ];
+
+    return (
+        <section className="reference-page" aria-label="Libro de codificación">
+            <section className="intro-panel reference-intro">
+                <div>
+                    <p className="eyebrow">Documento secreto</p>
+                    <h1>Libro de codificación</h1>
+                    <p>
+                        Los operadores consultaban estos libros para configurar sus máquinas de la misma forma
+                        antes de intercambiar mensajes.
+                    </p>
+                </div>
+                <aside className="reference-stamp">
+                    <strong>GEHEIM!</strong>
+                    <span>Solo para uso autorizado</span>
+                </aside>
+            </section>
+
+            <section className="codebook-layout">
+                <figure className="codebook-document">
+                    <img src={codeBookPreview} alt="Página de un libro de claves de la Máquina Enigma" />
+                    <figcaption>Hoja mensual de claves de diciembre de 1940.</figcaption>
+                </figure>
+                <article className="codebook-explanation">
+                    <p className="eyebrow">Cómo utilizarlo</p>
+                    <h2>Una configuración para cada día</h2>
+                    <p>
+                        Para cifrar o descifrar correctamente, emisor y receptor debían utilizar la fila
+                        correspondiente al mismo día. Al cambiar la fecha, también cambiaban los ajustes.
+                    </p>
+                    <p>
+                        El libro debía mantenerse en secreto: conocer el funcionamiento de Enigma no servía de
+                        mucho sin conocer también la clave diaria.
+                    </p>
+                    <p>
+                        Todos los días se utilizaba el Reflector tipo C
+                    </p>
+                </article>
+            </section>
+
+            <section className="codebook-columns" aria-label="Columnas del libro de codificación">
+                {columns.map((column, index) => (
+                    <article key={column.title}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <h3>{column.title}</h3>
+                        <p>{column.text}</p>
+                    </article>
+                ))}
+            </section>
+        </section>
+    );
+}
+
+function ChallengesPage({onOpenMachine}) {
+    const [visibleHint, setVisibleHint] = useState(null);
+    const missions = [
+        {
+            date: "7 de diciembre de 1940",
+            message: "IXSPB NIVXQ WNSTF HGDHV UNDOF ALS",
+            hint: "Pensaba que estaban extintos..."
+        },
+        {
+            date: "11 de diciembre de 1940",
+            message: "ZIJME WKYAZ CUSUP CURDC RPUBO LPDEY AEHTB AG",
+            hint: "Parece que nos necesitan"
+        },
+        {
+            date: "24 de diciembre de 1940",
+            message: "GFCQA RMQVA QVGPN JRIMX INOUE KXYYY ONXSF JUBEY HKWG",
+            hint: "Alguien se equivocó y lo va a pagar muy caro"
+        },
+        {
+            date: "31 de diciembre de 1940",
+            message: "IEXLU SQRAR YVVZZ CANHY ODRJM UOWKX SKACN X",
+            hint: "¿Eren Yeager? No lo conozco, pero le buscan"
+        }
+    ];
+
+    return (
+        <section className="missions-page" aria-label="Retos de descifrado">
+            <section className="intro-panel missions-intro">
+                <div>
+                    <p className="eyebrow">Bletchley Park · Estación X</p>
+                    <h1>Retos</h1>
+                    <p>
+                        Hemos interceptado varios mensajes de un remitente desconocido, aunque parece que te conoce... Utiliza los ajustes recuperados del libro
+                        de codificación y descubre qué dicen, si juntas las 3 primeras letras de cada mensaje decodificado, obtendrás el mensaje secreto.
+                    </p>
+                </div>
+                <button type="button" className="mission-machine-button" onClick={onOpenMachine}>
+                    Abrir Máquina Enigma
+                </button>
+            </section>
+
+            <section className="mission-briefing">
+                <strong>Misión</strong>
+                <p>
+                    Configura los rotores, sus posiciones iniciales y las conexiones indicadas. Selecciona el
+                    modo descifrar e introduce cada mensaje letra por letra, ignorando los espacios. Para confirmar que
+                    estás haciendo un buen trabajo, hay una pista asociada a cada mensaje.
+                </p>
+            </section>
+
+            <div className="mission-grid">
+                {missions.map((mission, index) => (
+                    <article className="mission-card" key={`${mission.date}-${index}`}>
+                        <header>
+                            <span>Mensaje {String(index + 1).padStart(2, "0")}</span>
+                            <strong>{mission.date}</strong>
+                        </header>
+                        <code>{mission.message}</code>
+                        {visibleHint === index && (
+                            <p className="mission-hint">{mission.hint}</p>
+                        )}
+                        <div className="mission-actions">
+                            <button
+                                type="button"
+                                onClick={() => setVisibleHint((current) => current === index ? null : index)}
+                            >
+                                {visibleHint === index ? "Ocultar pista" : "Mostrar pista"}
+                            </button>
+                            <button type="button" onClick={onOpenMachine}>Resolver en la máquina</button>
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </section>
+    );
+}
+
 export default function Home() {
     const {accessToken, logout} = useAuth();
     const [settingsOpen, setSettingsOpen] = useState(false);
@@ -1282,6 +1436,10 @@ export default function Home() {
     const latestSteps = useMemo(() => {
         return lastSteps.length ? lastSteps : normaliseSteps(sessionHistory[0]?.steps);
     }, [lastSteps, sessionHistory]);
+
+    const chronologicalSessionHistory = useMemo(() => {
+        return [...sessionHistory].reverse();
+    }, [sessionHistory]);
 
     useEffect(() => {
         const createMachine = async () => {
@@ -1382,6 +1540,14 @@ export default function Home() {
         setAccountMenuOpen(false);
         setHistoryOpen(false);
         logout();
+    };
+
+    const clearCurrentMessage = () => {
+        setSessionHistory([]);
+        setLastOutput("");
+        setLastSteps([]);
+        setStepsOpen(false);
+        setStatus("Mensaje limpiado");
     };
 
     const encryptLetter = async (letter) => {
@@ -1645,8 +1811,10 @@ export default function Home() {
                         ¿Cómo funciona?
                     </button>
                     <button type="button" onClick={() => setActivePage("history")}>Historia</button>
-                    <button type="button">German Book</button>
-                    <button type="button">Retos</button>
+                    <button type="button" onClick={() => setActivePage("codebook")}>
+                        Libro de codificación
+                    </button>
+                    <button type="button" onClick={() => setActivePage("challenges")}>Retos</button>
                 </nav>
 
                 <div className="title-strip">MAQUINA ENIGMA M3</div>
@@ -1754,6 +1922,10 @@ export default function Home() {
                 <HowWorksPage />
             ) : activePage === "history" ? (
                 <HistoryPage />
+            ) : activePage === "codebook" ? (
+                <CodeBookPage />
+            ) : activePage === "challenges" ? (
+                <ChallengesPage onOpenMachine={() => setActivePage("machine")} />
             ) : (
                 <>
             <section className="intro-panel machine-intro" aria-label="Introduccion">
@@ -1995,13 +2167,13 @@ export default function Home() {
                 <div className="notebook-columns">
                     <div>
                         <h2>Entrada</h2>
-                        {sessionHistory.map((item, index) => (
+                        {chronologicalSessionHistory.map((item, index) => (
                             <span key={`input-${index}`}>{item.input}</span>
                         ))}
                     </div>
                     <div>
                         <h2>Salida</h2>
-                        {sessionHistory.map((item, index) => (
+                        {chronologicalSessionHistory.map((item, index) => (
                             <span key={`output-${index}`}>{item.output}</span>
                         ))}
                     </div>
@@ -2009,13 +2181,23 @@ export default function Home() {
             </section>
 
             <section className="steps-area" aria-label="Pasos de cifrado">
-                <button
-                    className="steps-toggle"
-                    onClick={() => setStepsOpen((open) => !open)}
-                    disabled={!latestSteps.length}
-                >
-                    {stepsOpen ? "Ocultar pasos seguidos" : "Mostrar pasos seguidos"}
-                </button>
+                <div className="steps-actions">
+                    <button
+                        className="steps-toggle"
+                        onClick={() => setStepsOpen((open) => !open)}
+                        disabled={!latestSteps.length}
+                    >
+                        {stepsOpen ? "Ocultar pasos seguidos" : "Mostrar pasos seguidos"}
+                    </button>
+                    <button
+                        className="steps-clear"
+                        type="button"
+                        onClick={clearCurrentMessage}
+                        disabled={!sessionHistory.length && !lastOutput && !lastSteps.length}
+                    >
+                        Limpiar
+                    </button>
+                </div>
 
                 {stepsOpen && (
                     <div className="steps-panel">

@@ -146,7 +146,6 @@ public class Rotor {
     // MÉTODOS
 
     public void sumarPosicion(){
-        posicion++;
-        if(posicion==25) posicion=0;
+        posicion=Math.floorMod(posicion+1, 26);
     }
 }
