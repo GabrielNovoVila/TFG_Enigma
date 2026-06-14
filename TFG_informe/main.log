@@ -1,0 +1,545 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.6.13)  14 JUN 2026 14:09
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./main.tex
+(main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
+Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/base\bk12.clo
+File: bk12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@chapter=\count276
+\c@section=\count277
+\c@subsection=\count278
+\c@subsubsection=\count279
+\c@paragraph=\count280
+\c@subparagraph=\count281
+\c@figure=\count282
+\c@table=\count283
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2025/12/11 v25.17 The multilingual framework for LuaLaTeX, pdfLa
+TeX and XeLaTeX
+\babel@savecnt=\count284
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input li
+ne 2068.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input li
+ne 2070.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input lin
+e 2072.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input lin
+e 2073.
+LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) 
+on input line 2074.
+LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) 
+on input line 2076.
+LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) 
+on input line 2101.
+\U@D=\dimen149
+\l@unhyphenated=\language79
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count285
+Package babel Info: Configuration files are deprecated, as
+(babel)             they can break document portability.
+(babel)             Reported on input line 4196.
+
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/gl\babel-
+galician.tex)
+Package babel Info: Importing font and identification data for galician
+(babel)             from babel-gl.ini. Reported on input line 4320.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/babel-galician\galician.
+ldf
+Language: galician.ldf 2008/07/06 v4.3c Galician support from the babel system
+\gl@quottoks=\toks19
+\gl@quotdepth=\count286
+Package babel Info: Making . an active character on input line 533.
+Package babel Info: Making " an active character on input line 564.
+Package babel Info: Making < an active character on input line 656.
+Package babel Info: Making > an active character on input line 657.
+))
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks20
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cf
+g
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen150
+\Gin@req@width=\dimen151
+) (C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/graphics\epsfig.sty
+Package: epsfig 2024/01/14 v1.7b (e)psfig emulation (SPQR)
+\epsfxsize=\dimen152
+\epsfysize=\dimen153
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks21
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/eurosym\eurosym.sty
+Package: eurosym 1998/08/06 v1.1 European currency symbol ``Euro''
+\@eurobox=\box53
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count287
+\float@exts=\toks22
+\float@box=\box54
+\@float@everytoks=\toks23
+\@floatcapt=\box55
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/base\latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/ntgclass\a4.sty
+Package: a4 2025/12/29 v1.2g A4 based page layout
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count288
+\lst@gtempboxa=\box56
+\lst@token=\toks24
+\lst@length=\count289
+\lst@currlwidth=\dimen154
+\lst@column=\count290
+\lst@pos=\count291
+\lst@lostspace=\dimen155
+\lst@width=\dimen156
+\lst@newlines=\count292
+\lst@lineno=\count293
+\lst@maxwidth=\dimen157
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
+File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
+\c@lstnumber=\count294
+\lst@skipnumbers=\count295
+\lst@framebox=\box57
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2025/11/14 1.11b listings configuration
+))
+Package: listings 2025/11/14 1.11b (Carsten Heinz)
+
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdft
+ex.def
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count296
+) (main.aux (capitulos/titulo.aux)
+Package babel Info: 'galician' activates 'galician' shorthands.
+(babel)             Reported on input line 11.
+ (capitulos/certificacion.aux)
+(capitulos/agradecementos.aux) (capitulos/resumo.aux)
+(capitulos/introducion.aux) (capitulos/cap2.aux) (capitulos/cap3.aux)
+(capitulos/cap4.aux) (capitulos/exemplos.aux) (capitulos/conclusions.aux)
+(capitulos/apendicea.aux) (capitulos/apendiceb.aux) (capitulos/licenza.aux)
+(capitulos/bibliografia.aux))
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Encoding Info:    Redeclaring text command \guillemotleft (encoding OT1) 
+on input line 41.
+LaTeX Encoding Info:    Redeclaring text command \guillemotright (encoding OT1)
+ on input line 41.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mki
+i
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count297
+\scratchdimen=\dimen158
+\scratchbox=\box58
+\nofMPsegments=\count298
+\nofMParguments=\count299
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count300
+\MPscratchDim=\dimen159
+\MPnumerator=\count301
+\makeMPintoPDFobject=\count302
+\everyMPtoPDFconversion=\toks26
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-ba
+se.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cf
+g
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+\c@lstlisting=\count303
+\openout2 = `capitulos/titulo.aux'.
+
+ (capitulos/titulo.tex
+LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 6.
+
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/base\ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)) [1
+
+
+{C:/Users/Gabi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2
+
+
+
+]
+\openout2 = `capitulos/certificacion.aux'.
+
+
+(capitulos/certificacion.tex)
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <13.13947> not available
+(Font)              size <12> substituted on input line 44.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/sc' in size <13.13947> not available
+(Font)              size <12> substituted on input line 44.
+
+[1
+
+] [2
+
+
+
+]
+\openout2 = `capitulos/agradecementos.aux'.
+
+ (capitulos/agradecementos.tex) [3
+
+
+] [4
+
+
+
+]
+\openout2 = `capitulos/resumo.aux'.
+
+ (capitulos/resumo.tex) [5
+
+
+]
+[6
+
+
+
+] (main.toc)
+\tf@toc=\write3
+\openout3 = `main.toc'.
+
+ [7
+
+] [8
+
+] (main.lof)
+\tf@lof=\write4
+\openout4 = `main.lof'.
+
+ [9] [10
+
+] (main.lot)
+\tf@lot=\write5
+\openout5 = `main.lot'.
+
+ [11] [12
+
+]
+\openout2 = `capitulos/introducion.aux'.
+
+
+(capitulos/introducion.tex
+Cap\'{\i }tulo 1.
+) [1
+
+
+]
+Package babel Info: 'galician' activates 'galician' shorthands.
+(babel)             Reported on input line 62.
+ [2
+
+
+
+]
+\openout2 = `capitulos/cap2.aux'.
+
+ (capitulos/cap2.tex
+Cap\'{\i }tulo 2.
+) [3
+
+
+] [4
+
+
+
+]
+\openout2 = `capitulos/cap3.aux'.
+
+ (capitulos/cap3.tex
+Cap\'{\i }tulo 3.
+) [5
+
+
+] [6
+
+
+
+]
+\openout2 = `capitulos/cap4.aux'.
+
+ (capitulos/cap4.tex
+Cap\'{\i }tulo 4.
+) [7
+
+
+] [8
+
+
+
+]
+\openout2 = `capitulos/exemplos.aux'.
+
+ (capitulos/exemplos.tex
+Cap\'{\i }tulo 5.
+[9
+
+
+]
+Overfull \hbox (4.24084pt too wide) has occurred while \output is active
+\OT1/cmr/m/n/12 10  \OT1/cmr/m/sl/12 CAP[]ITULO 5.  EXEMPLOS (ELIMINAR CAP[]ITU
+LO NA VERSI[]ON FINAL)
+ []
+
+[10]
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2025/11/14 1.11b listings language file
+)
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
+)
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 8
+1.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
+File: omlcmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 81.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 8
+3.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 83.
+
+(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2025/11/14 1.11b listings language file
+)
+Overfull \hbox (53.36043pt too wide) in paragraph at lines 97--98
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [11]
+Overfull \hbox (4.24084pt too wide) has occurred while \output is active
+\OT1/cmr/m/n/12 12  \OT1/cmr/m/sl/12 CAP[]ITULO 5.  EXEMPLOS (ELIMINAR CAP[]ITU
+LO NA VERSI[]ON FINAL)
+ []
+
+[12
+
+
+
+]
+\openout2 = `capitulos/conclusions.aux'.
+
+ (capitulos/conclusions.tex
+Cap\'{\i }tulo 6.
+) [13
+
+
+] [14
+
+
+
+]
+\openout2 = `capitulos/apendicea.aux'.
+
+ (capitulos/apendicea.tex
+Ap\'endice A.
+) [15
+
+
+] [16
+
+
+
+]
+\openout2 = `capitulos/apendiceb.aux'.
+
+ (capitulos/apendiceb.tex
+Ap\'endice B.
+) [17
+
+
+] [18
+
+
+
+]
+\openout2 = `capitulos/licenza.aux'.
+
+ (capitulos/licenza.tex
+Ap\'endice C.
+) [19
+
+
+] [20
+
+
+
+]
+\openout2 = `capitulos/bibliografia.aux'.
+
+ (capitulos/bibliografia.tex
+Underfull \hbox (badness 1590) in paragraph at lines 7--8
+[]\OT1/cmr/m/n/12 Nvidia CU-DA pro-gram-ming gui-de. Ver-si^^Son 2.0, 2010. Dis
+-po~nible en
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
+[]\OT1/cmr/m/n/12 Acceso m^^Sulti-ple por di-vi-si^^Son de c^^Sodi-go. Ar-ti-go
+ da wi-ki-pe-dia
+ []
+
+) [21
+
+
+] (main.aux (capitulos/titulo.aux) (capitulos/certificacion.aux)
+(capitulos/agradecementos.aux) (capitulos/resumo.aux)
+(capitulos/introducion.aux) (capitulos/cap2.aux) (capitulos/cap3.aux)
+(capitulos/cap4.aux) (capitulos/exemplos.aux) (capitulos/conclusions.aux)
+(capitulos/apendicea.aux) (capitulos/apendiceb.aux) (capitulos/licenza.aux)
+(capitulos/bibliografia.aux))
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+ ***********
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 1.13947pt have occurred.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 5734 strings out of 467871
+ 97000 string characters out of 5418860
+ 692182 words of memory out of 5000000
+ 34444 multiletter control sequences out of 15000+600000
+ 637944 words of font info for 78 fonts, out of 8000000 for 9000
+ 1142 hyphenation exceptions out of 8191
+ 57i,8n,65p,537b,1323s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Gabi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1
+200.pk> <C:\Users\Gabi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
+tcti1200.pk><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmcsc10.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Gabi/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Gabi/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Gabi/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Gab
+i/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Us
+ers/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb>
+<C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr
+8.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmsl12.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmsy8.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on main.pdf (35 pages, 205753 bytes).
+PDF statistics:
+ 199 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
