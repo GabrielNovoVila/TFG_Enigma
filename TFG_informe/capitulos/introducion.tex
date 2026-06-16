@@ -1,22 +1,96 @@
-\chapter{Introdución}
-\hyphenation{In-te-re-se}
+\chapter{Introducción}
 
-Obxectivos Xerais, Relación da Documentación que conforma a Memoria, Descrición do Sistema, Información Adicional de Interese (métodos, técnicas ou arquitecturas utilizadas, xustificación da súa elección, etc.).
+La máquina Enigma ocupa un lugar destacado tanto en la historia de la criptografía
+como en la de la informática. Su utilización durante la Segunda Guerra Mundial, la
+complejidad de su funcionamiento y el esfuerzo colectivo necesario para descifrar sus
+comunicaciones la convierten en un caso especialmente interesante para comprender cómo
+la tecnología puede influir en acontecimientos históricos. Sin embargo, explicar su
+funcionamiento únicamente mediante descripciones teóricas puede resultar difícil para
+una persona que no disponga de conocimientos previos sobre criptografía.
 
-El objetivo de este proyecto no es el de hacer la aplicación más 
-eficiente de todas ni la más revolucionaria. 
+El presente Trabajo de Fin de Grado tiene como objetivo principal desarrollar una
+aplicación web educativa que simule una máquina Enigma M3 y permita comprenderla
+mediante la interacción directa con sus componentes. El usuario puede configurar la
+máquina, cifrar y descifrar letras, observar los pasos seguidos durante el proceso y
+consultar explicaciones sobre su funcionamiento y su contexto histórico. Asimismo, se
+incluyen retos de descifrado que permiten aplicar de forma práctica los conocimientos
+adquiridos a lo largo de la página, pues existen secciones dedicadas tanto a la historia
+como al funcionamiento interno de la máquina.
+
+\section{Objetivos generales}
+
+El desarrollo del proyecto parte de los siguientes objetivos generales:
+
+Por un lado, desde el backend del proyecto, lo que buscamos es reproducir el comportamiento 
+de una máquina Enigma M3, centrándose en todas las posibilidades que nos presenta una: 
+desde cambiar un rotor hasta cifrar una letra u obtener los pasos seguidos para este cifrado.
+
+Por otro, buscamos, también, ofrecer una interfaz clara y visual que permita modificar
+la dicha configuración de la máquina y observar, con detalle, el resultado de cada 
+operación realizada con esta simulación. Este frontend no solo actuaría como portal 
+entre el usuario y el backend, sinoq que también nos provee de opciones de accesibilidad 
+para que todo tipo de persona pueda disfrutar la página: diferencias entre el modo claro 
+y oscuro, modo para daltónicos y distintos tamaños de letra para que nadie se sienta excluído. 
+
+Tendría, también, secciones de historia o de funcionamiento, 
+de forma que un usuario, sin saber nada de criptografía pueda aprender los orígenes de la misma 
+y las funcionalidades provistas por cada pieza de la máquina. Consideramos necesaria la comprensión
+de la historia detrás de la máquina, pues, al final del día, es solamente una máquina más.
+La gente la tiene totalmente demonizada por el perfil de la gente que la utilizaba. Este trabajo no 
+pretende ser ni político ni social, no es más que una demostración de hasta dónde puede llegar 
+la creación de una persona y la prueba de que se puede separar la herramienta de la persona que la use.
+
+Por supuesto, algunos de los objetivos propuestos también son técnicos:
+
+\begin{itemize}
+	\item Diseñar una arquitectura que separe la lógica de simulación de la interfaz y
+	permita mantener y ampliar el sistema es una buena práctica, de forma que no sea tan centralizado.
+	Si falla la interfaz, siempre tienes la posibilidad de acceder a través de línea de comandos a la aplicación.
+	Si falla el código, la interfaz no será capaz de cifrar, pero sí que podrás abrir las secciones de historia y 
+	funcionamiento para entender cómo funciona.
+\end{itemize}
 
 
-A lo largo de toda esta etapa universitaria, se nos presentaron muchas formas 
-de trabajo, muchas maneras de realizar una misma tarea. La eficiencia no debe ser la prioridad
-de la vida, sino el disfrute de la misma, trabajando sobre esta mentalidad, la decisión de las tecnologías usadas fue clara:
-se usaría Spring con Java para este proyecto. No hay tecnología que más amigable y disfrutable me pareciera en todas nuestras
-enseñanzas.
+\section{Descripción del sistema}
 
+La aplicación se divide en dos partes principales. El backend, desarrollado en Java
+con Spring, contiene la lógica de la máquina Enigma y expone sus operaciones mediante
+una API REST. Esta parte se encarga de crear y configurar máquinas, gestionar sus
+conexiones y procesar las letras durante el cifrado y el descifrado.
 
-El objetivo, entonces, es el demostrar que, aún sin utilizar las tecnologías más eficientes, es posible
-crear algo completamente funcional. Siempre, claro, que midamos bien nuestro entorno de desarrollo. 
-La eficiencia es importante, claro, pero no en todos los campos o proyectos.
-Esta aplicación podría ser recreada de múltiples maneras haciendo uso de
-cualquier otra tecnología o lenguaje, pero en nuestro caso fue utilizado Java con Spring
-para el backend y JavaScript con React para el frontend. 
+El frontend, desarrollado con React, proporciona la interfaz web con la que interactúa
+el usuario. Además del simulador, incluye secciones dedicadas al funcionamiento de los
+componentes, la historia de Enigma, el libro de codificación y distintos retos. La
+aplicación también permite iniciar sesión mediante una cuenta de Google y conservar un
+historial asociado al usuario.
+
+\section{Elección de las tecnologías}
+
+A lo largo de la etapa universitaria se presentaron distintas tecnologías y múltiples
+formas de resolver un mismo problema. Una decisión técnica no debe valorar únicamente
+la máxima eficiencia posible, sino también el contexto del proyecto, la experiencia
+previa y la capacidad de desarrollar una solución comprensible y mantenible.
+
+Por este motivo se escogieron Java y Spring para el backend. Estas tecnologías
+permitieron trabajar con herramientas conocidas y construir una API estructurada en la
+que la lógica de la máquina estuviese claramente separada del resto del sistema. Para
+el frontend se eligió JavaScript con React, debido a su capacidad para crear interfaces
+interactivas y actualizar visualmente el estado de los distintos componentes.
+
+El objetivo no es presentar la aplicación más revolucionaria ni afirmar que las
+tecnologías elegidas sean las únicas adecuadas. El proyecto busca demostrar que, cuando
+las decisiones se adaptan correctamente al entorno de desarrollo, es posible construir
+una aplicación funcional, educativa y ampliable utilizando herramientas con las que el
+desarrollador se siente cómodo trabajando.
+
+\section{Organización de la memoria}
+
+Esta memoria comienza con una explicación de la máquina Enigma lo más cercana al usuario posible, 
+navegando a través de los componentes de la máquina, pasando por la historia de la misma, uniendo las 
+complicaciones y las razones detrás del éxito de la misma, hasta llegar al evento que puso fin a la guerra:
+la decodificación de la máquina. 
+Luego, se hablará de la especificación de los requisitos más relevantes del
+sistema. A continuación, se describe su diseño, la división entre componentes y las
+decisiones tomadas durante la implementación. Posteriormente, se presenta el plan de
+pruebas utilizado para comprobar el funcionamiento de la aplicación. Finalmente, se
+exponen las conclusiones obtenidas y las posibles ampliaciones futuras del proyecto.

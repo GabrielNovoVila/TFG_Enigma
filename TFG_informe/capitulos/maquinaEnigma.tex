@@ -1,0 +1,189 @@
+\chapter {La máquina Enigma}
+
+\section {¿Qué es la máquina Enigma?}
+
+\subsection {Historia}
+\subsubsection {Orígenes de la criptografía}
+
+La respuesta simple es que la máquina Enigma es una máquina de cifrado por rotores, pero esa no sería una buena respuesta. Para poder responder adecuadamente a esta pregunta tenemos que preguntarnos "¿Qué es el cifrado?"
+
+Nos referimos a cifrar cuando hablamos del proceso de codificación de la información. Codificar la información, en palabras simples, es convertir el mensaje que queremos transmitir en otro. Este segundo mensaje puede tener sentido o puede que no lo tenga, lo normal es que no lo tenga. A la ciencia que estudia el cifrado de mensajes se le llama Criptografía. Si queremos hablar de esta ciencia, nos remontaremos al siglo V aC, nos remontamos a la guerra del Peloponeso.
+
+La criptografía se cree que nace en la guerra de Esparta y Atenas. La comunicación entre los distintos aliados de un bando siempre fue algo de suma importancia en una contienda bélica y fue entonces cuando pensaron que la guerra podría dar una vuelta si, el mensaje, aunque fuera interceptado, solo lo pudieran entender ellos. Esto fue clave en el avance de la guerra por parte del bando griego, pues lograron crear el primer método registrado de cifrado.
+
+\subsubsection {La escítala}
+
+Los griegos usaban la llamada "Escítala", que constaba de un palo, rodillo o escalta que rodeaban de una tira de papel, ambos elementos de un tamaño adecuado y preciso. Existe un debate en la comunidad que menciona si este método de cifrado verdaderamente fue fruto de esta sociedad o si ya existía en otras polis. Como no es claro, lo trataremos como si hubiese surgido en la mencionada.
+
+La escítala era un método sencillo, no requería de memorización ni de algoritmos complejos. Si tenías 2 varas del mismo tamaño, tenías el mensaje. Usualmente se escogían varas hexagonales u octogonales por sus caras planas. Alrededor, se enrollaba la tira de papel y se escribía sobre ella, una línea en cada cara de la vara. Cuando desenrollabas la cinta, tenías una tira de papel con letras aparentemente aleatorias en ella. Así, solo quien tuviera una escalta del mismo tamaño podía descifrar el mensaje, volviendo a enrollar la tira sobre la misma.
+
+Si nos fijamos en el contexto histórico que este tenía detrás, podemos decir que no acababa de ser el mejor método de cifrado. En esta época todavía no existían los métodos de puntuación y no se utilizaban espacios para separar las palabras. Por si fuera poco, todas las palabras se escribían en mayúscula, por lo que era responsabilidad del lector identificar dónde empezaban y terminaban las palabras. Todo esto dificultaba la lectura del mensaje, aún siendo descifrado. Aristóteles decía que este método, además, era fácilmente descifrable: si alguien probaba con distintos grosores de vara y distintas formas, no había tantas posibilidades. De todas formas, esto requería tiempo y todos sabemos que, en la guerra, cada segundo cuenta.
+
+\subsubsection {Cifrado César}
+
+Cuanto más avanzamos en el tiempo, más tipos de cifrado nos podemos encontrar. El cifrado César fue el ideado por los romanos en el siglo I aC. Este era, de igual forma que el anterior, simple. Pero no requería de ningún artilugio, solo hacía falta conocer un número.
+
+El cifrado César consistía en coger el alfabeto y moverlo 3 letras a la derecha. Así, la A se convertía en la D, la B en la E, la C en la F y así progresivamente hasta volver a la A. Esto ocasiona mensajes aparentemente sin sentido, pero sigue manteniendo los patrones del habla. Si una palabra es corta, véase artículos como "el" o "la" en castellano, seguirán siendo así. Como son palabras muy comunes, es sencillo asociar palabras, esto asociará letras y poco a poco nos dará el alfabeto entero. También, si una letra es muy común en el lenguaje, lo será su letra asociada bajo este cifrado.
+
+El número que se dijo que hacía falta conocer era el desplazamiento. Se mencionó que se movían las letras 3 posiciones a la derecha, pero esto fue variando con el paso del tiempo.
+
+\subsubsection {La máquina Enigma}
+
+Ahora que hablamos de distintas formas de cifrado, podemos pasar a entender mejor qué hace la máquina Enigma y cómo funciona.
+
+En el cifrado César, se formaba un nuevo abecedario. Podemos pensarlo como que se hacía una asociación 1 a 1 con las letras de ambos. Así, teníamos ABCDEF... y DEFGHI... Donde la primera letra del primer abecedario se sustituía con la primera del segundo, la segunda letra con la segunda y así hasta terminar el abecedario. Esta es la base de la máquina Enigma.
+
+Una vez entendido lo anterior, podemos pasar a responder la pregunta "¿Qué es la máquina Enigma?". La máquina Enigma es una máquina de cifrado por rotores. Un rotor es, en resumidas cuentas, una pieza que rota. Se explicó el funcionamiento de esta pieza en la sección "¿Cómo funciona?". Lo importante ahora es entender que cada rotor tiene un abecedario nuevo, como si tuviéramos un pequeño cifrado César metido en cada pieza. Este abecedario no sigue un patrón como los anteriores, no son 3 posiciones a la derecha, sino que es una selección sin patrón del orden de las letras. De igual forma, se hace una asociación 1 a 1 para las letras.
+
+Hablar de la "máquina Enigma" como entidad universal es un error de concepto. Hay múltiples versiones de la misma, por ende, hay múltiples máquinas Enigma. El simulador montado en esta página es la versión M3, que es la primera versión modificada por la armada. Esta, como nuevas adiciones, incluía los tipos IV y V de rotores y los tipos B y C del reflector
+
+Más tarde en la guerra, en 1942 se creó la versión M4 de la máquina, que incluía nuevos tipos de rotores, nuevos reflectores y un rotor adicional. Ahora, en vez de 3 rotores simultáneamente, tenía 4. Este rotor extra le daba una complejidad extra a la decodificación de los británicos de unas 50 a 100 veces, es esta la razón dentrás de la adición del nuevo rotor. De todas formas, un error en el cifrado hizo que el descubrimiento del funcionamiento de este nuevo rotor fuera posible, por lo que, realmente, no tuvo el efecto deseado.
+
+\subsection {Funcionamiento}
+\subsubsection {Rotores}
+
+Cada rotor contiene un tipo, un alfabeto propio, una posición inicial,
+una actual y una posición de cambio. Dependiendo del tipo de máquina,
+hay unos tipos de rotor u otros y este influye en su alfabeto y en la posición de cambio.
+
+
+La función del rotor es cifrar una letra en base al alfabeto que contiene.
+A este le llega una entrada, que es una letra y devolverá una distinta.
+Cada letra de entrada tiene asociada otra de salida, de forma que podemos tener A → H, B → D, etc.
+
+
+Ahora vamos a complicarlo un poco más, los rotores de las máquinas enigma giran para cambiar de posición.
+Cada vez que pulsas una letra en el teclado, el que llamaremos el primer rotor (el situado más a la derecha), gira.
+Si, por ejemplo, los rotores están en una posición A A A
+(La letra asociada a la posición del primer rotor es A, la del segundo, es A y la del tercero, es A),
+si cifras o descifras una letra, pasarán a A A B. Luego a A A C y así continuamente.
+Dependiendo del tipo de rotor, este tendrá una posición de cambio. Si la posición de cambio es H,
+al llegar a H, cambiará el siguiente rotor. Así, tendríamos la siguiente secuencia:
+A A F → A A G → A B H → A B I, cuando vuelva a llegar a H, volverá a cambiar el siguiente.
+
+
+¿Cuál es el efecto de estas posiciones?
+Pues bien, además de estas, existe una posición inicial para cada rotor,
+que nos indica el desplazamiento para el alfabeto.
+La forma más fácil de entenderlo es pasando las letras a números.
+Imaginemos que al rotor llega la letra 1 (A).
+Este rotor está en una posición 3 (C) y su posición inicial era 2 (B).
+Como hay un cambio de 1 posición entre la actual y la inicial (3-2=1),
+el rotor actúa como si, en lugar de llegar la letra A, llegara la letra B (1+1=2).
+Se devuelve la letra asociada a la B. Imaginemos que es la M la letra asociada a la B.
+Ahora, se le restaría la diferencia que antes se sumó. Antes sumamos la letra que llegó (A+1=B),
+ahora lo restamos (M-1=N), en este ejemplo, si entrara una A,
+devolvería una N. Este ejemplo era de cifrado.
+En un caso de descifrado, primero se resta y luego se suma.
+
+\subsubsection {Reflector}
+
+El reflector es un elemento que el lector
+puede pensar como un rotor muy simple,
+como uno que no gira. Los únicos elementos de un reflector son su tipo y su alfabeto,
+dependiente del tipo del mismo.
+
+
+Un reflector también tiene una señal de entrada y otra de salida. Esto significa
+que recibe una letra y, dependiendo del alfabeto del mismo, devolverá otra.
+
+
+Para entenderlo bien, un reflector tiene un alfabeto como el de un rotor:
+En lugar de ser ABCDEF... podría ser PLTHYA...,
+en este ejemplo, si llega una A, devuelve una P, si llega una B, devuelve una L, etc.
+
+
+La cualidad que no comparte con el rotor,
+además de que es un elemento fijo que no tiene posiciones,
+es que las letras están “unidas”. En el ejemplo anterior, si llega una A,
+devuelve una P. Si llegara una P, este devolvería una A.
+Esto no tien por qué pasar en un rotor, pero es una cualidad necesaria en el reflector.
+
+\subsubsection {Teclado}
+
+En anteriores elementos comentamos que, dependiendo de la versión de la máquina, podíamos tener unos tipos u otros, esto no ocurre con el teclado. Siempre es el mismo.
+
+
+El teclado de la Máquina Enigma está basado en un QWERTZ. Para quien no esté familiarizado con los teclados, en la mayoría de países del mundo se usa el teclado QWERTY. Este nombre hace referencia a las 6 primeras letras del teclado. El primero mencionado es el utilizado en países con lenguas germánicas, pues la Z es una letra más común que la Y.
+
+
+Se mencionó que está “basado” en un QWERTZ y no que “sea” un QWERTZ por las ligeras diferencias que este presenta. Tiene una distribución muy curiosa de las teclas. Al no haber símbolos ni números, quedarían huecos, por lo que era necesaria una distribución algo distinta a la par que cómoda y usual para los usuarios.
+
+
+Desde este componente se decide qué letra va a ser la cifrada, es el comienzo de la señal que se enviará a través de los rotores, el reflector y el espacio de conexiones.
+
+\subsubsection {Espacio de conexiones}
+
+Toda máquina Enigma contiene un espacio de conexiones cercano al teclado.
+
+
+Este espacio de conexiones consiste en una serie de entradas disponibles donde cada una representa una letra. Está pensado para conectar letras entre ellas.
+
+
+Cuando enviamos una letra con el teclado, antes de llegar a los rotores, pasa por el espacio de conexiones, es el primer paso. Es sencillo: si, con el teclado, pulsamos la A, primero mirará en este espacio si hay una conexión con la A; si no la hay, al primer rotor le llegará una A como entrada. En caso de que, por ejemplo, exista una conexión entre la entrada A y la entrada B, al rotor le llegará una B. Esta conexión funciona en ambos sentidos, es decir, si mantenemos esa conexión A-B e introducimos una B, al primer rotor llegará una A.
+
+
+\subsubsection {Salida}
+
+Las máquinas Enigma originales utilizaban un panel de bombillas. Tras completar el recorrido, se iluminaba la bombilla correspondiente a la letra obtenida.
+
+
+La letra iluminada es el resultado final. Para formar un mensaje completo, el operador debía anotar cada salida y repetir el proceso letra por letra.
+
+
+Como el recorrido es reversible cuando la configuración coincide, la salida cifrada puede introducirse de nuevo para recuperar el texto original.
+
+
+\section {Contexto histórico}
+
+La Máquina Enigma fue la máquina utilizada por las Potencias del Eje en la Segunda Guerra Mundial para cifrar sus comunicaciones de una manera segura. Para entender la Máquina Enigma y sus orígenes tenemos que remontarnos al comienzo del siglo XX, antes de que el partido nazi alcanzara el poder.
+
+
+Arthur Scherbius, nacido en 1878 en Fráncfort del Meno y graduado en ingeniería eléctrica tanto en la Universidad Técnica de Munich como en la Universidad de Hannover, decide fundar una empresa bajo el nombre de Scherbius \& Ritter. De esta forma, hizo múltiples inventos, entre los que estaba cierta máquina basada en ruedas cableadas giratorias, hoy día conocida como máquina de rotores. Los modelos creados se apodaban con letras. El primero fue el modelo A, el segundo el B y el tercero y último que creó, el modelo C. La máquina Enigma utilizada durante la guerra era del tamaño de una máquina de escribir y, de hecho, se parecía mucho en cuestiones como el teclado o la forma general de la máquina. Estos primeros modelos se asemejaban más a una máquina registradora.
+
+
+En 1918, Arthur patenta su máquina, pensada originalmente para actuar como cifradora para empresas importantes como bancos. En estos años nos enfrentamos a una situación de gran inestabilidad política y social. Es el nacimiento de la República de Weimar, el fin de la Gran Guerra. Ante esta situación, Scherbius dudaba de si realmente la patente de la máquina llegaría a dar frutos, la realidad era que nadie parecía mostrar interés ante esta máquina. Esto, si bien es correcto cuando hablamos del ciudadano promedio, no es de igual forma para el gobierno. El gobierno alemán estaba altamente interesado en una máquina codificadora plenamente funcional e indescifrable, pues un año antes, en 1917, se interceptó y decodificó el Telegrama de Zimmermann, lo que puso a Estados Unidos en el mapa y cambió el transcurso de la batalla.
+
+
+En 1926, ya comercializada bajo el nombre "Enigma", fue adoptada por la Armada alemana y, unos años más tarde, en 1934, la versión M3 de la máquina fue adoptada por la armada naval. Para este entonces, Arthur Scherbius ya no estaba presente para ver el alcance de su invención, falleció en 1929 sin conocer la importancia que tuvo la existencia de su invento en una guerra que tampoco alcanzó a vislumbrar.
+
+
+En 1939, a punto de empezar la guerra, se crea la máquina enigma M4, que será la que usarán los aliados de Alemania durante toda la guerra, hasta que Alan Turing y su equipo logren descifrarla.
+
+\section {Historia del descifrado de la máquina}
+
+\subsubsection {El reto de descifrar Enigma}
+
+Tener una Máquina Enigma no era suficiente para poder leer los mensajes del bando alemán. Para cifrar y descifrar un mensaje era necesario que ambas máquinas estuvieran configuradas exactamente de la misma forma. Los operadores alemanes utilizaban libros de claves donde aparecían los ajustes correspondientes a cada día del mes, como los rotores que debían utilizar y sus posiciones iniciales. Esta configuración cambiaba diariamente, por lo que descubrir la clave de un día no solucionaba el problema para siempre: al día siguiente, el trabajo comenzaba de nuevo.
+
+
+Estos libros eran, por tanto, información de enorme valor. La captura de material alemán, como máquinas, manuales o libros de códigos, permitió conocer mejor el funcionamiento de sus redes de comunicación y facilitó el trabajo de los equipos de descifrado. Aun así, seguía siendo necesario encontrar la configuración concreta utilizada en cada jornada entre una cantidad inmensa de posibilidades.
+
+
+\subsubsection {Bletchley Park}
+
+El principal centro británico dedicado al descifrado se encontraba en Bletchley Park, una propiedad situada al norte de Londres que durante la guerra pasó a ser conocida también como la Estación X. Allí se reunieron matemáticos, criptógrafos, lingüistas, ingenieros, jugadores de ajedrez, personas aficionadas a los crucigramas y muchos otros perfiles que podían aportar una manera distinta de enfrentarse al problema.
+
+
+El descifrado de Enigma no consistía únicamente en observar una máquina y descubrir su funcionamiento. Primero se interceptaban los mensajes enviados por radio, después se buscaban posibles fragmentos del texto original y, finalmente, se probaban y descartaban configuraciones hasta encontrar una que tuviera sentido. Todo este proceso se realizaba bajo un secreto absoluto y de forma continua, mediante distintos turnos de trabajo.
+
+\subsubsection {Alan Turing y un mérito compartido}
+
+Cuando se habla del descifrado de Enigma, el nombre que más se repite es el de Alan Turing. Su mérito es indiscutible: fue una figura fundamental en Bletchley Park y participó en el diseño de la Bombe, una máquina electromecánica que permitía descartar rápidamente configuraciones incompatibles con un mensaje y reducir el número de posibilidades que debían comprobarse manualmente.
+
+
+Sin embargo, presentar esta historia como el logro de una sola persona sería injusto. La Bombe británica partía del trabajo previo de los criptógrafos polacos, entre los que destacó Marian Rejewski. En su desarrollo también fueron esenciales las mejoras de Gordon Welchman y el trabajo de ingeniería de Harold Keen. Junto a ellos participaron miles de personas encargadas de interceptar, organizar, estudiar y comprobar mensajes. Alan Turing merece ser recordado, pero también lo merece el equipo que hizo posible convertir sus ideas en resultados diarios.
+
+\subsubsection {Las descodificadoras invisibles}
+
+Las mujeres formaban aproximadamente tres cuartas partes del personal de Bletchley Park, aunque durante décadas su participación quedó oculta tras una historia contada principalmente a través de figuras masculinas. No se limitaron a realizar tareas auxiliares: operaron máquinas, analizaron mensajes y formaron parte directa de los equipos de criptografía.
+
+
+Joan Clarke trabajó en el equipo de Alan Turing y llegó a ser subdirectora de la cabaña 8, dedicada a los mensajes de la armada alemana. Mavis Lever y Margaret Rock formaron parte del equipo dirigido por Dilly Knox y ayudaron a romper el código utilizado por el servicio de inteligencia alemán. Estos nombres representan a muchas otras mujeres cuyo trabajo permaneció en secreto y que también fueron responsables del éxito de Bletchley Park.
+
+\subsubsection {Descifrando Enigma}
+
+En 2014 se estrenó The Imitation Game, conocida en España comoDescifrando Enigma. La película fue dirigida por Morten Tyldum, está basada en la biografía de Alan Turing escrita por Andrew Hodges y cuenta con Benedict Cumberbatch en el papel protagonista. Su estreno ayudó a que una gran cantidad de personas conocieran la historia de Turing y el trabajo realizado en Bletchley Park.
+
+
+De todas formas, debe entenderse como una dramatización y no como un documental. La película modifica o simplifica ciertos acontecimientos y concentra gran parte del relato en la figura de Turing. Es una buena puerta de entrada a esta historia, pero el descifrado real de Enigma fue un esfuerzo colectivo mucho más amplio, construido sobre el trabajo de polacos, británicos, hombres y mujeres cuyos nombres no siempre aparecen en pantalla.
