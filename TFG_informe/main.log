@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.6.13)  16 JUN 2026 17:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.6.13)  18 JUN 2026 16:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -331,13 +331,12 @@ Cap\'{\i }tulo 1.
 
 
 ]
+Underfull \vbox (badness 1024) has occurred while \output is active []
+
 Package babel Info: 'galician' activates 'galician' shorthands.
-(babel)             Reported on input line 79.
- [2]) [3] [4
-
-
-
-]
+(babel)             Reported on input line 72.
+ [2])
+[3] [4]
 \openout2 = `capitulos/maquinaEnigma.aux'.
 
  (capitulos/maquinaEnigma.tex
@@ -345,36 +344,56 @@ Cap\'{\i }tulo 2.
 [5
 
 
-]
-Overfull \hbox (2.17499pt too wide) in paragraph at lines 36--37
+
+
+
+] [6]
+Overfull \hbox (2.17499pt too wide) in paragraph at lines 40--41
 []\OT1/cmr/m/n/12 Una vez en-ten-di-do lo an-te-rior, po-de-mos pa-sar a res-po
 n-der la pre-gun-ta "?`Qu^^Se es
  []
 
-[6] [7] [8] [9] [10] [11]) [12]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+[8] [9]
+Underfull \vbox (badness 6675) has occurred while \output is active []
+
+ [10]
+[11]) [12]
 \openout2 = `capitulos/cap2.aux'.
 
  (capitulos/cap2.tex
 Cap\'{\i }tulo 3.
-) [13
+[13
 
 
 
 
 
-] [14
+] [14] [15] [16] [17]
+LaTeX Font Info:    Trying to load font information for OML+cmtt on input line 
+136.
+LaTeX Font Info:    No file OMLcmtt.fd. on input line 136.
 
 
+LaTeX Font Warning: Font shape `OML/cmtt/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 136.
 
-]
+) [18]
 \openout2 = `capitulos/cap3.aux'.
 
  (capitulos/cap3.tex
 Cap\'{\i }tulo 4.
-) [15
+) [19
 
 
-] [16
+
+
+
+] [20
 
 
 
@@ -383,10 +402,10 @@ Cap\'{\i }tulo 4.
 
  (capitulos/cap4.tex
 Cap\'{\i }tulo 5.
-) [17
+) [21
 
 
-] [18
+] [22
 
 
 
@@ -395,16 +414,16 @@ Cap\'{\i }tulo 5.
 
  (capitulos/exemplos.tex
 Cap\'{\i }tulo 6.
-[19
+[23
 
 
 ]
 Overfull \hbox (4.24084pt too wide) has occurred while \output is active
-\OT1/cmr/m/n/12 20  \OT1/cmr/m/sl/12 CAP[]ITULO 6.  EXEMPLOS (ELIMINAR CAP[]ITU
+\OT1/cmr/m/n/12 24  \OT1/cmr/m/sl/12 CAP[]ITULO 6.  EXEMPLOS (ELIMINAR CAP[]ITU
 LO NA VERSI[]ON FINAL)
  []
 
-[20]
+[24]
 (C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
@@ -435,13 +454,13 @@ Overfull \hbox (53.36043pt too wide) in paragraph at lines 97--98
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [21]
+) [25]
 Overfull \hbox (4.24084pt too wide) has occurred while \output is active
-\OT1/cmr/m/n/12 22  \OT1/cmr/m/sl/12 CAP[]ITULO 6.  EXEMPLOS (ELIMINAR CAP[]ITU
+\OT1/cmr/m/n/12 26  \OT1/cmr/m/sl/12 CAP[]ITULO 6.  EXEMPLOS (ELIMINAR CAP[]ITU
 LO NA VERSI[]ON FINAL)
  []
 
-[22
+[26
 
 
 
@@ -450,30 +469,6 @@ LO NA VERSI[]ON FINAL)
 
  (capitulos/conclusions.tex
 Cap\'{\i }tulo 7.
-) [23
-
-
-] [24
-
-
-
-]
-\openout2 = `capitulos/apendicea.aux'.
-
- (capitulos/apendicea.tex
-Ap\'endice A.
-) [25
-
-
-] [26
-
-
-
-]
-\openout2 = `capitulos/apendiceb.aux'.
-
- (capitulos/apendiceb.tex
-Ap\'endice B.
 ) [27
 
 
@@ -482,14 +477,38 @@ Ap\'endice B.
 
 
 ]
-\openout2 = `capitulos/licenza.aux'.
+\openout2 = `capitulos/apendicea.aux'.
 
- (capitulos/licenza.tex
-Ap\'endice C.
+ (capitulos/apendicea.tex
+Ap\'endice A.
 ) [29
 
 
 ] [30
+
+
+
+]
+\openout2 = `capitulos/apendiceb.aux'.
+
+ (capitulos/apendiceb.tex
+Ap\'endice B.
+) [31
+
+
+] [32
+
+
+
+]
+\openout2 = `capitulos/licenza.aux'.
+
+ (capitulos/licenza.tex
+Ap\'endice C.
+) [33
+
+
+] [34
 
 
 
@@ -508,7 +527,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--11
  da wi-ki-pe-dia
  []
 
-) [31
+) [35
 
 
 ] (main.aux (capitulos/titulo.aux) (capitulos/certificacion.aux)
@@ -526,15 +545,18 @@ L3 programming layer <2025-12-24>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.13947pt have occurred.
 
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
  ) 
 Here is how much of TeX's memory you used:
- 5774 strings out of 467871
- 98336 string characters out of 5418860
- 692723 words of memory out of 5000000
- 34478 multiletter control sequences out of 15000+600000
+ 5783 strings out of 467871
+ 98466 string characters out of 5418860
+ 692793 words of memory out of 5000000
+ 34487 multiletter control sequences out of 15000+600000
  637944 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,8n,65p,913b,1323s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,8n,65p,913b,1322s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Gabi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcti1
 200.pk> <C:\Users\Gabi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
 tcrm1200.pk><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
@@ -554,9 +576,9 @@ msfonts/cm/cmsy10.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmsy8.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (45 pages, 239242 bytes).
+Output written on main.pdf (49 pages, 256651 bytes).
 PDF statistics:
- 234 PDF objects out of 1000 (max. 8388607)
+ 247 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,3 +1,145 @@
 \chapter{Especificación de Requisitos}
 
 Especificación dos requisitos máis relevantes do Sistema, xunto coa información que este debe almacenar e as interfaces con outros Sistemas, sexan hardware ou software, e outros requisitos (rendemento, seguridade, etc.).
+
+\section{Requisitos funcionales}
+
+Los requisitos funcionales describen las acciones que debe permitir realizar el sistema. En este proyecto se han considerado los siguientes:
+
+\begin{itemize}
+    \item \textbf{RF-01. Crear una máquina Enigma M3.} El sistema debe permitir crear una instancia de una máquina Enigma M3 desde el backend, asignándole un identificador único y una configuración inicial.
+
+    \item \textbf{RF-02. Configurar los rotores.} El sistema debe permitir modificar los tres rotores utilizados por la máquina, así como sus posiciones iniciales, las posiciones actuales y los ajustes del anillo.
+
+    \item \textbf{RF-03. Configurar el reflector.} El sistema debe permitir alternar entre los reflectores disponibles en la simulación. En la interfaz se muestran como reflector B y reflector C, aunque internamente se representan mediante los valores 0 y 1.
+
+    \item \textbf{RF-04. Cifrar letras.} El sistema debe permitir introducir una letra y obtener la letra cifrada correspondiente, aplicando el estado actual de rotores, reflector y panel de conexiones.
+
+    \item \textbf{RF-05. Descifrar letras.} El sistema debe permitir descifrar letras usando el mismo flujo de procesamiento que el cifrado, pero desde el modo de descifrado seleccionado por el usuario.
+
+    \item \textbf{RF-06. Avanzar los rotores tras cada operación.} Cada vez que se cifra o descifra una letra, el sistema debe actualizar la posición actual de los rotores de acuerdo con el mecanismo definido en la simulación.
+
+    \item \textbf{RF-07. Gestionar el panel de conexiones.} El sistema debe permitir conectar y desconectar pares de letras. Una letra conectada debe transformarse en su pareja tanto antes como después de pasar por los rotores y el reflector.
+
+    \item \textbf{RF-08. Mostrar la salida de la máquina.} La interfaz debe mostrar la letra resultante de cada operación y construir visualmente el mensaje introducido junto con su salida.
+
+    \item \textbf{RF-09. Mostrar los pasos seguidos.} El sistema debe permitir consultar los pasos internos realizados durante el cifrado o descifrado de una letra, incluyendo el paso por cables, rotores y reflector.
+
+    \item \textbf{RF-10. Mantener historial de sesión.} La aplicación debe conservar las últimas operaciones realizadas durante la sesión actual para que el usuario pueda revisarlas.
+
+    \item \textbf{RF-11. Mantener historial asociado al usuario.} Cuando el usuario inicia sesión, la aplicación debe mantener un historial asociado a su cuenta en el navegador.
+
+    \item \textbf{RF-12. Iniciar sesión con Google.} El sistema debe permitir autenticación mediante Google OAuth2, generando tokens de acceso y refresco para identificar al usuario.
+
+    \item \textbf{RF-13. Cerrar sesión.} El usuario debe poder cerrar la sesión, eliminando los tokens almacenados en el navegador.
+
+    \item \textbf{RF-14. Renovar el token de acceso.} El sistema debe permitir solicitar un nuevo token de acceso a partir de un token de refresco válido.
+
+    \item \textbf{RF-15. Ofrecer opciones de accesibilidad.} La aplicación debe permitir activar modo claro, modo para daltónicos y modificar el tamaño de letra.
+
+    \item \textbf{RF-16. Identificar conexiones en modo daltónico.} Cuando el modo para daltónicos está activado, las conexiones del panel deben mostrar identificadores adicionales para no depender únicamente del color.
+
+    \item \textbf{RF-17. Navegar por las secciones informativas.} La aplicación debe permitir acceder a las secciones de funcionamiento, historia, libro de codificación y retos desde la barra de navegación.
+
+    \item \textbf{RF-18. Mostrar contenido educativo sobre la máquina.} El sistema debe incluir explicaciones sobre los principales componentes de Enigma: teclado, panel de conexiones, rotores, reflector, salida y flujo completo.
+
+    \item \textbf{RF-19. Mostrar retos de descifrado.} La aplicación debe presentar mensajes cifrados para que el usuario intente resolverlos utilizando la máquina.
+
+    \item \textbf{RF-20. Mostrar pistas en los retos.} Cada reto debe poder mostrar una pista individual que oriente al usuario durante el descifrado.
+\end{itemize}
+
+\section{Requisitos no funcionales}
+
+Los requisitos no funcionales establecen restricciones medibles sobre el comportamiento del sistema. Para esta aplicación se proponen los siguientes:
+
+\begin{itemize}
+    \item \textbf{RNF-01. Tiempo de respuesta del cifrado y descifrado.} El backend debe devolver el resultado de cifrar o descifrar una letra en menos de 500 ms en ejecución local.
+
+    \item \textbf{RNF-02. Actualización visual tras cada letra.} Tras pulsar una tecla, la interfaz debe actualizar la salida, los rotores y el historial visible en menos de 1 segundo.
+
+    \item \textbf{RNF-03. Carga inicial.} La página principal debe estar disponible en menos de 3 segundos en un navegador moderno ejecutándose en local.
+
+    \item \textbf{RNF-04. Límite del historial visible.} La aplicación debe mantener como máximo 60 operaciones en el historial de sesión y en el historial asociado al usuario.
+
+    \item \textbf{RNF-05. Capacidad del panel de conexiones.} El panel debe permitir hasta 13 pares de conexiones, equivalentes a las 26 letras del alfabeto conectadas sin repetición.
+
+    \item \textbf{RNF-06. Compatibilidad de navegadores.} La aplicación debe funcionar correctamente en versiones recientes de Google Chrome, Microsoft Edge y Mozilla Firefox.
+
+    \item \textbf{RNF-07. Resoluciones soportadas.} La interfaz debe ser utilizable en pantallas de escritorio desde 1366 x 768 píxeles y en pantallas móviles desde 360 píxeles de ancho.
+
+    \item \textbf{RNF-08. Cambio entre secciones.} La navegación entre las secciones principales debe completarse en menos de 1 segundo, al tratarse de una aplicación de una sola página.
+
+    \item \textbf{RNF-09. Apertura de menús.} Los menús de cuenta, historial y accesibilidad deben abrirse o cerrarse en menos de 300 ms tras la interacción del usuario.
+
+    \item \textbf{RNF-10. Tamaño máximo de respuesta.} Las respuestas de cifrado y descifrado deben mantenerse por debajo de 10 KB, incluyendo letra resultante, máquina actualizada y pasos seguidos.
+
+    \item \textbf{RNF-11. Consistencia del estado.} Tras cada operación de cifrado o descifrado, las posiciones de los rotores mostradas en la interfaz deben coincidir con las posiciones almacenadas en el backend.
+
+    \item \textbf{RNF-12. Persistencia de sesión autenticada.} La sesión debe mantenerse mientras los tokens almacenados en el navegador sigan siendo válidos.
+
+    \item \textbf{RNF-13. Aislamiento del historial por usuario.} El historial guardado en el navegador debe separarse por cuenta autenticada, utilizando una clave distinta para cada correo electrónico.
+
+    \item \textbf{RNF-14. Accesibilidad cromática.} En modo daltónico, la información del panel de conexiones no debe depender exclusivamente del color.
+
+    \item \textbf{RNF-15. Ajuste del tamaño de letra.} La interfaz debe permitir modificar el tamaño de letra entre los límites definidos por la aplicación, manteniendo la página utilizable.
+
+    \item \textbf{RNF-16. Disponibilidad en local.} El sistema debe poder ejecutarse localmente con el frontend en el puerto 3000 y el backend en el puerto 8082.
+
+    \item \textbf{RNF-17. Recuperación ante fallo del backend.} Si el backend no está disponible al iniciar la página, la interfaz no debe quedar bloqueada y debe mostrar un estado informativo.
+\end{itemize}
+
+\section{Información almacenada por el sistema}
+
+El sistema combina información gestionada por el backend con información mantenida por el frontend en el navegador. A continuación se separa según el lugar donde se almacena.
+
+\subsection{Información guardada en base de datos}
+
+El backend utiliza Spring Data JPA y un repositorio \texttt{CrudRepository} para almacenar objetos de tipo \texttt{M3DTO}. La configuración actual del proyecto utiliza H2 en memoria mediante la propiedad \texttt{spring.datasource.url=jdbc:h2:mem:testdb}. Por tanto, aunque se usa una base de datos, los datos no permanecen tras reiniciar el servidor.
+
+En la base de datos se guarda la información necesaria para reconstruir el estado de cada máquina Enigma M3:
+
+\begin{itemize}
+    \item \textbf{Identificador de la máquina:} campo \texttt{id}, utilizado para localizar una máquina concreta desde los endpoints.
+
+    \item \textbf{Rotores seleccionados:} lista \texttt{rotores}, donde se almacena el tipo de cada uno de los tres rotores.
+
+    \item \textbf{Configuración del anillo:} lista \texttt{rotores\_settings}, que guarda la letra asociada al ajuste del anillo de cada rotor.
+
+    \item \textbf{Posiciones actuales de los rotores:} lista \texttt{rotores\_posiciones}, que cambia al cifrar o descifrar letras y también puede modificarse desde la interfaz.
+
+    \item \textbf{Cables del panel de conexiones:} lista \texttt{cables}, formada por pares de índices de letras. Cada cable se representa mediante los campos \texttt{a} y \texttt{b}.
+
+    \item \textbf{Reflector seleccionado:} campo \texttt{reflector}, almacenado internamente como 0 o 1.
+\end{itemize}
+
+No se almacenan en la base de datos los textos educativos, los retos, las preferencias de accesibilidad, los tokens de autenticación ni el historial visible del usuario.
+
+\subsection{Información mantenida en memoria}
+
+Durante la ejecución, el backend crea objetos auxiliares en memoria para procesar cada operación. Entre ellos se encuentran la representación completa de la máquina \texttt{M3}, el alfabeto, el mapa temporal de cables, los rotores, el reflector y la lista de pasos generada durante el cifrado o descifrado de una letra. Esta información se usa durante la petición y después se transforma de nuevo en \texttt{M3DTO} para actualizar la base de datos.
+
+En el frontend también existe estado mantenido en memoria mediante React. Este estado incluye, entre otros elementos, la máquina actualmente mostrada, la letra de salida, el historial de la sesión actual, los últimos pasos consultados, la página activa, el modo de cifrado o descifrado, el cable seleccionado temporalmente, la apertura de menús y paneles, y los valores actuales de accesibilidad.
+
+Esta información se pierde al cerrar o recargar la página, salvo aquella que también se escribe en \texttt{localStorage}.
+
+\subsection{Información guardada en disco}
+
+El backend no guarda información propia de la aplicación en disco durante la ejecución normal. La base de datos H2 configurada es en memoria, por lo que las máquinas creadas desaparecen al reiniciar el servidor.
+
+En el lado del cliente sí existe almacenamiento persistente en el navegador mediante \texttt{localStorage}. Este almacenamiento pertenece al navegador del usuario y se conserva en el equipo o dispositivo hasta que el usuario cierre sesión, borre los datos del navegador o la aplicación lo sobrescriba. Se guardan los siguientes datos:
+
+\begin{itemize}
+    \item \texttt{accessToken}: token de acceso usado para identificar la sesión actual.
+
+    \item \texttt{refreshToken}: token utilizado para solicitar un nuevo token de acceso.
+
+    \item \texttt{enigma-history:\textless correo\textgreater}: historial asociado a la cuenta autenticada, limitado a 60 operaciones.
+
+    \item \texttt{enigma-accessibility-light}: preferencia del modo claro.
+
+    \item \texttt{enigma-accessibility-colorblind}: preferencia del modo para daltónicos.
+
+    \item \texttt{enigma-accessibility-font-scale}: escala de tamaño de letra seleccionada por el usuario.
+\end{itemize}
+
+Por tanto, no existe persistencia en disco en el servidor para los datos de dominio de la aplicación. La única persistencia duradera que se realiza actualmente corresponde al almacenamiento local del navegador.

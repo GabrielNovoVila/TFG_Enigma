@@ -48,6 +48,18 @@ Por supuesto, algunos de los objetivos propuestos también son técnicos:
 	Si falla la interfaz, siempre tienes la posibilidad de acceder a través de línea de comandos a la aplicación.
 	Si falla el código, la interfaz no será capaz de cifrar, pero sí que podrás abrir las secciones de historia y 
 	funcionamiento para entender cómo funciona.
+	\item Desarrollar una API REST que permita crear, configurar y eliminar máquinas, además de cifrar y descifrar letras,
+	gestionar las conexiones del panel de cables y modificar los ajustes internos de los rotores. De esta forma,
+	la lógica principal queda accesible de una manera ordenada y reutilizable.
+	\item Mantener el estado de cada máquina durante la sesión, incluyendo rotores, posiciones actuales, reflector y
+	cables conectados. Esto permite que la simulación no sea una simple transformación aislada de letras, sino un
+	proceso continuo donde cada pulsación afecta al estado posterior de la máquina.
+	\item Implementar un sistema de trazabilidad de las operaciones, de manera que el usuario pueda consultar los pasos
+	seguidos por cada letra cifrada o descifrada. Este punto es importante porque el proyecto no solo busca devolver
+	un resultado, sino enseñar cómo se llega a él.
+	\item Incorporar autenticación mediante Google para asociar ciertas funcionalidades al usuario, como el historial
+	de sesión o el historial guardado. Con esto se añade una capa de uso más cercana a una aplicación real y no solo a
+	una demostración local.
 \end{itemize}
 
 

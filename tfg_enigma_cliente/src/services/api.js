@@ -1,4 +1,11 @@
-const API_URL = "http://localhost:8082";
+const currentHost = window.location.hostname || "localhost";
+const localBackendUrl = "http://localhost:8082";
+const networkBackendUrl = `http://${currentHost}:8082`;
+const defaultBackendUrl = ["localhost", "127.0.0.1"].includes(currentHost)
+    ? localBackendUrl
+    : networkBackendUrl;
+
+export const API_URL = process.env.REACT_APP_API_URL || defaultBackendUrl;
 
 function notifyAuthChange() {
     window.dispatchEvent(new Event("auth-token-changed"));

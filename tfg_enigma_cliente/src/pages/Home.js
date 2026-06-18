@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { fetchWithAuth } from "../services/api";
+import { API_URL, fetchWithAuth } from "../services/api";
 import { useAuth } from "../auth/AuthContext";
 import rotorPreview from "../assets/Enigma_rotor_set.png";
 import rotorWheel from "../assets/rueda.png";
@@ -14,6 +14,7 @@ import myPlugboardActivePreview from "../assets/mis_cables_si.png";
 import myOutputPreview from "../assets/mi_salida.png";
 import codeBookPreview from "../assets/libro_codificacion.png";
 import accessibilityIcon from "../assets/accesibilidad.png";
+import siteLogo from "../assets/Ilustracion_sin_titulo-removebg-preview.png";
 import keyA from "../assets/a.png";
 import keyB from "../assets/b.png";
 import keyC from "../assets/c.png";
@@ -42,7 +43,6 @@ import keyY from "../assets/y.png";
 import keyZ from "../assets/z.png";
 import "../App.css";
 
-const API_URL = "http://localhost:8082";
 const HISTORY_LIMIT = 60;
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const KEY_ROWS = ["QWERTZUIO", "ASDFGHJK", "PYXCVBNML"];
@@ -1817,7 +1817,9 @@ export default function Home() {
                     <button type="button" onClick={() => setActivePage("challenges")}>Retos</button>
                 </nav>
 
-                <div className="title-strip">MAQUINA ENIGMA M3</div>
+                <div className="title-strip" aria-label="Maquina Enigma M3">
+                    <img src={siteLogo} alt="Maquina Enigma M3" />
+                </div>
 
                 <div className="user-area" ref={userAreaRef}>
                     <div className="auth-row">

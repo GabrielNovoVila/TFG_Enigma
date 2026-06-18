@@ -116,6 +116,9 @@ public class M3Controller {
 
     @GetMapping("/")
     public Object home(@AuthenticationPrincipal OAuth2User user) {
+        if (user == null) {
+            return new ArrayList<>();
+        }
         return user.getAttributes();
     }
 }
