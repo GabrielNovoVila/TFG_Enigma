@@ -1,3 +1,35 @@
-\chapter{Conclusións e posibles ampliacións}
+\chapter{Conclusiones y posibles ampliaciones}
 
-O traballo describe o grao de cumprimento dos obxectivos. Posibles vías de mellora.
+\section{Conclusiones}
+
+El desarrollo de este proyecto permitió cumplir el objetivo principal planteado: crear una aplicación web interactiva capaz de simular el funcionamiento de una Máquina Enigma M3 y, al mismo tiempo, servir como herramienta educativa para comprender su contexto histórico, su estructura interna y su forma de uso.
+
+A lo largo del trabajo se construyó una aplicación dividida en dos partes claramente diferenciadas. Por un lado, el backend, desarrollado con Spring Boot, concentra la lógica de la máquina, la gestión de sus componentes y los endpoints necesarios para cifrar, descifrar y modificar la configuración del simulador. Por otro lado, el frontend, desarrollado con React, proporciona una interfaz visual que permite al usuario interactuar con la máquina de una forma más cercana e intuitiva que mediante simples llamadas a la API.
+
+Uno de los puntos más relevantes del proyecto fue lograr que la simulación no se limitase a transformar letras, sino que mantuviese una relación directa con el comportamiento real de la máquina. Para ello se incorporaron elementos como los rotores, el reflector, el panel de conexiones, las posiciones actuales de los rotores y el avance de los mismos tras cada pulsación. Además, se añadió un modo de descifrado, de forma que la aplicación no solo permite generar mensajes cifrados, sino también recorrer el proceso inverso cuando se dispone de la configuración correcta.
+
+La interfaz fue evolucionando de forma progresiva hasta adquirir una identidad visual propia. La estética oscura, las líneas ocres, la tipografía de máquina de escribir y los elementos inspirados en papel envejecido ayudaron a reforzar la ambientación histórica del proyecto. Al mismo tiempo, se buscó que la página no fuese únicamente decorativa, sino funcional: los botones de desplazamiento, las anotaciones, las secciones educativas, el historial, las pistas de los retos y los controles de accesibilidad fueron diseñados para facilitar la navegación y mejorar la experiencia del usuario.
+
+También se incorporaron varias páginas educativas que complementan al simulador. La sección de funcionamiento explica los componentes principales de la máquina; la sección de historia introduce el contexto en el que surge Enigma y el papel que tuvo en la Segunda Guerra Mundial; el libro de codificación muestra cómo se preparaban los ajustes diarios; y la sección de retos permite aplicar lo aprendido mediante mensajes cifrados que el usuario debe intentar descifrar. De esta forma, la aplicación no se queda en una demostración técnica, sino que se convierte en una herramienta de aprendizaje.
+
+Desde el punto de vista técnico, el proyecto permitió trabajar con una arquitectura separada entre cliente y servidor, comunicación mediante API REST, persistencia de datos, autenticación mediante Google OAuth2, gestión de tokens, pruebas automáticas y diseño responsive. Esta separación entre frontend y backend facilitó la organización del código y permitió que cada parte de la aplicación tuviese una responsabilidad clara.
+
+En definitiva, el proyecto cumple con la finalidad de ofrecer una simulación funcional, visual y educativa de la Máquina Enigma M3. Además, supuso una oportunidad para integrar conocimientos de programación backend, desarrollo frontend, diseño de interfaces, seguridad, pruebas y documentación técnica dentro de una misma aplicación.
+
+\section{Trabajo futuro}
+
+Aunque la aplicación alcanza los objetivos planteados, existen varias líneas de mejora que podrían desarrollarse en futuras versiones.
+
+Una primera mejora sería ampliar las funcionalidades asociadas al inicio de sesión con Google. Actualmente, la autenticación permite identificar al usuario y asociar cierta información a su cuenta, pero podría aprovecharse para ofrecer una experiencia más personalizada. Por ejemplo, se podrían guardar configuraciones favoritas de la máquina, registrar el progreso en los retos, almacenar estadísticas de uso o permitir que cada usuario mantenga un historial completo de mensajes cifrados y descifrados.
+
+Otra posible ampliación sería convertir los retos en retos diarios. En la versión actual, los mensajes son estáticos y están definidos dentro de la propia aplicación. Como mejora futura, el sistema podría generar o seleccionar automáticamente un reto distinto cada día, con una configuración concreta del libro de codificación y una pista asociada. Esto haría que la sección fuese más dinámica y aumentaría la motivación del usuario para volver a utilizar la aplicación.
+
+También sería interesante ampliar el contenido histórico y educativo. La aplicación podría incluir más modelos de Máquina Enigma, explicar con mayor detalle las diferencias entre versiones, añadir material multimedia o incorporar ejercicios guiados paso a paso. De esta manera, el proyecto podría evolucionar desde un simulador concreto hacia una plataforma educativa más completa sobre criptografía histórica.
+
+Desde el punto de vista técnico, una mejora importante sería reforzar la seguridad del sistema. Algunas posibles medidas serían revisar y endurecer la configuración de CORS, limitar el uso de los endpoints mediante control de frecuencia para evitar abuso de peticiones, almacenar los tokens de forma más segura, añadir una política más estricta de expiración y renovación de sesiones y validar con mayor detalle todos los datos recibidos desde el cliente. También podría incorporarse un sistema de roles si en el futuro existiesen funcionalidades de administración.
+
+Otra línea de mejora sería desplegar la aplicación en un entorno público estable. Esto permitiría utilizarla desde cualquier dispositivo sin depender de una ejecución local. 
+
+Por último, se podrían ampliar las pruebas automáticas. Aunque los endpoints principales están cubiertos, sería recomendable añadir más pruebas de integración entre frontend y backend, pruebas sobre la interfaz, pruebas de accesibilidad y pruebas de rendimiento. Esto ayudaría a garantizar que futuras ampliaciones no rompan funcionalidades existentes y permitiría mantener la aplicación con mayor seguridad a largo plazo.
+
+En conclusión, el proyecto desarrollado constituye una base sólida y funcional sobre la que podrían construirse nuevas funcionalidades. La aplicación ya permite comprender e interactuar con una Máquina Enigma M3, pero todavía ofrece margen para crecer como herramienta educativa, como simulador histórico y como aplicación web técnicamente más completa.

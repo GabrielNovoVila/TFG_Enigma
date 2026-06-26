@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.6.13)  18 JUN 2026 16:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.6.13)  26 JUN 2026 09:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -186,9 +186,9 @@ Package babel Info: 'galician' activates 'galician' shorthands.
  (capitulos/certificacion.aux)
 (capitulos/agradecementos.aux) (capitulos/resumo.aux)
 (capitulos/introducion.aux) (capitulos/maquinaEnigma.aux) (capitulos/cap2.aux)
-(capitulos/cap3.aux) (capitulos/cap4.aux) (capitulos/exemplos.aux)
-(capitulos/conclusions.aux) (capitulos/apendicea.aux) (capitulos/apendiceb.aux)
-(capitulos/licenza.aux) (capitulos/bibliografia.aux))
+(capitulos/cap3.aux) (capitulos/cap4.aux) (capitulos/conclusions.aux)
+(capitulos/apendicea.aux) (capitulos/apendiceb.aux) (capitulos/licenza.aux)
+(capitulos/bibliografia.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
@@ -387,92 +387,269 @@ LaTeX Font Warning: Font shape `OML/cmtt/m/n' undefined
 
  (capitulos/cap3.tex
 Cap\'{\i }tulo 4.
-) [19
+[19
 
 
 
 
 
-] [20
+] [20]
+Underfull \vbox (badness 4832) has occurred while \output is active []
 
+ [21]
+<figuras/diagrama_casosUso_modelo.png, id=121, 441.65pt x 825.0825pt>
+File: figuras/diagrama_casosUso_modelo.png Graphic file (type png)
+<use figuras/diagrama_casosUso_modelo.png>
+Package pdftex.def Info: figuras/diagrama_casosUso_modelo.png  used on input li
+ne 61.
+(pdftex.def)             Requested size: 121.84161pt x 227.62204pt.
+<figuras/diagrama_casosUso_autenticacion.png, id=122, 605.26125pt x 514.92375pt
+>
+File: figuras/diagrama_casosUso_autenticacion.png Graphic file (type png)
+<use figuras/diagrama_casosUso_autenticacion.png>
+Package pdftex.def Info: figuras/diagrama_casosUso_autenticacion.png  used on i
+nput line 76.
+(pdftex.def)             Requested size: 267.55331pt x 227.62204pt.
 
+[22] [23 <./figuras/diagrama_casosUso_modelo.png>]
+<figuras/diagrama_casosUso_educativo.png, id=131, 430.60875pt x 713.66624pt>
+File: figuras/diagrama_casosUso_educativo.png Graphic file (type png)
+<use figuras/diagrama_casosUso_educativo.png>
+Package pdftex.def Info: figuras/diagrama_casosUso_educativo.png  used on input
+ line 96.
+(pdftex.def)             Requested size: 137.33766pt x 227.62204pt.
+ [24 <./figuras/diagrama_casosUso_autenticacion.png>]
+<figuras/diagrama_casosUso_accesibilidad.png, id=136, 369.38pt x 620.3175pt>
+File: figuras/diagrama_casosUso_accesibilidad.png Graphic file (type png)
+<use figuras/diagrama_casosUso_accesibilidad.png>
+Package pdftex.def Info: figuras/diagrama_casosUso_accesibilidad.png  used on i
+nput line 112.
+(pdftex.def)             Requested size: 135.5412pt x 227.62204pt.
+ [25 <./figuras/diagrama_casosUso_educativo.png>]
+Underfull \vbox (badness 3333) has occurred while \output is active []
 
-]
+ [26 <./figuras/diagrama_casosUso_accesibilidad.png>]
+<figuras/diagrama_clases_controlador.png, id=145, 1336.995pt x 337.26pt>
+File: figuras/diagrama_clases_controlador.png Graphic file (type png)
+<use figuras/diagrama_clases_controlador.png>
+Package pdftex.def Info: figuras/diagrama_clases_controlador.png  used on input
+ line 140.
+(pdftex.def)             Requested size: 398.33858pt x 100.4789pt.
+ [27 <./figuras/diagrama_clases_controlador.png>]
+<figuras/diagrama_clases_servicio.png, id=150, 1336.995pt x 681.54625pt>
+File: figuras/diagrama_clases_servicio.png Graphic file (type png)
+<use figuras/diagrama_clases_servicio.png>
+Package pdftex.def Info: figuras/diagrama_clases_servicio.png  used on input li
+ne 160.
+(pdftex.def)             Requested size: 398.33858pt x 203.05112pt.
+ [28 <./figuras/diagrama_clases_servicio.png>]
+<figuras/diagrama_clases_dtoRepo.png, id=155, 2285.53876pt x 1412.27625pt>
+File: figuras/diagrama_clases_dtoRepo.png Graphic file (type png)
+<use figuras/diagrama_clases_dtoRepo.png>
+Package pdftex.def Info: figuras/diagrama_clases_dtoRepo.png  used on input lin
+e 178.
+(pdftex.def)             Requested size: 644.65456pt x 398.33858pt.
+ [29] [30 <./figuras/diagrama_clases_dtoRepo.png>]
+<figuras/diagrama_clases_modelo.png, id=164, 3163.82pt x 1700.3525pt>
+File: figuras/diagrama_clases_modelo.png Graphic file (type png)
+<use figuras/diagrama_clases_modelo.png>
+Package pdftex.def Info: figuras/diagrama_clases_modelo.png  used on input line
+ 196.
+(pdftex.def)             Requested size: 741.18057pt x 398.33858pt.
+<figuras/diagrama_clases_v1.png, id=165, 3361.55875pt x 1865.97125pt>
+File: figuras/diagrama_clases_v1.png Graphic file (type png)
+<use figuras/diagrama_clases_v1.png>
+Package pdftex.def Info: figuras/diagrama_clases_v1.png  used on input line 214
+.
+(pdftex.def)             Requested size: 717.59174pt x 398.33858pt.
+ [31] [32 <./figuras/diagrama_clases_modelo.png>]
+[33 <./figuras/diagrama_clases_v1.png>] [34]
+<figuras/pagina_principal.png, id=180, 1445.4pt x 2028.57875pt>
+File: figuras/pagina_principal.png Graphic file (type png)
+<use figuras/pagina_principal.png>
+Package pdftex.def Info: figuras/pagina_principal.png  used on input line 250.
+(pdftex.def)             Requested size: 283.80373pt x 398.33858pt.
+ [35 <./figuras/pagina_principal.png>]
+Underfull \vbox (badness 3168) has occurred while \output is active []
+
+ [36]
+<figuras/funcionamiento.png, id=190, 1445.4pt x 5796.65625pt>
+File: figuras/funcionamiento.png Graphic file (type png)
+<use figuras/funcionamiento.png>
+Package pdftex.def Info: figuras/funcionamiento.png  used on input line 274.
+(pdftex.def)             Requested size: 99.31366pt x 398.33858pt.
+
+[37 <./figuras/funcionamiento.png>]
+<figuras/historia.png, id=195, 1445.4pt x 2614.76875pt>
+File: figuras/historia.png Graphic file (type png)
+<use figuras/historia.png>
+Package pdftex.def Info: figuras/historia.png  used on input line 297.
+(pdftex.def)             Requested size: 220.17506pt x 398.33858pt.
+ [38] [39 <./figuras/historia.png>]
+<figuras/libro.png, id=203, 1445.4pt x 1287.81125pt>
+File: figuras/libro.png Graphic file (type png)
+<use figuras/libro.png>
+Package pdftex.def Info: figuras/libro.png  used on input line 335.
+(pdftex.def)             Requested size: 447.0769pt x 398.33858pt.
+ [40]
+[41 <./figuras/libro.png>]
+<figuras/problemas.png, id=212, 1445.4pt x 1287.81125pt>
+File: figuras/problemas.png Graphic file (type png)
+<use figuras/problemas.png>
+Package pdftex.def Info: figuras/problemas.png  used on input line 364.
+(pdftex.def)             Requested size: 447.0769pt x 398.33858pt.
+ [42] [43 <./figuras/problemas.png>]) [44]
 \openout2 = `capitulos/cap4.aux'.
 
- (capitulos/cap4.tex
+
+(capitulos/cap4.tex
 Cap\'{\i }tulo 5.
-) [21
 
-
-] [22
-
-
-
-]
-\openout2 = `capitulos/exemplos.aux'.
-
- (capitulos/exemplos.tex
-Cap\'{\i }tulo 6.
-[23
-
-
-]
-Overfull \hbox (4.24084pt too wide) has occurred while \output is active
-\OT1/cmr/m/n/12 24  \OT1/cmr/m/sl/12 CAP[]ITULO 6.  EXEMPLOS (ELIMINAR CAP[]ITU
-LO NA VERSI[]ON FINAL)
+Underfull \hbox (badness 1895) in paragraph at lines 19--20
+[]\OT1/cmr/bx/n/12 Resultado es-
  []
 
-[24]
-(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
-File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
-)
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 8
-1.
 
-(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
-File: omlcmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 81.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 8
-3.
-
-(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
-File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 83.
-
-(C:\Users\Gabi\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-Overfull \hbox (53.36043pt too wide) in paragraph at lines 97--98
-[][][][][][][][][][][][][][][][][][][][][][][][][] 
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+[]\OT1/cmr/m/n/12 C^^Sodi-go 201 y
  []
 
-) [25]
-Overfull \hbox (4.24084pt too wide) has occurred while \output is active
-\OT1/cmr/m/n/12 26  \OT1/cmr/m/sl/12 CAP[]ITULO 6.  EXEMPLOS (ELIMINAR CAP[]ITU
-LO NA VERSI[]ON FINAL)
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/cmr/m/n/12 con-fi-gu-ra-ci^^Son
  []
 
-[26
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+\OT1/cmr/m/n/12 ini-cial de la
+ []
+
+LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 
+23.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 23.
+
+LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbraceleft' on input line 23.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--24
+[]\OT1/cmr/m/n/12 C^^Sodi-go 200 o
+ []
+
+
+Underfull \hbox (badness 2401) in paragraph at lines 23--24
+\OT1/cmr/m/n/12 404, res-pec-ti-va-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+[]\OT1/cmr/m/n/12 C^^Sodi-go 204 o
+ []
+
+
+Underfull \hbox (badness 2401) in paragraph at lines 25--26
+\OT1/cmr/m/n/12 404, res-pec-ti-va-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+[]\OT1/cmr/m/n/12 C^^Sodi-go 200 y
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+\OT1/cmr/m/n/12 con-fi-gu-ra-ci^^Son
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]\OT1/cmtt/m/n/12 POST
+ []
+
+
+Underfull \hbox (badness 2573) in paragraph at lines 31--31
+[]\OT1/cmr/m/n/12 Cifrar una le-tra en una
+ []
+
+
+Underfull \hbox (badness 8189) in paragraph at lines 31--32
+\OT1/cmr/m/n/12 le-tra, pa-sos y
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--33
+[]\OT1/cmtt/m/n/12 POST
+ []
+
+
+Underfull \hbox (badness 8189) in paragraph at lines 33--34
+\OT1/cmr/m/n/12 le-tra, pa-sos y
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--35
+[]\OT1/cmtt/m/n/12 POST
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--36
+[]\OT1/cmr/m/n/12 C^^Sodi-go 200 o
+ []
+
+
+Underfull \hbox (badness 2401) in paragraph at lines 35--36
+\OT1/cmr/m/n/12 404, res-pec-ti-va-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--37
+[]\OT1/cmtt/m/n/12 DELETE
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--38
+[]\OT1/cmr/m/n/12 C^^Sodi-go 200 o
+ []
+
+
+Underfull \hbox (badness 2401) in paragraph at lines 37--38
+\OT1/cmr/m/n/12 404, res-pec-ti-va-
+ []
+
+
+Underfull \hbox (badness 1895) in paragraph at lines 54--55
+[]\OT1/cmr/bx/n/12 Resultado es-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--57
+[]\OT1/cmr/m/n/12 C^^Sodi-go 200 y
+ []
+
+[45
 
 
 
-]
+
+
+] [46]
+Overfull \hbox (22.27676pt too wide) in paragraph at lines 94--110
+ []|  [] 
+ []
+
+) [47] [48]
 \openout2 = `capitulos/conclusions.aux'.
 
  (capitulos/conclusions.tex
-Cap\'{\i }tulo 7.
-) [27
+Cap\'{\i }tulo 6.
+[49
 
 
-] [28
+
+
+
+] [50]) [51] [52
 
 
 
@@ -481,10 +658,10 @@ Cap\'{\i }tulo 7.
 
  (capitulos/apendicea.tex
 Ap\'endice A.
-) [29
+) [53
 
 
-] [30
+] [54
 
 
 
@@ -493,10 +670,10 @@ Ap\'endice A.
 
  (capitulos/apendiceb.tex
 Ap\'endice B.
-) [31
+) [55
 
 
-] [32
+] [56
 
 
 
@@ -505,10 +682,10 @@ Ap\'endice B.
 
  (capitulos/licenza.tex
 Ap\'endice C.
-) [33
+) [57
 
 
-] [34
+] [58
 
 
 
@@ -527,15 +704,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--11
  da wi-ki-pe-dia
  []
 
-) [35
+) [59
 
 
 ] (main.aux (capitulos/titulo.aux) (capitulos/certificacion.aux)
 (capitulos/agradecementos.aux) (capitulos/resumo.aux)
 (capitulos/introducion.aux) (capitulos/maquinaEnigma.aux) (capitulos/cap2.aux)
-(capitulos/cap3.aux) (capitulos/cap4.aux) (capitulos/exemplos.aux)
-(capitulos/conclusions.aux) (capitulos/apendicea.aux) (capitulos/apendiceb.aux)
-(capitulos/licenza.aux) (capitulos/bibliografia.aux))
+(capitulos/cap3.aux) (capitulos/cap4.aux) (capitulos/conclusions.aux)
+(capitulos/apendicea.aux) (capitulos/apendiceb.aux) (capitulos/licenza.aux)
+(capitulos/bibliografia.aux))
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -550,35 +727,27 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 5783 strings out of 467871
- 98466 string characters out of 5418860
- 692793 words of memory out of 5000000
- 34487 multiletter control sequences out of 15000+600000
- 637944 words of font info for 78 fonts, out of 8000000 for 9000
+ 5410 strings out of 467871
+ 96501 string characters out of 5418860
+ 504612 words of memory out of 5000000
+ 34135 multiletter control sequences out of 15000+600000
+ 636968 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,8n,65p,913b,1322s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\Gabi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcti1
-200.pk> <C:\Users\Gabi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
-tcrm1200.pk><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmbx12.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmcsc10.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Gabi/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Gabi/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Gabi/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Gab
-i/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Us
-ers/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb>
-<C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr
-8.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmsl12.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
-msfonts/cm/cmsy10.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmsy8.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (49 pages, 256651 bytes).
+ 57i,11n,65p,1488b,409s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Gabi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1
+200.pk><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmcsc10.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Gabi/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Gabi/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Gabi/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/Gabi/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Gabi/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/
+Gabi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on main.pdf (73 pages, 9035757 bytes).
 PDF statistics:
- 247 PDF objects out of 1000 (max. 8388607)
+ 318 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

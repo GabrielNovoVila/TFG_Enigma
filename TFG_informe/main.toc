@@ -31,20 +31,44 @@
 \contentsline {subsection}{\numberline {3.3.1}Información guardada en base de datos}{16}{}%
 \contentsline {subsection}{\numberline {3.3.2}Información mantenida en memoria}{17}{}%
 \contentsline {subsection}{\numberline {3.3.3}Información guardada en disco}{18}{}%
-\contentsline {chapter}{\numberline {4}Deseño}{19}{}%
-\contentsline {chapter}{\numberline {5}Probas}{21}{}%
-\contentsline {chapter}{\numberline {6}Exemplos (eliminar capítulo na versión final)}{23}{}%
-\contentsline {section}{\numberline {6.1}Un exemplo de sección}{23}{}%
-\contentsline {subsection}{\numberline {6.1.1}Un exemplo de subsección}{23}{}%
-\contentsline {subsection}{\numberline {6.1.2}Otro exemplo de subsección}{23}{}%
-\contentsline {subsubsection}{Un exemplo de subsubsección}{23}{}%
-\contentsline {subsubsection}{Un exemplo de subsubsección}{23}{}%
-\contentsline {subsubsection}{Un exemplo de subsubsección}{24}{}%
-\contentsline {section}{\numberline {6.2}Exemplos de figuras e cadros}{24}{}%
-\contentsline {section}{\numberline {6.3}Exemplos de referencias á bibliografía}{24}{}%
-\contentsline {section}{\numberline {6.4}Exemplos de enumeracións}{24}{}%
-\contentsline {chapter}{\numberline {7}Conclusións e posibles ampliacións}{27}{}%
-\contentsline {chapter}{\numberline {A}Manuais técnicos}{29}{}%
-\contentsline {chapter}{\numberline {B}Manuais de usuario}{31}{}%
-\contentsline {chapter}{\numberline {C}Licenza}{33}{}%
-\contentsline {chapter}{Bibliografía}{35}{}%
+\contentsline {chapter}{\numberline {4}Diseño}{19}{}%
+\contentsline {section}{\numberline {4.1}Planificación}{19}{}%
+\contentsline {subsection}{\numberline {4.1.1}Spring}{20}{}%
+\contentsline {subsection}{\numberline {4.1.2}React}{21}{}%
+\contentsline {subsection}{\numberline {4.1.3}Casos de uso}{22}{}%
+\contentsline {subsubsection}{Modelo}{22}{}%
+\contentsline {subsubsection}{Autenticación}{23}{}%
+\contentsline {subsubsection}{Historia y retos}{24}{}%
+\contentsline {subsubsection}{Accesibilidad}{25}{}%
+\contentsline {section}{\numberline {4.2}Diseño del código}{26}{}%
+\contentsline {subsection}{\numberline {4.2.1}Diagramas de clases}{27}{}%
+\contentsline {subsubsection}{Controlador}{27}{}%
+\contentsline {subsubsection}{Servicios}{28}{}%
+\contentsline {subsubsection}{DTO}{29}{}%
+\contentsline {subsubsection}{Modelo}{31}{}%
+\contentsline {subsubsection}{Conjunto}{31}{}%
+\contentsline {section}{\numberline {4.3}Diseño inicial de la interfaz}{34}{}%
+\contentsline {subsection}{\numberline {4.3.1}Concepto}{34}{}%
+\contentsline {subsection}{\numberline {4.3.2}Máquina Enigma}{35}{}%
+\contentsline {subsection}{\numberline {4.3.3}¿Cómo funciona?}{37}{}%
+\contentsline {subsection}{\numberline {4.3.4}Historia}{38}{}%
+\contentsline {subsubsection}{El contexto de la máquina}{38}{}%
+\contentsline {subsubsection}{¿Qué es la máquina Enigma?}{38}{}%
+\contentsline {subsubsection}{Descifrado}{40}{}%
+\contentsline {subsubsection}{Línea del tiempo}{40}{}%
+\contentsline {subsubsection}{Curiosidades}{40}{}%
+\contentsline {subsection}{\numberline {4.3.5}Libro de codificación}{40}{}%
+\contentsline {subsection}{\numberline {4.3.6}Retos}{42}{}%
+\contentsline {chapter}{\numberline {5}Pruebas}{45}{}%
+\contentsline {section}{\numberline {5.1}Plan de pruebas}{45}{}%
+\contentsline {subsection}{\numberline {5.1.1}Endpoints de la máquina Enigma}{45}{}%
+\contentsline {subsection}{\numberline {5.1.2}Autenticación y lógica de negocio}{45}{}%
+\contentsline {section}{\numberline {5.2}Ejecución de las pruebas}{45}{}%
+\contentsline {section}{\numberline {5.3}Resultados obtenidos}{47}{}%
+\contentsline {chapter}{\numberline {6}Conclusiones y posibles ampliaciones}{49}{}%
+\contentsline {section}{\numberline {6.1}Conclusiones}{49}{}%
+\contentsline {section}{\numberline {6.2}Trabajo futuro}{50}{}%
+\contentsline {chapter}{\numberline {A}Manuais técnicos}{53}{}%
+\contentsline {chapter}{\numberline {B}Manuais de usuario}{55}{}%
+\contentsline {chapter}{\numberline {C}Licenza}{57}{}%
+\contentsline {chapter}{Bibliografía}{59}{}%

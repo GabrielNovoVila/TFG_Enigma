@@ -43,7 +43,7 @@ Las pruebas automatizadas asociadas estan en:
 | --- | --- | --- | --- |
 | `M3Servicio.cifrar` | Cifrado con offsets negativos por configuracion de anillos | No lanza excepcion y devuelve una letra | `cifraConOffsetsNegativosSinSalirDelAlfabeto` |
 
-## Ejecucion
+## Ejecucion y resultado
 
 Comando recomendado:
 
@@ -52,15 +52,19 @@ cd C:\Users\Gabi\Desktop\Clasecita\TFG\TFG_Enigma\TFG_Enigma
 .\gradlew.bat test
 ```
 
-En el entorno actual de Codex no se pudo completar la ejecucion porque Gradle intento resolver
-`org.springframework.boot:org.springframework.boot.gradle.plugin:3.3.2` y la red esta bloqueada.
-El error obtenido fue:
+La bateria se ejecuto correctamente el 20 de junio de 2026. El resultado fue de **23 pruebas superadas de 23**, sin fallos ni pruebas omitidas:
 
-```text
-Plugin [id: 'org.springframework.boot', version: '3.3.2'] was not found
-```
+- 17 pruebas de endpoints de `M3Controller`.
+- 4 pruebas del endpoint de renovacion de sesion.
+- 1 prueba de la logica de cifrado con offsets negativos.
+- 1 prueba de carga del contexto de la aplicacion.
 
-Cuando el equipo tenga red o la dependencia este cacheada, el comando anterior generara el informe en:
+Durante la ejecucion se corrigieron dos incidencias detectadas por las pruebas:
+
+1. Las pruebas de `M3Controller` necesitaban un doble de prueba de `AutenticacionServicio`, ya que el componente `FiltroJWT` depende de dicho servicio al construir el contexto de Spring.
+2. El endpoint `GET /m3/` recibia directamente un `OAuth2User`, lo que podia fallar cuando no existia una sesion OAuth activa. Ahora recibe la autenticacion de forma segura y devuelve una lista vacia cuando el usuario no esta autenticado mediante OAuth.
+
+El informe detallado se genera en:
 
 ```text
 build/reports/tests/test/index.html

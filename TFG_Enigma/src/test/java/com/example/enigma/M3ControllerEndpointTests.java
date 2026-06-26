@@ -5,6 +5,7 @@ import com.example.enigma.Modelo.DTO.CifrarDTO;
 import com.example.enigma.Modelo.DTO.ConfigDTO;
 import com.example.enigma.Modelo.DTO.M3DTO;
 import com.example.enigma.Modelo.M3;
+import com.example.enigma.Servicios.AutenticacionServicio;
 import com.example.enigma.Servicios.M3Servicio;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -48,6 +49,9 @@ class M3ControllerEndpointTests {
 
     @MockBean
     M3Servicio m3Servicio;
+
+    @MockBean
+    AutenticacionServicio autenticacionServicio;
 
     @Test
     void crearMaquinaDevuelve201YMaquinaCreada() throws Exception {

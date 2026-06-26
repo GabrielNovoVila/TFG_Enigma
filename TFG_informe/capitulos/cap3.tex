@@ -1,3 +1,388 @@
-\chapter{Deseño}
+\chapter{Diseño}
 
-Debe describirse como se realiza o Sistema, a división deste en diferentes compoñentes e a comunicación entre eles. Así mesmo, determinarase o equipamento hardware e software necesario, xustificando a súa elección no caso de que non fose un requisito previo. Debe achegarse a un nivel suficiente de detalle que permita comprender a totalidade da estrutura do produto desenvolvido, utilizando no posible representacións gráficas.
+
+
+\section {Planificación}
+La planificación antes del desarrollo es un proceso clave en un proyecto. Cuando tratamos de realizar acciones que no fueron planificadas con anterioridad siempre hay algo que se nos escapa y que logra que tengamos que volver a un apartado que considerábamos terminado o  que logra retrasos en los tiempos que nos marcamos. 
+
+Así, el primer paso que decidimos seguir fue el de planear las tecnologías que íbamos a utilizar. En un inicio, el proyecto era el de realizar un "Simulador de la máquina Enigma con tecnologías web". Esta sentencia es lo suficientemente amplia como para dejar como posibilidades múltiples tecnologías posibles. Para el desarrollo web lo más sencillo sería hacer una aplicación solamente con JavaScript, no sería necesaria la separación entre backend y frontend, tanto la lógica de procesado como la interfaz estarían en la misma dimensión, en el mismo conjunto de archivos. 
+
+Esta no era una idea que me atrajese demasiado, conociendo la magnitud de este trabajo, tuve 2 conceptos en cuenta: 
+\begin{itemize}
+	\item División clara entre el backend y el frontend.
+	\item Disfrute del desarrollo.
+\end{itemize}
+A lo largo de la carrera, conocimos y utilizamos un número amplio de tecnologías y de puntos de vista. No solo nos enseñaron a entender y a utilizar herramientas, nos enseñaron mucho más. Nos enseñaron que algo importante a la hora de realizar un proyecto o un trabajo es el interés. El interés por lo que uno hace impulsa el trabajo de manera desmedida. Cuando alguien siente verdadera pasión, se nota en cada línea escrita, se nota en la profundidad de su trabajo. 
+
+\subsection {Spring}
+
+Así, pues, decidí utilizar  ambos aspectos y el framework de desarrollo Java Spring me proporcionaba a través de Spring Boot la tecnología necesaria para cubrir ambos aspectos? una tecnología que cumpliera ambos puntos y esta es Spring Boot. De esta forma me ayuda a es posible?? dividir el código de la interfaz para no tener un solo punto de ruptura, es decir, si el backend cae, el frontend puede mostrar contenido estático, pero no usar el simulador ni consultar datos dinámicos y, al revés, sin frontend la API se puede consumir mediante herramientas de línea de comandos o clientes HTTP. Si todo estuviese atado al mismo cabo, en caso de error, no habría segundas posibilidades
+
+Es probable que el lector no esté al tanto de la susodicha tecnología, así, pues, ¿Qué es Spring Boot? Citando a IBM, Spring Boot es un marco popular, de código abierto, de nivel empresarial para crear aplicaciones de producción de nivel independiente que se ejecutan en la máquina virtual Java (JVM). Lo importante que tenemos que sacar de Spring Boot es que agiliza y simplifica el desarrollo de Spring Framework a través de tres características principales:
+\begin{itemize}
+	\item Autoconfiguración
+	\item Un enfoque basado en convenciones y configuración por defecto
+	\item La capacidad de crear aplicaciones independientes
+\end{itemize}
+
+Spring Boot nos da pie al uso de APIs REST, lo que logra aplicaciones todavía más independientes, de forma que, cada funcionalidad está separada de una forma completamente organizada y limpia. Esta es la dirección que buscamos en la aplicación, además, a lo largo de mi estancia en la USC aprendimos a utilizarla, centrándonos en hacer un buen uso de la misma: seguridad, eficiencia y la capacidad de hacer de la aplicación totalmente Restful (endpoints bien ajustados, con cabeceras y verbos correctos).
+
+En esta aplicación, Spring Boot se emplea para implementar la capa de servidor del simulador. La lógica se organiza mediante controladores, servicios, repositorios y modelos de datos. Los controladores exponen los endpoints REST empleados por la interfaz, los servicios contienen la lógica de cifrado y descifrado de la máquina Enigma, y los repositorios gestionan la persistencia de las configuraciones de las máquinas. Esta separación facilita el mantenimiento, las pruebas y la evolución de cada parte del sistema.
+Asimismo, se utiliza Spring Data JPA para gestionar el acceso a los datos mediante repositorios, evitando la elaboración manual de consultas para las operaciones habituales. La aplicación incorpora Spring Security para controlar la autenticación de usuarios mediante OAuth 2.0 con Google y para gestionar tokens JWT. De este modo, las operaciones asociadas a una sesión pueden mantenerse vinculadas al usuario autenticado.
+
+La elección de Spring Boot permite que el simulador sea accesible tanto desde la interfaz web desarrollada en React como desde cualquier cliente capaz de realizar peticiones HTTP, manteniendo la lógica criptográfica centralizada en el backend.
+
+\subsection{React}
+
+Para el desarrollo de la interfaz de usuario se ha utilizado React. Esta elección permite construir una aplicación web dinámica, organizada y sencilla de mantener. React es una biblioteca de JavaScript orientada a la creación de interfaces mediante componentes reutilizables. En lugar de desarrollar toda la página como un único bloque, la aplicación se divide en elementos independientes, como el teclado de la máquina, la configuración de rotores, el historial de cifrado, los menús de accesibilidad o las distintas páginas informativas.
+
+Esta organización resulta especialmente adecuada para un simulador como el desarrollado. Cada componente puede encargarse de una parte concreta de la interfaz y de su comportamiento, reduciendo la repetición de código y facilitando futuras modificaciones. Por ejemplo, los componentes relacionados con la máquina Enigma pueden actualizarse cuando el usuario modifica una configuración o pulsa una letra, sin necesidad de volver a cargar toda la página.
+
+React utiliza un sistema de estado que permite que la interfaz se actualice automáticamente cuando cambian los datos de la aplicación. En este proyecto, dicho estado se emplea para representar, entre otros aspectos, la posición actual de los rotores, el reflector seleccionado, las conexiones del panel de cables, la letra cifrada o descifrada y el historial de la sesión. De esta manera, la representación visual de la máquina se mantiene sincronizada con la información recibida desde el backend.
+
+La comunicación entre React y el servidor desarrollado con Spring Boot se realiza mediante peticiones HTTP a la API REST. La interfaz solicita al backend las operaciones que requieren lógica de negocio, como cifrar o descifrar una letra, crear una máquina o modificar su configuración. Posteriormente, React procesa la respuesta y actualiza los componentes afectados. Esta separación permite mantener diferenciadas la lógica de presentación y la lógica criptográfica.
+
+Además de la parte interactiva del simulador, React se utiliza para implementar las páginas de contenido educativo, como la explicación del funcionamiento de la máquina, la historia de Enigma, el libro de codificación y los retos. También permite incorporar elementos de accesibilidad, como la modificación del tamaño de letra, el modo claro y la identificación visual de las conexiones para personas con dificultades en la percepción de colores.
+Por tanto, React aporta una interfaz fluida y modular, capaz de mostrar contenido estático incluso si el backend no está disponible, mientras que las funcionalidades dinámicas del simulador se conectan al servidor cuando este se encuentra operativo.
+
+\subsection {Casos de uso}
+Una vez tenemos las tecnologías decididas, podemos pasar a las funcionalidades que buscamos tener en la aplicación. En un inicio, solo un concepto está claro: la aplicación tiene que simular una máquina Enigma. Este tipo de máquina se caracteriza por tener muchos pequeños componentes, de forma que se puede subdividir de manera muy cómoda el trabajo y la escritura del código y, como estamos usando Java, esto implica una división de clases coherente y sencilla. Tras informarnos de la máquina y de su funcionamiento, fue momento de decidir de manera seria cuáles iban a ser los principales objetivos de la página y qué iba a poder hacer un usuario con ella, aquí es donde entran los diagramas de casos de uso. 
+
+Un diagrama de casos de uso es un tipo de diagrama UML que representa gráficamente las posibles interacciones de distintos actores con un sistema. En este caso, como actores, tenemos al usuario autenticado, al usuario invitado y a google. Por otra parte, el sistema sería la aplicación en cualquiera de los diagramas planteados.
+Con estos esquemas, un usuario de la aplicación puede entender las funciones posibles que le ofrece el proyecto.
+
+Vamos a dividirlo en varias secciones, para que no quede un dibujo enorme ya que al final, el objetivo de este tipo de diagramas es el de la simplicidad y el de entender correctamente las posibles acciones por parte del usuario.
+
+\subsubsection{Modelo}
+
+Comenzamos por el diagrama que muestra las funcionalidades principales del simulador asociadas a la lógica del backend. Los casos de uso representados corresponden a las operaciones expuestas por la API REST, así como a las acciones de la interfaz que requieren comunicarse con ella.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=8cm]{figuras/diagrama_casosUso_modelo.png}}
+	\caption{Diagrama de casos de uso del simulador}
+	\label{casos_uso_modelo}
+\end{figure}
+
+El actor principal del diagrama \ref{casos_uso_modelo} es el usuario, que puede crear una máquina Enigma y modificar sus elementos de configuración: los rotores, el reflector, la posición actual de los rotores y las conexiones entre letras. Una vez configurada la máquina, puede utilizar las operaciones de cifrado y descifrado, así como consultar los pasos seguidos durante el procesamiento de cada letra.
+Tanto el cifrado como el descifrado incluyen la actualización de la posición de los rotores, ya que la máquina Enigma modifica su estado tras procesar cada letra. Esta relación se representa mediante la etiqueta "include", puesto que el avance de los rotores forma parte necesaria de ambas operaciones y no es una acción opcional.
+
+Por otra parte, el historial de sesión se asocia exclusivamente al usuario autenticado. El resto de funcionalidades del simulador pueden utilizarse sin iniciar sesión, permitiendo que cualquier visitante configure una máquina y experimente con el proceso de cifrado. La autenticación añade la posibilidad de conservar y consultar el historial vinculado a la cuenta del usuario.
+
+\subsubsection{Autenticación}
+
+El diagrama \ref{casos_uso_autenticacion} representa las funcionalidades asociadas al inicio de sesión mediante Google OAuth 2.0.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=8cm]{figuras/diagrama_casosUso_autenticacion.png}}
+	\caption{Diagrama de casos de uso de la autenticación}
+	\label{casos_uso_autenticacion}
+\end{figure}
+
+El usuario que no ha iniciado sesión, denominado usuario invitado, dispone de una única funcionalidad relacionada con la autenticación: iniciar sesión con Google.
+
+Cuando el usuario pulsa el botón de inicio de sesión, la aplicación redirige el proceso de autenticación a Google, que actúa como sistema externo. Google solicita o reutiliza las credenciales de la persona y valida su identidad. Si el proceso concluye correctamente, Google redirige al usuario de vuelta a la aplicación y el backend genera los tokens de acceso y de refresco necesarios para mantener la sesión.
+
+El token de acceso permite identificar al usuario en las peticiones que requieren autenticación, mientras que el token de refresco permite obtener un nuevo token de acceso cuando el anterior deja de ser válido. De este modo, el usuario no necesita repetir el proceso de inicio de sesión continuamente durante el uso de la aplicación.
+
+Una vez iniciada la sesión, el usuario autenticado puede cerrar sesión o consultar los datos asociados a su cuenta. Al cerrar sesión, la aplicación elimina la información de autenticación almacenada en el navegador, por lo que el usuario vuelve a ser tratado como un usuario invitado. Sin embargo, puede volver a iniciar sesión posteriormente, tanto con la misma cuenta como con una diferente.
+
+La segunda funcionalidad disponible consiste en mostrar los datos de la cuenta, entre los que se incluye el historial de cifrados realizado durante el uso del simulador. Este historial se asocia al correo electrónico de la cuenta y se conserva en el almacenamiento local del navegador. Por este motivo, un usuario puede recuperar su historial al volver a iniciar sesión con la misma cuenta desde el mismo navegador, incluso después de haber cerrado sesión o de haber utilizado otra cuenta de forma temporal.
+
+\subsubsection{Historia y retos}
+
+El diagrama \ref{casos_uso_educativo} representa las funcionalidades educativas de la aplicación. Estas permiten que el usuario no solo utilice el simulador, sino que también pueda comprender el contexto histórico de la máquina Enigma, sus componentes y algunos de los principios que intervienen en el cifrado.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=8cm]{figuras/diagrama_casosUso_educativo.png}}
+	\caption{Diagrama de casos de uso del contenido educativo y los retos}
+	\label{casos_uso_educativo}
+\end{figure}
+
+El usuario puede consultar la sección "¿Cómo funciona?", dedicada a explicar el funcionamiento general de la máquina Enigma. Desde ella puede acceder a información concreta acerca de sus componentes principales: El teclado, el espacio de conexiones, los rotores, el reflector y la salida de la letra cifrada.
+
+Además, la aplicación dispone de una sección histórica que permite consultar información sobre el contexto en el que surgió la máquina Enigma, su evolución, el proceso de descifrado durante la Segunda Guerra Mundial y diferentes curiosidades relacionadas con el dispositivo. También se incluye un libro de codificación que presenta, de forma visual, el tipo de configuraciones que podían utilizarse para establecer los ajustes diarios de una máquina, pues cada día, los que la utilizaban, cambiaban los ajustes de la misma, de forma que resultara una odisea el descifrado de los mensajes.
+
+Por último, el usuario puede acceder a la sección de retos. En ella se presentan mensajes secretos que deben resolverse utilizando el simulador. El usuario puede solicitar una pista cuando la necesite y comprobar si la respuesta a la que se acercó es correcta. De este modo, los retos permiten aplicar de forma práctica los conceptos explicados en las secciones educativas.
+
+\subsubsection{Accesibilidad}
+
+El diagrama \ref{casos_uso_accesibilidad} recoge las funcionalidades de accesibilidad incluidas en la aplicación. Estas opciones permiten que el usuario adapte la interfaz a sus necesidades visuales sin modificar el funcionamiento del simulador.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=8cm]{figuras/diagrama_casosUso_accesibilidad.png}}
+	\caption{Diagrama de casos de uso de las opciones de accesibilidad}
+	\label{casos_uso_accesibilidad}
+\end{figure}
+
+El usuario puede navegar entre las distintas páginas de la aplicación y desplazarse directamente a secciones concretas mediante los botones de navegación disponibles. Estos desplazamientos incluyen un efecto visual que resalta temporalmente la sección de destino, facilitando la identificación del contenido al que se ha accedido.
+
+Asimismo, la aplicación incorpora un modo claro que modifica los colores generales de la interfaz para mejorar su legibilidad en entornos luminosos. También se ofrece un modo daltónico, pensado especialmente para facilitar la identificación de las conexiones del espacio de cables. Al activar este modo, cada conexión se acompaña de un identificador mediante números romanos, evitando que el usuario tenga que depender únicamente del color para distinguirlas.
+
+Finalmente, el usuario puede aumentar o reducir el tamaño de letra de la página. Esta configuración afecta al contenido textual de la interfaz y permite adaptar su lectura a las necesidades de cada persona. Las preferencias de accesibilidad se conservan en el almacenamiento local del navegador para que se mantengan en futuras visitas desde el mismo dispositivo.
+
+La accesibilidad es un apartado clave en un sitio web. La Interacción Persona-Ordenador nos dice que toda persona es merecedora de visitar una página y de informarse. Es necesaria una comprensión total del alcance de la aplicación y del perfil de usuario al que va dedicada. En este caso, no existe ningún perfil concreto de usuario, por lo que es necesario adaptarse a todos ellos: el daltonismo, la presbicia o la miopía son condiciones muy comunes que podría hacer que alguien no sea capaz de profundizar en la página, son condiciones que el diseñador de la interfaz tiene que tener en cuenta. Aquí brilla el concepto de la accesibilidad.
+
+\section {Diseño del código}
+
+Una vez planteadas las funcionalidades que quería para mi aplicación, el siguiente paso fue el de implementarlas. Para esto también es necesario el diseño técnico de las mismas: ¿Qué clases voy a usar?, ¿Qué métodos van a tener?, ¿Cómo se van a comunicar entre ellas?. De nuevo, para mostrar de forma coherente y simple los resultados de este diseño, se utilizarán diagramas, no de casos de uso, sino otro tipo llamado "Diagrama de clases".
+
+\subsection {Diagramas de clases}
+
+Un diagrama de clases es un tipo de diagrama de estructura estática que describe la estructura de un sistema mostrando las clases del sistema, sus atributos, operaciones (o métodos) y las relaciones entre los objetos.
+
+Las clases del sistema se pueden clasificar en varios niveles dependiendo de su funcionalidad. Esto favorece la modularidad, de forma que todo esté correctamente estructurado. En caso de error, sabes a dónde ir, en caso de que una tercera persona retome el proyecto, es importante que esté lo suficientemente ordenado para que pueda hacerlo sin problemas. Hay veces que el sistema es complejo y el análisis del mismo se vuelve complicado, pero podemos, de esta forma, aligerar el peso que conlleva el estudiar el código para saber dónde hay errores o a dónde hay que ir de ser necesaria la modificación de algún fragmento del código.
+
+\subsubsection {Controlador}
+
+Cuando hablamos de los controladores en una API REST, estamos hablando de aquellas clases que recogen la llamada al sistema. Estas contienen la lógica necesaria para formar la puerta a la aplicación. Por ellas pasa toda la información, tanto la entrada como la salida y aquí se decide el requerimiento de roles, el requerimiento de permisos, además del contenido y el código del mensaje que enviemos de vuelta al usuario.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[width=14cm]{figuras/diagrama_clases_controlador.png}}
+	\caption{Diagrama de clases de los controladores}
+	\label{clases_controlador}
+\end{figure}
+
+En la figura \ref{clases_controlador} tenemos las dos clases controlador que conforman la aplicación.
+
+Los controladores se anotan como controladores REST, por lo que actúan como punto de entrada de las peticiones HTTP realizadas desde la interfaz desarrollada en React. Cada método se asocia a una ruta concreta y a un verbo HTTP, como \texttt{GET}, \texttt{POST}, \texttt{PUT}, \texttt{PATCH} o \texttt{DELETE}, según la operación que se desea realizar.
+
+El controlador del simulador, \texttt{M3Controller}, centraliza las operaciones relacionadas con las máquinas Enigma. Entre ellas se encuentran la creación, consulta, modificación y eliminación de una máquina, la actualización de sus rotores y reflector, la gestión de las conexiones del espacio de cables y las operaciones de cifrado y descifrado de letras. Para transportar los datos entre el cliente y el servidor se utilizan objetos DTO, que permiten definir de forma explícita la información necesaria en cada petición.
+
+Por su parte, el controlador de autenticación, \texttt{AutenticacionControlador}, expone el endpoint encargado de renovar el token de acceso. Esta operación utiliza el token de refresco previamente obtenido durante el inicio de sesión, permitiendo mantener la sesión sin obligar al usuario a autenticarse de nuevo cuando el token de acceso caduca.
+
+Aunque los controladores reciben las peticiones y construyen las respuestas, no contienen la lógica principal de cifrado ni de gestión de datos. Estas responsabilidades se delegan en las clases de servicio correspondientes, \texttt{M3Servicio} y \texttt{AutenticacionServicio}. De este modo, los controladores se mantienen centrados en la comunicación HTTP, mientras que los servicios encapsulan las reglas de negocio de la aplicación.
+
+\subsubsection{Servicios}
+
+Los servicios son las clases que se encargan de la lógica de negocio. En ellas recaen los cálculos y procesos necesarios para lograr el correcto funcionamiento del simulador. Esta capa permite separar el tratamiento de las peticiones HTTP, realizado por los controladores, de la lógica propia de la máquina Enigma y de la gestión de la autenticación.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[width=14cm]{figuras/diagrama_clases_servicio.png}}
+	\caption{Diagrama de clases de los servicios de la aplicación}
+	\label{clases_servicio}
+\end{figure}
+
+Como fue mencionado anteriormente, los controladores se comunican con su respectivo servicio. De esta forma, el controlador de la máquina delega las operaciones en la clase \texttt{M3Servicio}, mientras que el controlador de autenticación utiliza \texttt{AutenticacionServicio}.
+
+La clase \texttt{M3Servicio} contiene las operaciones principales del simulador. Entre ellas se encuentran la creación y eliminación de máquinas, el cambio de reflector, la modificación de la configuración de los rotores y la gestión de las conexiones del espacio de cables. Asimismo, implementa los métodos de cifrado y descifrado de letras.
+
+Para procesar una letra, el servicio recupera la configuración almacenada de la máquina y construye una instancia del modelo \texttt{M3}. Antes de realizar la transformación, avanza la posición de los rotores de acuerdo con sus posiciones de cambio. Posteriormente, la letra atraviesa el espacio de conexiones, los rotores, el reflector y de nuevo los rotores y el espacio de conexiones. Durante este proceso se registra cada paso realizado para que la interfaz pueda mostrarlo al usuario. Finalmente, el estado actualizado de la máquina se vuelve a guardar en el repositorio.
+
+El servicio \texttt{AutenticacionServicio} se encarga de la generación y validación de tokens JWT. Genera un token de acceso con una duración limitada y un token de refresco con una duración mayor. Además, valida la firma y la fecha de caducidad de los tokens recibidos, recuperando el correo electrónico del usuario autenticado y, cuando está disponible, la dirección de su imagen de perfil. Esta lógica permite renovar el token de acceso sin necesidad de repetir el inicio de sesión con Google. 
+
+\subsubsection{DTO}
+
+Los objetos de transferencia de datos, conocidos como DTO por sus siglas en inglés, se utilizan para transportar información entre el cliente y el servidor. Su finalidad es definir qué datos recibe o devuelve cada endpoint, evitando que la interfaz tenga que trabajar directamente con las clases internas que implementan la lógica de la máquina Enigma.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=14cm]{figuras/diagrama_clases_dtoRepo.png}}
+	\caption{Diagrama de clases de los DTO y del repositorio}
+	\label{clases_dto}
+\end{figure}
+
+La clase principal es \texttt{M3DTO}, que representa la información necesaria para almacenar una configuración de máquina. Contiene su identificador, los tipos de los tres rotores, sus configuraciones iniciales, las posiciones actuales, las conexiones del espacio de cables y el reflector seleccionado. Aunque su nombre incluye el término DTO, esta clase también actúa como entidad de persistencia, ya que se encuentra anotada para que Spring Data JPA pueda almacenarla en la base de datos.
+
+El DTO \texttt{ConfigDTO} se emplea al actualizar la configuración de los rotores. Transporta una lista con los tipos de rotor elegidos, otra con sus configuraciones iniciales y una tercera con las posiciones actuales. Por otra parte, \texttt{CablesDTO} representa una conexión entre dos letras mediante los atributos \texttt{a} y \texttt{b}, y se utiliza tanto para crear como para eliminar conexiones.
+
+El DTO \texttt{CifrarDTO} se devuelve tras cifrar o descifrar una letra. Incluye la letra resultante, la configuración actualizada de la máquina y la lista de pasos seguidos durante el proceso. Gracias a esta respuesta, la interfaz puede actualizar simultáneamente las ruedas de los rotores, mostrar la letra obtenida y, si el usuario lo solicita, explicar el recorrido de la señal.
+
+Finalmente, \texttt{M3Repo} es el repositorio encargado de acceder a los datos persistidos. Extiende la interfaz \texttt{CrudRepository} de Spring Data JPA, que proporciona de forma automática las operaciones habituales de creación, consulta, actualización y eliminación de máquinas mediante su identificador.
+
+\subsubsection{Modelo}
+
+Las clases del modelo representan los elementos que componen una máquina Enigma y contienen la información necesaria para simular su comportamiento. Estas clases no se ocupan de recibir peticiones ni de almacenar directamente los datos, sino de representar la máquina mientras se realizan las operaciones de cifrado y descifrado.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=14cm]{figuras/diagrama_clases_modelo.png}}
+	\caption{Diagrama de clases del modelo de dominio}
+	\label{clases_modelo}
+\end{figure}
+
+La clase central del modelo es \texttt{M3}, que representa una máquina Enigma M3 completa. Esta clase contiene el identificador de la máquina, el alfabeto utilizado, una colección de tres rotores, un reflector y las conexiones establecidas entre letras. Las conexiones se gestionan mediante una estructura que permite conocer rápidamente si una letra está conectada a otra antes o después de atravesar los rotores.
+
+Cada objeto \texttt{Rotor} representa uno de los rotores de la máquina. Un rotor dispone de un tipo, un alfabeto interno de sustitución, una posición de cambio, una configuración inicial y una posición actual. La posición de cambio determina cuándo debe avanzar el rotor situado a su izquierda. El sistema permite seleccionar entre los cinco tipos de rotores disponibles para la Enigma M3.
+
+La clase \texttt{Reflector} representa el componente que devuelve la señal hacia los rotores después de que esta haya recorrido el camino de ida. En la aplicación existen dos configuraciones de reflector, correspondientes a los reflectores B y C. A diferencia de los rotores, el reflector no cambia de posición durante el cifrado.
+
+Por último, la clase \texttt{Cable} representa una pareja de letras conectadas en el espacio de conexiones. Esta clase se utiliza tanto dentro del modelo como en la persistencia de la configuración de la máquina. Cada conexión se registra en ambos sentidos, garantizando que, si una letra A está conectada con una letra B, la entrada B también se transforme en A.
+
+\subsubsection{Conjunto}
+
+La figura \ref{clases_completo} muestra el diagrama de clases completo del backend de la aplicación. Los diagramas anteriores se han presentado de forma progresiva para facilitar la comprensión de cada capa, mientras que en esta figura se reúnen todas las relaciones principales entre controladores, servicios, DTO, repositorios y clases del modelo.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=14cm]{figuras/diagrama_clases_v1.png}}
+	\caption{Diagrama de clases completo del backend de la aplicación}
+	\label{clases_completo}
+\end{figure}
+
+La arquitectura sigue una organización por capas. Los controladores reciben las solicitudes HTTP enviadas desde la interfaz web y delegan su tratamiento en los servicios. Los servicios contienen la lógica de negocio y utilizan el repositorio cuando necesitan consultar o modificar una máquina almacenada. El repositorio, a su vez, gestiona la persistencia de los objetos \texttt{M3DTO}.
+
+Para realizar el cifrado o descifrado, \texttt{M3Servicio} transforma temporalmente la información almacenada en un objeto del modelo \texttt{M3}. Esta máquina se compone de objetos \texttt{Rotor}, \texttt{Reflector} y \texttt{Cable}, que permiten representar el comportamiento de los componentes de la máquina real. Una vez procesada la letra, el estado actualizado se convierte de nuevo en un \texttt{M3DTO} y se guarda mediante \texttt{M3Repo}.
+
+Esta separación permite modificar cada capa con un impacto reducido sobre las demás. Por ejemplo, la interfaz puede cambiar sin alterar el algoritmo de cifrado, o el sistema de persistencia puede sustituirse sin necesidad de modificar los controladores ni las clases que representan los rotores y el reflector.
+
+\section {Diseño inicial de la interfaz}
+
+El proyecto consiste en el desarrollo de un código en Java y de una interfaz en React. Es momento de hablar, entonces, de cómo fue el proceso de la creación de la interfaz. Una vez rematado el código, el siguiente paso fue el de comenzar a diseñar el frontend. 
+
+Como nos cuenta la Interacción Persona-Ordenador, esto cuenta con una gran importancia, pues es el portal que une el código con el usuario. La IPO es la disciplina que estudia cómo las personas interactúan con los sistemas informáticos. Se centra en el diseño, la implementación y la evaluación de sistemas interactivos, con el fin de que sean seguros, útiles, efectivos, eficientes y usables. Hablaremos de estos términos con frecuencia, pues son los principales motivos de muchos aspectos de la interfaz.
+
+Los siguientes diseños fueron los prototipos de la página. El diseño final discierne un poco de los mismos y los cambios entre la versión comentada y la final se comentarán con detalle. 
+
+\subsection{Concepto}
+El orden de cada página es independiente a la misma, es decir, todas las páginas siguen el mismo: la paleta de colores, la forma de los botones, el header y el footer. Todo esto es similar entre las distintas páginas, de forma que se aprecie una unidad entre ellas. 
+En el header se incluyen los botones asociados al cambio de ventanas, el logo de la página y el botón de inicio de sesión
+
+La razón detrás de la paleta de colores guarda relación con el contenido de la página: es una vuelta atrás hasta el siglo XX. Con tonos grisáceos y amarillos que intentan recordar a las hojas de papel manchadas por el paso del tiempo.
+
+Los botones son reconocibles por su diseño. Todos están pensados de la misma forma: son del mismo color y tienen asociada una línea ocre, ya sea abajo para los botones de desplazamiento a lo largo de las páginas o al lado para los botones que realizan alguna acción en las mismas. 
+
+Todo esto aumenta de forma consistente la usabilidad de la página, pues causa un efecto directo en el mapa mental creado por el usuario, lo cual, al final del día, es lo principal en una página. El diseño de la misma puede ser considerado ideal por el creador, pero si los usuarios no lo consideran, no lo es.
+
+
+\subsection{Máquina Enigma}
+
+La figura \ref{pagina_principal} es la de la página principal, llamada Máquina Enigma: La página que contiene las conexiones al código que podemos asociar con el propio simulador de la máquina.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=14cm]
+		{figuras/pagina_principal.png}}
+	\caption{Máquina Enigma}
+	\label{pagina_principal}
+\end{figure}
+
+En esta, tenemos dos elementos que captan la atención: La propia máquina, pues tiene una textura distinta al resto de la página y la hoja que está debajo de la misma, que es de un color distinto y, de igual forma, contiene una textura no plana.  En la página real, comenzaría la visión desde arriba, por lo que la máquina sería el elemento más reconocible de la pantalla. El diseño de la misma está inspirado en una máquina Enigma M3 real, desde la composición hasta la textura provista. Yendo de arriba a abajo, tenemos los tres rotores, que, como su nombre indica, giran cada vez que se cifra una letra, el siguiente elemento sería la salida de la máquina. En una máquina Enigma real, la salida está formada por 26 leds, uno por cada letra del abecedario y se iluminará la letra final de la misma. En nuestro caso, para hacerlo más visual para el usuario, en este espacio aparece la letra escrita. El siguiente componente es el de la entrada: Este sería un teclado un poco distinto al usual que inicia la señal, al final, esta máquina se puede pensar como una máquina de escribir que escribe una letra distinta a la que uno pulsa. El último elemento visible es el del panel de conexiones. Uno puede conectar dos letras para que, cuando entre o salga una letra del sistema, estas se intercambien. Se puede encontrar más detalle sobre la máquina y su funcionamiento en el Capítulo 2: La máquina Enigma.
+
+La hoja situada debajo del simulador de la máquina representa una hoja de cifrado, donde, progresivamente, se escriben las letras antes del cifrado y después. Así, tenemos un historial de los distintos cifrados realizados mientras dure la sesión. Si tenemos iniciada la sesión en la página, podremos acceder a un historial que perdura aunque se cierre la página.
+
+En esta máquina uno puede cambiar los ajustes de la misma, se pueden cambiar tanto los rotores como el reflector como los cables comentados. El reflector es una pieza similar al rotor, pero que no gira, sino que su funcionamiento es el mismo, es completamente independiente a los pasos anteriores seguidos. Todos estos elementos son modificables tanto desde la interfaz como desde línea de comandos. 
+
+Con respecto al diseño final encontramos los siguientes cambios:
+\begin{itemize}
+	\item La hoja de cifrado se alejó de la máquina, de forma que ahora parecen dos elementos separados.
+	\item Se añadió un botón de limpieza del historial a la derecha del botón de Mostrar los pasos seguidos
+	\item Se añadió un botón a la misma altura que los que permiten la edición de rotores y reflector. Este permite cambiar entre las opciones de cifrado y descifrado de la máquina.
+\end{itemize}
+
+\subsection{¿Cómo funciona?}
+
+Una vez explicado el diseño de la página simulador que conecta con el backend, es el turno de las páginas educativas. La primera que vamos a ver es la primera creada, la que explica el funcionamiento de la máquina real: ¿Cómo funciona?, la pestaña que referencia la figura \ref{funcionamiento}
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=14cm]
+		{figuras/funcionamiento.png}}
+	\caption{¿Cómo funciona?}
+	\label{funcionamiento}
+\end{figure}
+
+Por un lado, de forma común al resto de pestañas, tenemos el header y el footer, que almacenan la información previamente comentada.
+
+Por otro, hablaremos de la información única que nos proporciona la pestaña. 
+
+La información está organizada en base a los componentes de la propia máquina, de forma que el usuario pueda encontrar la explicación que desee con mayor facilidad. Está desplegada sobre el diseño de hoja antigua ya usado para la hoja de decodificación de la página del simulador. Al tener la información organizada de esta forma, con la contraposición que causa la página con colores planos frente al diseño con textura de la hoja logra llamar la atención lo máximo posible del usuario, que es el objetivo. 
+
+Esta pagina tuvo cambios muy notorios en la disposición de la información:
+\begin{itemize}
+	\item La información, ahora, sale en notas pequeñas que el usuario de la pagina abre haciendo click sobre ellas. Como la información es de distinta longitud en los distintos apartados, de esta forma no se "molesta" al usuario con mucha información que pueda considerar innecesaria.
+	\item Se añadieron fotos relacionadas con el contenido.
+	\item La información acerca de nuestra propia página, vista al lado de la nota antigua, ahora no esta siempre disponible, sino que aparece cuando el ratón está encima de la imagen relacionada.
+\end{itemize}
+
+\subsection{Historia}
+
+La pestaña informativa \ref{historia} creada fue la de la historia alrededor de la máquina.
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=14cm]
+		{figuras/historia.png}}
+	\caption{Historia}
+	\label{historia}
+\end{figure}
+
+Desde su creación hasta la deducción de su funcionamiento por parte de los ingleses, todo queda presente en esta sección, organizada por secciones.
+La pestaña, para seguir con la línea ya presentada, contiene un header y un footer, donde se almacena la misma información ya vista. 
+La información contenida está estructurada de una manera simétrica, no para atraer la vista del usuario, sino para causar una sensación de confort, es por la misma razón que el texto está justificado. Hoy en día, la atención es un problema, lo que hace que siempre sea positivo tener herramientas contra esta falta de atención.
+
+Concretamente, los temas presentes son los siguientes:
+
+\subsubsection{El contexto de la máquina}
+En esta sección se habla de la creación de la máquina, así como del proceso del comienzo de uso de la máquina por parte de la Armada.
+
+\subsubsection{¿Qué es la máquina Enigma?}
+Primero se plantea la pregunta de qué es la máquina Enigma, pero, para responder a esta pregunta, hay que remontarse a hace muchos siglos atrás y, para quien no sepa de criptografía, se explica los orígenes de la misma, pasando por fórmulas criptográficas clásicas como la escítala o el cifrado César, hasta llegar al funcionamiento de la máquina, que mantiene un claro legado de estos.
+
+\subsubsection{Descifrado}
+Aquí se habla, de forma amplia, de cómo fue el proceso de descifrado de la máquina, pasando por Bletchley Park y comentando acerca de la película "Descifrando el Enigma", que cuenta esta misma historia de una forma cinemática, es importante no confundirla con un documental, pues muchas historias están exageradas o contadas de una forma distinta a lo sucedido en la realidad.
+
+\subsubsection{Línea del tiempo}
+Tenemos presente una línea temporal para clarificar al usuario cómo es el orden de los sucesos alrededor de la máquina.
+
+\subsubsection{Curiosidades}
+En esta sección de la página se comentan ciertas curiosidades de la máquina como que el uso de la misma no se encontraba únicamente en Alemania, sino que, por ejemplo, España la utilizaba, a pesar de no pertenecer a las Potencias del Eje durante la segunda guerra mundial.
+
+Los cambios con respecto a la versión base fueron los siguientes:
+
+\begin{itemize}
+	\item Creación de subapartados para cada sección
+	\item Añadidos efectos visuales como números o líneas separatorias entre capítulos 
+\end{itemize}
+
+
+\subsection{Libro de codificación}
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=14cm]
+		{figuras/libro.png}}
+	\caption{Libro de codificación}
+	\label{libro}
+\end{figure}
+
+La siguiente pestaña educativa es la del Libro de codificación, representada en la figura \ref{libro}. Esta sección nace con la intención de acercar al usuario a una parte fundamental del uso real de la Máquina Enigma: la configuración diaria de la máquina.
+
+A diferencia de la página anterior, donde la información se organiza por componentes físicos, en esta pestaña se presenta un documento similar a los libros de claves usados por los operadores. La idea principal es mostrar que el cifrado no dependía únicamente de la máquina, sino también de una configuración concreta para cada día. Sin conocer esa configuración, el mensaje cifrado resultaba prácticamente imposible de interpretar.
+
+En el centro de la página aparece una imagen representativa de un libro de codificación. Esta imagen se coloca como elemento principal porque es el punto alrededor del cual gira toda la sección. El usuario no solo lee una explicación teórica, sino que ve una representación visual del tipo de documento que se utilizaba para preparar la máquina antes de enviar o recibir mensajes.
+
+La información se divide en varios bloques grises con línea ocre, siguiendo la estética de los botones y de otros elementos interactivos de la aplicación. Estos bloques permiten explicar por separado las distintas columnas del libro de codificación:
+
+\begin{itemize}
+	\item El día, que indica qué fila del libro debe utilizarse.
+	\item La posición de los rotores, que define qué rotores se colocan en la máquina y en qué orden.
+	\item La configuración de los anillos, relacionada con el desplazamiento interno de cada rotor.
+	\item Las conexiones entre letras, equivalentes al panel de conexiones de la máquina.
+	\item Los grupos de identificación, usados para reconocer o clasificar mensajes.
+\end{itemize}
+
+Esta página también tuvo cambios con respecto a la idea inicial. En un primer momento, la sección estaba pensada como una explicación más simple, similar al resto de apartados informativos. Sin embargo, al introducir los retos, cobró más importancia que el libro tuviera una presencia propia y visual. Por ello, se añadió la imagen central y se reorganizó la explicación para que el usuario pudiera entender qué información debía consultar antes de intentar descifrar un mensaje.
+
+Además, esta pestaña sirve como puente entre la parte educativa y la parte práctica de la aplicación. El usuario aprende aquí que una máquina Enigma no se usa de forma aislada, sino que necesita unos ajustes previos. Estos ajustes serán precisamente los que se reutilicen después en la sección de retos, donde el usuario tendrá que interpretar mensajes cifrados a partir de la información proporcionada.
+
+\subsection{Retos}
+
+\begin{figure}[htbp]
+	\centerline{\includegraphicssafe[height=14cm]
+		{figuras/problemas.png}}
+	\caption{Retos}
+	\label{pruebas}
+\end{figure}
+
+La última pestaña de la aplicación es la de Retos, visible en la figura \ref{pruebas}. Esta sección tiene un objetivo distinto al de las anteriores: pasar de la lectura y la explicación a la participación directa del usuario.
+
+Hasta este punto, la aplicación explica qué es la Máquina Enigma, cómo funciona, cuál es su contexto histórico y cómo se utilizaban los libros de codificación. La página de retos busca reunir todo ese conocimiento en una actividad práctica. El usuario recibe varios mensajes cifrados y debe intentar descifrarlos utilizando el simulador de la máquina.
+
+El diseño mantiene la misma estética general de la aplicación: fondo oscuro, tipografía de máquina de escribir, bloques grises y líneas ocres. Esta decisión permite que la sección se diferencie por su funcionalidad, pero sin romper con la identidad visual del proyecto. Los mensajes aparecen en tarjetas independientes, de forma que cada reto pueda entenderse como una unidad propia.
+
+Cada tarjeta contiene un mensaje cifrado y un botón de pista. Esta pista no resuelve directamente el problema, pero ayuda al usuario si se queda bloqueado. La intención es que la sección no sea únicamente una prueba de acierto o error, sino una actividad guiada. El usuario puede avanzar por sí mismo, pero tiene una ayuda disponible si la necesita.
+
+La sección está pensada para funcionar junto con el libro de codificación y el simulador. El flujo esperado sería el siguiente:
+
+\begin{itemize}
+	\item El usuario consulta el reto y observa el mensaje cifrado.
+	\item Si lo necesita, puede mostrar una pista asociada a ese mensaje concreto.
+	\item Después, puede acudir al libro de codificación para obtener la configuración necesaria.
+	\item Finalmente, introduce los ajustes en la máquina y prueba a descifrar el mensaje.
+\end{itemize}
+
+Con esta página se busca cerrar el recorrido educativo de la aplicación. Primero se enseña la máquina, después se explica su funcionamiento y su historia, luego se introduce el libro de claves y, finalmente, se propone al usuario usar todo lo aprendido.
+
+En cuanto a los cambios de diseño, esta sección también evolucionó durante el desarrollo. La primera idea era mostrar los retos como simples textos, pero esto hacía que la página se sintiera demasiado estática. Por ello, se optó por organizar los mensajes en tarjetas separadas, añadir botones de pista y mantener una distribución más visual. De esta forma, la página se acerca más a una pequeña actividad interactiva que a un apartado puramente informativo.
