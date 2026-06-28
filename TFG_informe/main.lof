@@ -3,23 +3,26 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de casos de uso del simulador}}{23}{}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de casos de uso de la autenticación}}{24}{}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagrama de casos de uso del contenido educativo y los retos}}{25}{}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagrama de casos de uso de las opciones de accesibilidad}}{26}{}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Diagrama de clases de los controladores}}{27}{}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Diagrama de clases de los servicios de la aplicación}}{28}{}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Diagrama de clases de los DTO y del repositorio}}{30}{}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagrama de clases del modelo de dominio}}{32}{}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Diagrama de clases completo del backend de la aplicación}}{33}{}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Máquina Enigma}}{35}{}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces ¿Cómo funciona?}}{37}{}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Historia}}{39}{}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Libro de codificación}}{41}{}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Retos}}{43}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Conjunto de test superado}}{48}{}%
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Teclado de la máquina Enigma}}{43}{figure.Alph1.1}%
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Diagrama entidad-relación acerca del contenido de la base de datos}}{45}{figure.Alph1.2}%
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Diagrama de casos de uso del simulador}}{46}{figure.Alph1.3}%
+\contentsline {figure}{\numberline {A.4}{\ignorespaces Diagrama de casos de uso de la autenticación}}{46}{figure.Alph1.4}%
+\contentsline {figure}{\numberline {A.5}{\ignorespaces Diagrama de casos de uso del contenido educativo y los retos}}{47}{figure.Alph1.5}%
+\contentsline {figure}{\numberline {A.6}{\ignorespaces Diagrama de casos de uso de las opciones de accesibilidad}}{47}{figure.Alph1.6}%
+\contentsline {figure}{\numberline {A.7}{\ignorespaces Diagrama de clases de los controladores}}{48}{figure.Alph1.7}%
+\contentsline {figure}{\numberline {A.8}{\ignorespaces Diagrama de clases de los servicios de la aplicación}}{49}{figure.Alph1.8}%
+\contentsline {figure}{\numberline {A.9}{\ignorespaces Diagrama de clases de los DTO y del repositorio}}{50}{figure.Alph1.9}%
+\contentsline {figure}{\numberline {A.10}{\ignorespaces Diagrama de clases del modelo de dominio}}{51}{figure.Alph1.10}%
+\contentsline {figure}{\numberline {A.11}{\ignorespaces Diagrama de clases completo del backend de la aplicación}}{52}{figure.Alph1.11}%
+\contentsline {figure}{\numberline {A.12}{\ignorespaces Máquina Enigma}}{53}{figure.Alph1.12}%
+\contentsline {figure}{\numberline {A.13}{\ignorespaces ¿Cómo funciona?}}{54}{figure.Alph1.13}%
+\contentsline {figure}{\numberline {A.14}{\ignorespaces Historia}}{55}{figure.Alph1.14}%
+\contentsline {figure}{\numberline {A.15}{\ignorespaces Libro de codificación}}{56}{figure.Alph1.15}%
+\contentsline {figure}{\numberline {A.16}{\ignorespaces Retos}}{57}{figure.Alph1.16}%
+\contentsline {figure}{\numberline {A.17}{\ignorespaces Conjunto de test superado}}{57}{figure.Alph1.17}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

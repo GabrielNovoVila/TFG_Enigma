@@ -1,0 +1,118 @@
+\chapter{Pruebas}
+\label{cap:pruebas}
+
+Con el objetivo de comprobar el correcto funcionamiento del backend, se ha definido y ejecutado una batería de pruebas automatizadas sobre los endpoints REST, el servicio de cifrado y el mecanismo de autenticación.
+
+Las pruebas se han desarrollado con JUnit 5, Spring Boot Test y MockMvc. Las pruebas de controladores utilizan servicios simulados, lo que permite verificar que cada endpoint recibe las peticiones correctamente, delega la operación en el servicio correspondiente y devuelve el código HTTP y el cuerpo de respuesta esperados. Por otra parte, la prueba de servicio ejecuta la lógica real de cifrado para comprobar un caso relevante del algoritmo.
+
+\section{Plan de pruebas}
+
+El plan de pruebas se ha dividido según la parte del sistema que se desea comprobar: los endpoints de la máquina Enigma, el endpoint de renovación de sesión y la lógica interna del cifrado.
+
+\subsection{Endpoints de la máquina Enigma}
+
+Véase la tabla \ref{tabla_pruebas_m3}
+
+\begin{table}[htbp]
+	\centering
+	\footnotesize
+	\begin{tabular}{|p{4cm}|p{5cm}|p{3cm}|}
+		\hline
+		\textbf{Endpoint} & \textbf{Caso de prueba} & \textbf{Resultado esperado} \\
+		\hline
+		\texttt{POST /m3} & Crear una máquina nueva & Código 201 y configuración inicial de la máquina \\
+		\hline
+		\texttt{PATCH /m3/\{id\}} & Cambiar el reflector de una máquina existente o inexistente & Código 200 o 404, respectivamente \\
+		\hline
+		\texttt{DELETE /m3/\{id\}} & Eliminar una máquina existente o inexistente & Código 204 o 404, respectivamente \\
+		\hline
+		\texttt{PUT /m3/\{id\}} & Modificar rotores, configuraciones iniciales y posiciones actuales & Código 200 y configuración actualizada \\
+		\hline
+		\texttt{PUT /m3/\{id\}} & Modificar una máquina inexistente & Código 404 \\
+		\hline
+		\texttt{POST /m3/\{id\}/cifrar} & Cifrar una letra en una máquina existente o inexistente & Código 200 con letra, pasos y máquina; o 404 \\
+		\hline
+		\texttt{POST /m3/\{id\}/descifrar} & Descifrar una letra en una máquina existente o inexistente & Código 200 con letra, pasos y máquina; o 404 \\
+		\hline
+		\texttt{POST /m3/\{id\}/cables} & Crear una conexión en una máquina existente o inexistente & Código 200 o 404, respectivamente \\
+		\hline
+		\texttt{DELETE /m3/\{id\}/cables} & Eliminar una conexión en una máquina existente o inexistente & Código 200 o 404, respectivamente \\
+		\hline
+		\texttt{GET /m3/} & Consultar datos sin sesión OAuth activa & Código 200 y lista vacía \\
+		\hline
+	\end{tabular}
+	\caption{Plan de pruebas de los endpoints de la máquina Enigma}
+	\label{tabla_pruebas_m3}
+\end{table}
+
+\subsection{Autenticación y lógica de negocio}
+
+Véase la tabla \ref{tabla_pruebas_autenticacion}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{5cm}|p{3cm}|}
+		\hline
+		\textbf{Elemento} & \textbf{Caso de prueba} & \textbf{Resultado esperado} \\
+		\hline
+		\texttt{POST /auth/refresh} & Token de refresco válido & Código 200 y nuevo token de acceso \\
+		\hline
+		\texttt{POST /auth/refresh} & Token ausente, vacío, inválido o caducado & Código 401 \\
+		\hline
+		\texttt{M3Servicio.cifrar} & Configuración de anillos que provoca offsets negativos & La operación devuelve una letra sin lanzar excepciones \\
+		\hline
+	\end{tabular}
+	\caption{Plan de pruebas de autenticación y lógica de cifrado}
+	\label{tabla_pruebas_autenticacion}
+\end{table}
+
+\section{Ejecución de las pruebas}
+
+La batería de pruebas se ejecutó mediante Gradle con el siguiente comando:
+
+\begin{verbatim}
+	.\gradlew.bat test
+\end{verbatim}
+
+Las pruebas automatizadas se encuentran distribuidas en las siguientes clases:
+
+\begin{itemize}
+	\item \texttt{M3ControllerEndpointTests}, con 17 pruebas sobre los endpoints del simulador.
+	\item \texttt{AutenticacionControladorEndpointTests}, con 4 pruebas sobre la renovación de sesión.
+	\item \texttt{M3ServicioTests}, con 1 prueba de la lógica de cifrado.
+	\item \texttt{EnigmaApplicationTests}, con 1 prueba de carga del contexto de Spring.
+\end{itemize}
+
+Durante la primera ejecución se detectó que las pruebas del controlador de la máquina no podían iniciar el contexto de Spring, debido a que el filtro JWT necesitaba una instancia de \texttt{AutenticacionServicio}. Para resolverlo, se añadió un doble de prueba de dicho servicio en la clase \texttt{M3ControllerEndpointTests}.
+
+Posteriormente, las pruebas detectaron que el endpoint \texttt{GET /m3/} podía fallar cuando no existía una sesión OAuth activa. El endpoint recibía directamente un objeto \texttt{OAuth2User}, que Spring no podía crear en ausencia de autenticación. Se modificó el controlador para recibir la autenticación de forma segura y devolver una lista vacía cuando el usuario no se ha autenticado mediante OAuth.
+
+\section{Resultados obtenidos}
+
+Tras aplicar las correcciones descritas, la ejecución final obtuvo los siguientes resultados:
+
+\begin{table}[htbp]
+	\centering
+	\hspace*{-2cm}
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{Clase de prueba} & \textbf{Pruebas ejecutadas} & \textbf{Pruebas superadas} \\
+		\hline
+		\texttt{M3ControllerEndpointTests} & 17 & 17 \\
+		\hline
+		\texttt{AutenticacionControladorEndpointTests} & 4 & 4 \\
+		\hline
+		\texttt{M3ServicioTests} & 1 & 1 \\
+		\hline
+		\texttt{EnigmaApplicationTests} & 1 & 1 \\
+		\hline
+		\textbf{Total} & \textbf{23} & \textbf{23} \\
+		\hline
+	\end{tabular}
+	\caption{Resultados de la ejecución de pruebas automatizadas}
+	\label{tabla_resultados_pruebas}
+\end{table}
+
+Por tanto, el 100\% de las pruebas automatizadas definidas se ejecutaron correctamente, sin fallos ni pruebas omitidas. El informe detallado de Gradle queda disponible en la ruta \texttt{build/reports/tests/test/index.html} y corresponde a la figura \ref{test_superado}
+
+La captura correspondiente puede consultarse en la figura \ref{test_superado} del apéndice \ref{apendice_figuras}.

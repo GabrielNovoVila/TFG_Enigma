@@ -1,3 +1,153 @@
-\chapter{Manuais de usuario}
+\chapter{Manual técnico}
+\label{apendice_manual_tecnico}
 
-Incluirán toda a información precisa para aquelas persoas que utilicen o Sistema: instalación, utilización, configuración, mensaxes de erro, etc. A documentación do usuario debe ser autocontida, é dicir, para o seu entendemento o usuario final non debe precisar da lectura doutro manual técnico.
+Este apéndice recoge los pasos necesarios para instalar, configurar y ejecutar la aplicación en un entorno local. El proyecto está dividido en dos partes: el backend, desarrollado con Spring Boot, y el frontend, desarrollado con React. Ambas partes deben estar en ejecución para que el simulador funcione por completo.
+
+\section{Repositorio}
+
+El código fuente del proyecto se encuentra disponible en GitHub:
+
+\begin{lstlisting}
+https://github.com/GabrielNovoVila/TFG_Enigma
+\end{lstlisting}
+
+Para obtener una copia local del proyecto puede descargarse desde la página del repositorio o clonarse mediante Git:
+
+\begin{lstlisting}
+git clone https://github.com/GabrielNovoVila/TFG_Enigma.git
+\end{lstlisting}
+
+\section{Estructura del proyecto}
+
+La carpeta principal del proyecto contiene los siguientes elementos relevantes:
+
+\begin{itemize}
+	\item \texttt{TFG\_Enigma}: proyecto backend desarrollado en Java con Spring Boot.
+	\item \texttt{tfg\_enigma\_cliente}: proyecto frontend desarrollado con React.
+	\item \texttt{TFG\_informe}: memoria del Trabajo de Fin de Grado.
+\end{itemize}
+
+El backend expone la API REST utilizada por el simulador y se ejecuta, por defecto, en el puerto \texttt{8082}. El frontend muestra la interfaz al usuario y se ejecuta, por defecto, en el puerto \texttt{3000}.
+
+\section{Requisitos previos}
+
+Para ejecutar el proyecto desde terminal es necesario disponer de:
+
+\begin{itemize}
+	\item Java 21 o superior.
+	\item Node.js y npm.
+	\item Conexión a Internet durante la primera instalación de dependencias.
+	\item Un navegador web moderno.
+\end{itemize}
+
+No es necesario instalar Gradle manualmente, ya que el backend incluye el wrapper de Gradle mediante los archivos \texttt{gradlew} y \texttt{gradlew.bat}.
+
+\section{Ejecución del backend desde terminal}
+
+El primer paso es abrir una terminal en la carpeta principal del proyecto y entrar en la carpeta del backend:
+
+\begin{lstlisting}
+cd TFG_Enigma
+\end{lstlisting}
+
+En Windows, el backend se ejecuta con:
+
+\begin{lstlisting}
+.\gradlew.bat bootRun
+\end{lstlisting}
+
+En Linux o macOS, el comando equivalente es:
+
+\begin{lstlisting}
+./gradlew bootRun
+\end{lstlisting}
+
+Si todo funciona correctamente, la API quedará disponible en:
+
+\begin{lstlisting}
+http://localhost:8082
+\end{lstlisting}
+
+La base de datos utilizada es H2 en memoria. Esto significa que no es necesario instalar un gestor de base de datos externo para ejecutar el proyecto, pero también implica que las máquinas creadas desaparecen al detener el servidor.
+
+\section{Ejecución del frontend desde terminal}
+
+En una segunda terminal, desde la carpeta principal del proyecto, debe accederse a la carpeta del cliente:
+
+\begin{lstlisting}
+cd tfg_enigma_cliente
+\end{lstlisting}
+
+La primera vez que se ejecuta el proyecto es necesario instalar las dependencias:
+
+\begin{lstlisting}
+npm install
+\end{lstlisting}
+
+Una vez instaladas, la aplicación React se inicia con:
+
+\begin{lstlisting}
+npm start
+\end{lstlisting}
+
+El navegador abrirá la aplicación en:
+
+\begin{lstlisting}
+http://localhost:3000
+\end{lstlisting}
+
+El frontend está preparado para comunicarse con el backend en \texttt{http://localhost:8082} cuando se ejecuta en local. Si se desea utilizar otra dirección, puede indicarse mediante la variable de entorno \texttt{REACT\_APP\_API\_URL}.
+
+\section{Ejecución de pruebas}
+
+Las pruebas automatizadas del backend se ejecutan desde la carpeta \texttt{TFG\_Enigma}. En Windows:
+
+\begin{lstlisting}
+.\gradlew.bat test
+\end{lstlisting}
+
+En Linux o macOS:
+
+\begin{lstlisting}
+./gradlew test
+\end{lstlisting}
+
+Al finalizar, Gradle genera un informe HTML en:
+
+\begin{lstlisting}
+build/reports/tests/test/index.html
+\end{lstlisting}
+
+Este informe permite consultar qué pruebas se ejecutaron y si alguna de ellas falló.
+
+\section{Ejecución desde IntelliJ IDEA}
+
+Aunque la terminal es la forma más directa y reproducible de ejecutar el proyecto, también puede utilizarse un IDE como IntelliJ IDEA.
+
+Para el backend, se debe abrir la carpeta \texttt{TFG\_Enigma} como proyecto Gradle. IntelliJ detectará la configuración y permitirá ejecutar la clase principal de Spring Boot o la tarea \texttt{bootRun}. Para las pruebas, puede ejecutarse la tarea \texttt{test} desde el panel de Gradle.
+
+Para el frontend, puede abrirse la carpeta \texttt{tfg\_enigma\_cliente} y utilizar la terminal integrada del IDE para ejecutar \texttt{npm install} y \texttt{npm start}. El resultado será el mismo que ejecutándolo desde una terminal externa.
+
+\section{Autenticación con Google}
+
+La aplicación incluye inicio de sesión con Google mediante OAuth 2.0. Para que esta funcionalidad opere correctamente en una instalación propia, la aplicación debe estar configurada en Google Cloud Console con la URL de redirección correspondiente:
+
+\begin{lstlisting}
+http://localhost:8082/login/oauth2/code/google
+\end{lstlisting}
+
+Si se ejecuta la aplicación desde otro dominio, puerto o dirección pública, esa URL también debe añadirse a la configuración de Google. En dispositivos móviles conectados por red local puede haber restricciones si se intenta iniciar sesión contra una IP privada; para ese caso sería recomendable desplegar la aplicación o utilizar una URL pública temporal.
+
+\section{Orden recomendado de arranque}
+
+El orden recomendado para iniciar la aplicación es el siguiente:
+
+\begin{enumerate}
+	\item Ejecutar el backend desde la carpeta \texttt{TFG\_Enigma}.
+	\item Comprobar que queda disponible en el puerto \texttt{8082}.
+	\item Ejecutar el frontend desde la carpeta \texttt{tfg\_enigma\_cliente}.
+	\item Abrir \texttt{http://localhost:3000} en el navegador.
+	\item Crear o utilizar la máquina Enigma desde la interfaz.
+\end{enumerate}
+
+Si el frontend se abre pero el simulador no responde, lo primero que debe comprobarse es que el backend siga en ejecución.

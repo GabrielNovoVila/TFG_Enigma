@@ -1,0 +1,144 @@
+\chapter{Manual de usuario}
+\label{apendice_manual_usuario}
+
+Este apéndice describe el uso de la aplicación desde el punto de vista del usuario final. La aplicación está organizada en varias páginas conectadas entre sí mediante el menú superior. Todas comparten la misma estructura general: una cabecera con navegación, el logo del proyecto, la zona de sesión de usuario y el botón de accesibilidad.
+
+\section{Navegación general}
+
+El usuario puede desplazarse por la aplicación mediante los botones de la cabecera:
+
+\begin{itemize}
+	\item \textbf{Máquina Enigma}: página principal y simulador interactivo.
+	\item \textbf{¿Cómo funciona?}: explicación visual de los componentes de la máquina.
+	\item \textbf{Historia}: contexto histórico, explicación de la máquina, descifrado, línea temporal y curiosidades.
+	\item \textbf{Libro de codificación}: explicación de los ajustes diarios usados para configurar la máquina.
+	\item \textbf{Retos}: mensajes cifrados que el usuario puede intentar resolver.
+\end{itemize}
+
+Estas páginas no son independientes entre sí, sino que forman un recorrido. Primero se presenta el simulador, después se explica su funcionamiento, se contextualiza históricamente, se introduce el libro de codificación y finalmente se plantean retos para aplicar lo aprendido.
+
+\section{Inicio de sesión}
+
+La aplicación puede utilizarse sin iniciar sesión, en modo invitado. En este modo el usuario puede navegar por todas las páginas educativas, usar el simulador, configurar la máquina, cifrar y descifrar letras y probar los retos.
+
+Además, la aplicación permite iniciar sesión con una cuenta de Google desde el botón situado en la parte superior derecha. Al hacerlo, la interfaz muestra el correo de la cuenta y la imagen de perfil asociada. Esta opción ofrece una experiencia más completa, ya que permite vincular cierta información al usuario autenticado.
+
+La principal ventaja del inicio de sesión es el historial persistente asociado a la cuenta en el navegador actual. De esta forma, el usuario puede consultar cifrados y descifrados realizados anteriormente aunque cierre sesión y vuelva a iniciar sesión con la misma cuenta desde el mismo dispositivo. También permite diferenciar el historial de distintas cuentas, evitando mezclar la actividad de varios usuarios.
+
+\section{Página Máquina Enigma}
+
+La página principal permite utilizar el simulador de la Máquina Enigma M3. En ella el usuario puede introducir letras mediante el teclado de la máquina y observar la salida generada.
+
+En la parte superior de la máquina se encuentran los rotores y sus posiciones actuales. Cada vez que se cifra o descifra una letra, la posición de los rotores cambia, simulando el avance de la máquina real.
+
+El usuario puede utilizar los siguientes controles:
+
+\begin{itemize}
+	\item \textbf{Modo}: permite alternar entre cifrar y descifrar.
+	\item \textbf{Rotores}: permite modificar los rotores, sus ajustes y sus posiciones actuales.
+	\item \textbf{Reflector}: permite alternar entre los reflectores disponibles.
+	\item \textbf{Teclado}: permite introducir letras en la máquina.
+	\item \textbf{Panel de conexiones}: permite unir pares de letras para alterar la entrada y salida de la señal.
+	\item \textbf{Mostrar pasos}: muestra el recorrido seguido por la letra durante el cifrado o descifrado.
+	\item \textbf{Limpiar}: borra el contenido escrito en la hoja de salida.
+\end{itemize}
+
+La hoja situada bajo la máquina muestra el mensaje introducido y su resultado. Esta disposición permite ver de forma continua cómo se transforma el texto durante la sesión.
+
+\section{Configuración de rotores}
+
+Al pulsar el botón \textbf{Rotores}, se abre la tabla de configuración. Cada columna corresponde a uno de los tres rotores de la máquina.
+
+En cada rotor se puede modificar:
+
+\begin{itemize}
+	\item El tipo de rotor.
+	\item La posición inicial del anillo.
+	\item La posición actual del rotor.
+\end{itemize}
+
+La posición actual es la que cambia automáticamente al cifrar o descifrar letras, pero también puede modificarse manualmente desde esta tabla.
+
+\section{Panel de conexiones}
+
+El panel de conexiones permite unir dos letras. Cuando dos letras están conectadas, se intercambian antes y después de atravesar los rotores.
+
+Para crear una conexión, el usuario selecciona dos letras. Para eliminarla, puede usar la misma zona de configuración del panel. En el modo para daltónicos, las conexiones se acompañan de identificadores mediante números romanos, de forma que no sea necesario distinguirlas únicamente por color.
+
+\section{Historial y sesión}
+
+El usuario puede iniciar sesión mediante Google. Al hacerlo, la aplicación muestra la cuenta activa y permite acceder a opciones asociadas a la sesión.
+
+El historial permite consultar cifrados y descifrados realizados durante el uso de la aplicación. Si el usuario ha iniciado sesión, el historial se asocia a su cuenta en el navegador actual, permitiendo recuperarlo aunque cierre sesión y vuelva a entrar con la misma cuenta desde el mismo dispositivo. Si se utiliza la aplicación sin iniciar sesión, el usuario puede seguir usando el simulador, pero no dispone de esa separación del historial por cuenta.
+
+Desde el menú de cuenta también puede cerrarse la sesión. Al hacerlo, el usuario vuelve al modo invitado.
+
+\section{Página ¿Cómo funciona?}
+
+Esta página explica los componentes de la Máquina Enigma. La información está dividida por secciones: teclado, espacio de conexiones, rotores, reflector, salida y flujo completo.
+
+Cada apartado se presenta mediante una nota que puede abrirse para leer la explicación completa. Junto a estas notas aparecen imágenes representativas. Al pasar el ratón sobre algunas imágenes, se muestra información adicional sobre cómo se representa ese componente dentro de la aplicación.
+
+Los botones de desplazamiento permiten saltar directamente a cada sección. Al llegar al destino, la página resalta visualmente el apartado para que el usuario identifique dónde se encuentra.
+
+\section{Página Historia}
+
+La página de historia ofrece una explicación más contextual. Está organizada en varias secciones:
+
+\begin{itemize}
+	\item Contexto histórico.
+	\item Qué es la Máquina Enigma.
+	\item Descifrado.
+	\item Línea temporal.
+	\item Curiosidades.
+\end{itemize}
+
+Esta página está pensada para complementar el simulador. No es necesario leerla para usar la máquina, pero ayuda a entender por qué la Enigma fue importante y qué papel tuvo durante la Segunda Guerra Mundial.
+
+\section{Página Libro de codificación}
+
+El libro de codificación explica cómo se configuraba la máquina en un día concreto. En esta sección se presentan los campos habituales de este tipo de documento, como los rotores, la configuración de los anillos, las conexiones y los grupos de identificación.
+
+Esta página sirve de puente entre la explicación teórica y los retos. El usuario puede consultar el libro para entender qué ajustes debe trasladar después al simulador.
+
+\section{Página Retos}
+
+La página de retos contiene mensajes cifrados que el usuario debe intentar resolver. Cada reto se muestra como una tarjeta independiente.
+
+El funcionamiento recomendado es:
+
+\begin{enumerate}
+	\item Leer el mensaje cifrado del reto.
+	\item Consultar la pista si se necesita ayuda.
+	\item Acudir al libro de codificación para obtener los ajustes necesarios.
+	\item Configurar la máquina en la página principal.
+	\item Probar el descifrado del mensaje.
+\end{enumerate}
+
+De esta forma, los retos conectan la página de libro de codificación con el simulador principal.
+
+\section{Opciones de accesibilidad}
+
+El botón de accesibilidad se encuentra en la zona superior derecha de la interfaz. Desde este menú el usuario puede:
+
+\begin{itemize}
+	\item Activar o desactivar el modo claro.
+	\item Activar o desactivar el modo para daltónicos.
+	\item Aumentar o reducir el tamaño de la letra.
+\end{itemize}
+
+Estas opciones permiten adaptar la interfaz a distintas necesidades visuales. Las preferencias se guardan en el navegador para conservarse en futuras visitas desde el mismo dispositivo.
+
+\section{Flujo de uso recomendado}
+
+Un recorrido completo por la aplicación podría ser el siguiente:
+
+\begin{enumerate}
+	\item Entrar en la página \textbf{Máquina Enigma} y probar el cifrado de algunas letras.
+	\item Consultar \textbf{¿Cómo funciona?} para entender el papel de cada componente.
+	\item Leer la página \textbf{Historia} para conocer el contexto de la máquina.
+	\item Revisar el \textbf{Libro de codificación} para aprender cómo se establecen los ajustes.
+	\item Acceder a \textbf{Retos} e intentar resolver los mensajes usando el simulador.
+\end{enumerate}
+
+La aplicación permite, por tanto, un uso libre e inmediato del simulador, pero también ofrece un recorrido guiado para aprender progresivamente cómo se utilizaba una Máquina Enigma.

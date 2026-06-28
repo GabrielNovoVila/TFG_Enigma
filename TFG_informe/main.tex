@@ -24,7 +24,7 @@
 \usepackage{latexsym}
 \usepackage{a4}
 \usepackage{listings}
-% \usepackage{hyperref} % menús no pdf pero non leva ben co package galician
+\usepackage[hidelinks]{hyperref}
 
 \newcommand{\includegraphicssafe}[2][]{%
 	\IfFileExists{#2}{%
@@ -40,8 +40,6 @@
 
 \begin{document}
 \include{capitulos/titulo}
-\cleardoublepage
-\include{capitulos/certificacion} % paxina de certificación (optativa)
 \cleardoublepage
 \include{capitulos/agradecementos} % paxina de agradecementos (optativa) 
 \cleardoublepage
@@ -62,14 +60,11 @@
 \cleardoublepage
 \include{capitulos/maquinaEnigma}
 \cleardoublepage
-\include{capitulos/cap2}
+\include{capitulos/requisitos}
 \cleardoublepage
-\include{capitulos/cap3}
+\include{capitulos/diseno}
 \cleardoublepage
-\include{capitulos/cap4}
-%
-% Engadir os capitulos que fagan falta
-%
+\include{capitulos/pruebas}
 \cleardoublepage
 \include{capitulos/conclusions}
 
@@ -79,6 +74,8 @@
 \include{capitulos/apendicea}
 \cleardoublepage
 \include{capitulos/apendiceb}
+\cleardoublepage
+\include{capitulos/apendicec}
 \cleardoublepage
 \include{capitulos/licenza}
 \cleardoublepage

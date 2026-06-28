@@ -1,4 +1,5 @@
 \chapter {La máquina Enigma}
+\label{cap:maquina_enigma}
 
 La máquina Enigma es uno de los dispositivos criptográficos más conocidos de la historia y constituye un símbolo de la importancia que la criptografía tuvo durante la primera mitad del siglo XX. Su utilización por parte de Alemania durante la Segunda Guerra Mundial y el posterior esfuerzo realizado para descifrar sus mensajes la han convertido en una pieza clave tanto en la historia de la tecnología como en la de los conflictos bélicos.
 
@@ -37,7 +38,7 @@ Ahora que hablamos de distintas formas de cifrado, podemos pasar a entender mejo
 
 En el cifrado César, se formaba un nuevo abecedario. Podemos pensarlo como que se hacía una asociación 1 a 1 con las letras de ambos. Así, teníamos ABCDEF... y DEFGHI... Donde la primera letra del primer abecedario se sustituía con la primera del segundo, la segunda letra con la segunda y así hasta terminar el abecedario. Esta es la base de la máquina Enigma.
 
-Una vez entendido lo anterior, podemos pasar a responder la pregunta "¿Qué es la máquina Enigma?". La máquina Enigma es una máquina de cifrado por rotores. Un rotor es, en resumidas cuentas, una pieza que rota. Se explicó el funcionamiento de esta pieza en la sección "¿Cómo funciona?". Lo importante ahora es entender que cada rotor tiene un abecedario nuevo, como si tuviéramos un pequeño cifrado César metido en cada pieza. Este abecedario no sigue un patrón como los anteriores, no son 3 posiciones a la derecha, sino que es una selección sin patrón del orden de las letras. De igual forma, se hace una asociación 1 a 1 para las letras.
+Una vez entendido lo anterior, podemos pasar a responder la pregunta "¿Qué es la máquina Enigma?". La máquina Enigma es una máquina de cifrado por rotores. Un rotor es, en resumidas cuentas, una pieza que rota. Se explicará el funcionamiento de esta pieza en la sección "Funcionamiento". Lo importante ahora es entender que cada rotor tiene un abecedario nuevo, como si tuviéramos un pequeño cifrado César metido en cada pieza. Este abecedario no sigue un patrón como los anteriores, no son 3 posiciones a la derecha, sino que es una selección sin patrón del orden de las letras. De igual forma, se hace una asociación 1 a 1 para las letras.
 
 Hablar de la "máquina Enigma" como entidad universal es un error de concepto. Hay múltiples versiones de la misma, por ende, hay múltiples máquinas Enigma. El simulador montado en esta página es la versión M3, que es la primera versión modificada por la armada. Esta, como nuevas adiciones, incluía los tipos IV y V de rotores y los tipos B y C del reflector
 
@@ -101,7 +102,7 @@ La cualidad que no comparte con el rotor,
 además de que es un elemento fijo que no tiene posiciones,
 es que las letras están “unidas”. En el ejemplo anterior, si llega una A,
 devuelve una P. Si llegara una P, este devolvería una A.
-Esto no tien por qué pasar en un rotor, pero es una cualidad necesaria en el reflector.
+Esto no tiene por qué pasar en un rotor, pero es una cualidad necesaria en el reflector.
 
 \subsubsection {Teclado}
 
@@ -113,6 +114,7 @@ El teclado de la Máquina Enigma está basado en un QWERTZ. Para quien no esté 
 
 Se mencionó que está “basado” en un QWERTZ y no que “sea” un QWERTZ por las ligeras diferencias que este presenta. Tiene una distribución muy curiosa de las teclas. Al no haber símbolos ni números, quedarían huecos, por lo que era necesaria una distribución algo distinta a la par que cómoda y usual para los usuarios.
 
+La imagen correspondiente a este componente puede consultarse en la figura \ref{teclado_enigma} del apéndice \ref{apendice_figuras}.
 
 Desde este componente se decide qué letra va a ser la cifrada, es el comienzo de la señal que se enviará a través de los rotores, el reflector y el espacio de conexiones.
 
@@ -140,16 +142,16 @@ Como el recorrido es reversible cuando la configuración coincide, la salida cif
 
 \section {Contexto histórico}
 
-La Máquina Enigma fue la máquina utilizada por las Potencias del Eje en la Segunda Guerra Mundial para cifrar sus comunicaciones de una manera segura. Para entender la Máquina Enigma y sus orígenes tenemos que remontarnos al comienzo del siglo XX, antes de que el partido nazi alcanzara el poder.
+La Máquina Enigma fue la máquina utilizada en la Segunda Guerra Mundial, principalmente, por Alemania, aunque también era utilizada por Italia y, como curiosidad, por España. Aunque este último no participara en la guerra, le compró varias a Alemania para utilizarla en la guerra civil española. Era usada para cifrar sus comunicaciones de una manera segura. Para entender la Máquina Enigma y sus orígenes tenemos que remontarnos al comienzo del siglo XX, antes de que el partido nazi alcanzara el poder.
 
 
-Arthur Scherbius, nacido en 1878 en Fráncfort del Meno y graduado en ingeniería eléctrica tanto en la Universidad Técnica de Munich como en la Universidad de Hannover, decide fundar una empresa bajo el nombre de Scherbius \& Ritter. De esta forma, hizo múltiples inventos, entre los que estaba cierta máquina basada en ruedas cableadas giratorias, hoy día conocida como máquina de rotores. Los modelos creados se apodaban con letras. El primero fue el modelo A, el segundo el B y el tercero y último que creó, el modelo C. La máquina Enigma utilizada durante la guerra era del tamaño de una máquina de escribir y, de hecho, se parecía mucho en cuestiones como el teclado o la forma general de la máquina. Estos primeros modelos se asemejaban más a una máquina registradora.
+Arthur Scherbius, nacido en 1878 en Fráncfort del Meno y graduado en ingeniería eléctrica tanto en la Universidad Técnica de Munich como en la Universidad de Hannover, decide fundar una empresa bajo el nombre de Scherbius \& Ritter. De esta forma, hizo múltiples inventos, entre los que estaba cierta máquina basada en ruedas cableadas giratorias, hoy día conocida como máquina de rotores. Los modelos creados se apodaban con letras. El primero fue el modelo A, el segundo el B y el tercero y último que creó, el modelo C. La máquina Enigma utilizada durante la guerra era del tamaño de una máquina de escribir y, de hecho, se parecía mucho a esta en cuestiones como el teclado o la forma de la máquina. Estos primeros modelos se asemejaban más a una máquina registradora.
 
 
 En 1918, Arthur patenta su máquina, pensada originalmente para actuar como cifradora para empresas importantes como bancos. En estos años nos enfrentamos a una situación de gran inestabilidad política y social. Es el nacimiento de la República de Weimar, el fin de la Gran Guerra. Ante esta situación, Scherbius dudaba de si realmente la patente de la máquina llegaría a dar frutos, la realidad era que nadie parecía mostrar interés ante esta máquina. Esto, si bien es correcto cuando hablamos del ciudadano promedio, no es de igual forma para el gobierno. El gobierno alemán estaba altamente interesado en una máquina codificadora plenamente funcional e indescifrable, pues un año antes, en 1917, se interceptó y decodificó el Telegrama de Zimmermann, lo que puso a Estados Unidos en el mapa y cambió el transcurso de la batalla.
 
 
-En 1926, ya comercializada bajo el nombre "Enigma", fue adoptada por la Armada alemana y, unos años más tarde, en 1934, la versión M3 de la máquina fue adoptada por la armada naval. Para este entonces, Arthur Scherbius ya no estaba presente para ver el alcance de su invención, falleció en 1929 sin conocer la importancia que tuvo la existencia de su invento en una guerra que tampoco alcanzó a vislumbrar.
+En 1926, ya comercializada bajo el nombre "Enigma", fue adoptada por la Marina alemana y, unos años más tarde, en 1934, la versión M3 de la máquina fue adoptada por el ejército del mismo país. Para este entonces, Arthur Scherbius ya no estaba presente para ver el alcance de su invención, falleció en 1929 sin conocer la importancia que tuvo la existencia de su invento en una guerra que tampoco alcanzó a vislumbrar.
 
 
 En 1939, a punto de empezar la guerra, se crea la máquina enigma M4, que será la que usarán los aliados de Alemania durante toda la guerra, hasta que Alan Turing y su equipo logren descifrarla.
@@ -187,7 +189,7 @@ Joan Clarke trabajó en el equipo de Alan Turing y llegó a ser subdirectora de 
 
 \subsubsection {Descifrando Enigma}
 
-En 2014 se estrenó The Imitation Game, conocida en España comoDescifrando Enigma. La película fue dirigida por Morten Tyldum, está basada en la biografía de Alan Turing escrita por Andrew Hodges y cuenta con Benedict Cumberbatch en el papel protagonista. Su estreno ayudó a que una gran cantidad de personas conocieran la historia de Turing y el trabajo realizado en Bletchley Park.
+En 2014 se estrenó The Imitation Game, conocida en España como \textit{Descifrando Enigma}. La película fue dirigida por Morten Tyldum, está basada en la biografía de Alan Turing escrita por Andrew Hodges y cuenta con Benedict Cumberbatch en el papel protagonista. Su estreno ayudó a que una gran cantidad de personas conocieran la historia de Turing y el trabajo realizado en Bletchley Park.
 
 
 De todas formas, debe entenderse como una dramatización y no como un documental. La película modifica o simplifica ciertos acontecimientos y concentra gran parte del relato en la figura de Turing. Es una buena puerta de entrada a esta historia, pero el descifrado real de Enigma fue un esfuerzo colectivo mucho más amplio, construido sobre el trabajo de polacos, británicos, hombres y mujeres cuyos nombres no siempre aparecen en pantalla.
