@@ -3,7 +3,7 @@
 
 Con el objetivo de comprobar el correcto funcionamiento del backend, se ha definido y ejecutado una batería de pruebas automatizadas sobre los endpoints REST, el servicio de cifrado y el mecanismo de autenticación.
 
-Las pruebas se han desarrollado con JUnit 5, Spring Boot Test y MockMvc. Las pruebas de controladores utilizan servicios simulados, lo que permite verificar que cada endpoint recibe las peticiones correctamente, delega la operación en el servicio correspondiente y devuelve el código HTTP y el cuerpo de respuesta esperados. Por otra parte, la prueba de servicio ejecuta la lógica real de cifrado para comprobar un caso relevante del algoritmo.
+Las pruebas se han desarrollado con JUnit 5, Spring Boot Test y MockMvc \cite{youtube_mockmvc}. Las pruebas de controladores utilizan servicios simulados, lo que permite verificar que cada endpoint recibe las peticiones correctamente, delega la operación en el servicio correspondiente y devuelve el código HTTP y el cuerpo de respuesta esperados. Por otra parte, la prueba de servicio ejecuta la lógica real de cifrado para comprobar un caso relevante del algoritmo.
 
 \section{Plan de pruebas}
 
@@ -116,3 +116,4 @@ Tras aplicar las correcciones descritas, la ejecución final obtuvo los siguient
 Por tanto, el 100\% de las pruebas automatizadas definidas se ejecutaron correctamente, sin fallos ni pruebas omitidas. El informe detallado de Gradle queda disponible en la ruta \texttt{build/reports/tests/test/index.html} y corresponde a la figura \ref{test_superado}
 
 La captura correspondiente puede consultarse en la figura \ref{test_superado} del apéndice \ref{apendice_figuras}.
+

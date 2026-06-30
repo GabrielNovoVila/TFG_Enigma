@@ -18,14 +18,14 @@ A lo largo de la carrera, conocimos y utilizamos un número amplio de tecnologí
 Decidí, entonces, utilizar el framework de desarrollo Java Spring, que me proporcionaba a través de Spring Boot la tecnología necesaria para cubrir ambos aspectos. De esta forma es posible dividir el código de la interfaz para no tener un solo punto de ruptura, es decir, si el backend cae, el frontend puede mostrar contenido estático, pero no usar el simulador ni consultar datos dinámicos y, al revés, sin frontend la API se puede consumir mediante herramientas de línea de comandos o clientes HTTP. Si todo estuviese atado al mismo cabo, en caso de error, no habría segundas posibilidades
 
 \subsubsection {Spring Boot}
-Es probable que el lector no esté al tanto de la susodicha tecnología, así, pues, ¿Qué es Spring Boot? Citando a IBM, Spring Boot es un marco popular, de código abierto, de nivel empresarial para crear aplicaciones de producción de nivel independiente que se ejecutan en la máquina virtual Java (JVM). Lo importante que tenemos que sacar de Spring Boot es que agiliza y simplifica el desarrollo de Spring Framework a través de tres características principales:
+Es probable que el lector no esté al tanto de la susodicha tecnología, así, pues, ¿Qué es Spring Boot? Citando a IBM, Spring Boot es un marco popular, de código abierto, de nivel empresarial para crear aplicaciones de producción de nivel independiente que se ejecutan en la máquina virtual Java (JVM) \cite{ibm_spring_boot}. Lo importante que tenemos que sacar de Spring Boot es que agiliza y simplifica el desarrollo de Spring Framework a través de tres características principales:
 \begin{itemize}
 	\item Autoconfiguración
 	\item Un enfoque basado en convenciones y configuración por defecto
-	\item La capacidad de crear aplicaciones independientes
+	\item La capacidad de crear aplicaciones independientes \cite{ibm_spring_boot}
 \end{itemize}
 
-Spring Boot nos da pie al uso de APIs REST, lo que logra aplicaciones todavía más independientes, de forma que, cada funcionalidad está separada de una forma completamente organizada y limpia. Esta es la dirección que buscamos en la aplicación, además, a lo largo de mi estancia en la USC aprendimos a utilizarla, centrándonos en hacer un buen uso de la misma: seguridad, eficiencia y la capacidad de hacer de la aplicación totalmente Restful (endpoints bien ajustados, con cabeceras y verbos correctos).
+Spring Boot nos da pie al uso de APIs REST, lo que logra aplicaciones todavía más independientes, de forma que, cada funcionalidad está separada de una forma completamente organizada y limpia. Esta es la dirección que buscamos en la aplicación, además, a lo largo de mi estancia en la USC aprendimos a utilizarla, centrándonos en hacer un buen uso de la misma: seguridad, eficiencia y la capacidad de hacer de la aplicación totalmente Restful (endpoints bien ajustados, con cabeceras y verbos correctos) \cite{ibm_spring_boot}.
 
 En esta aplicación, Spring Boot se emplea para implementar la capa de servidor del simulador. La lógica se organiza mediante controladores, servicios, repositorios y modelos de datos. Los controladores exponen los endpoints REST empleados por la interfaz, los servicios contienen la lógica de cifrado y descifrado de la máquina Enigma, y los repositorios gestionan la persistencia de las configuraciones de las máquinas. Esta separación facilita el mantenimiento, las pruebas y la evolución de cada parte del sistema.
 Asimismo, se utiliza Spring Data JPA para gestionar el acceso a los datos mediante repositorios, evitando la elaboración manual de consultas para las operaciones habituales. La aplicación incorpora Spring Security para controlar la autenticación de usuarios mediante OAuth 2.0 con Google y para gestionar tokens JWT. De este modo, las operaciones asociadas a una sesión pueden mantenerse vinculadas al usuario autenticado.
@@ -48,7 +48,7 @@ Por tanto, React aporta una interfaz fluida y modular, capaz de mostrar contenid
 \subsection {Casos de uso}
 Una vez tenemos las tecnologías decididas, podemos pasar a las funcionalidades que buscamos tener en la aplicación. En un inicio, solo un concepto está claro: la aplicación tiene que simular una máquina Enigma. Este tipo de máquina se caracteriza por tener muchos pequeños componentes, de forma que se puede subdividir de manera muy cómoda el trabajo y la escritura del código y, como estamos usando Java, esto implica una división de clases coherente y sencilla. Tras informarnos de la máquina y de su funcionamiento, fue momento de decidir de manera seria cuáles iban a ser los principales objetivos de la página y qué iba a poder hacer un usuario con ella, aquí es donde entran los diagramas de casos de uso. 
 
-Un diagrama de casos de uso es un tipo de diagrama UML que representa gráficamente las posibles interacciones de distintos actores con un sistema. En este caso, como actores, tenemos al usuario autenticado, al usuario invitado y a google. Por otra parte, el sistema sería la aplicación en cualquiera de los diagramas planteados.
+Un diagrama de casos de uso es un tipo de diagrama UML que representa gráficamente las posibles interacciones de distintos actores con un sistema \cite{wiki_casos_uso}. En este caso, como actores, tenemos al usuario autenticado, al usuario invitado y a google. Por otra parte, el sistema sería la aplicación en cualquiera de los diagramas planteados.
 Con estos esquemas, un usuario de la aplicación puede entender las funciones posibles que le ofrece el proyecto.
 
 Vamos a dividirlo en varias secciones, para que no quede un esquema enorme ya que al final, el objetivo de este tipo de diagramas es el de la simplicidad y el de entender correctamente las posibles acciones por parte del usuario.
@@ -110,7 +110,7 @@ Una vez planteadas las funcionalidades que quería para mi aplicación, el sigui
 
 \subsection {Diagramas de clases}
 
-Un diagrama de clases es un tipo de diagrama de estructura estática que describe la estructura de un sistema mostrando las clases del sistema, sus atributos, operaciones (o métodos) y las relaciones entre los objetos.
+Un diagrama de clases es un tipo de diagrama de estructura estática que describe la estructura de un sistema mostrando las clases del sistema, sus atributos, operaciones (o métodos) y las relaciones entre los objetos \cite{wiki_diagrama_clases}.
 
 Las clases del sistema se pueden clasificar en varios niveles dependiendo de su funcionalidad. Esto favorece la modularidad, de forma que todo esté correctamente estructurado. En caso de error, sabes a dónde ir, en caso de que una tercera persona retome el proyecto, es importante que esté lo suficientemente ordenado para que pueda hacerlo sin problemas. Hay veces que el sistema es complejo y el análisis del mismo se vuelve complicado, pero podemos, de esta forma, aligerar el peso que conlleva el estudiar el código para saber dónde hay errores o a dónde hay que ir de ser necesaria la modificación de algún fragmento del código.
 
@@ -209,7 +209,9 @@ La figura \ref{pagina_principal} es la de la página principal, llamada Máquina
 
 La captura correspondiente puede consultarse en la figura \ref{pagina_principal} del apéndice \ref{apendice_figuras}.
 
-En esta, tenemos dos elementos que captan la atención: La propia máquina, pues tiene una textura distinta al resto de la página y la hoja que está debajo de la misma, que es de un color distinto y, de igual forma, contiene una textura no plana.  En la página real, comenzaría la visión desde arriba, por lo que la máquina sería el elemento más reconocible de la pantalla. El diseño de la misma está inspirado en una máquina Enigma M3 real, desde la composición hasta la textura provista. Yendo de arriba a abajo, tenemos los tres rotores, que, como su nombre indica, giran cada vez que se cifra una letra, el siguiente elemento sería la salida de la máquina. En una máquina Enigma real, la salida está formada por 26 leds, uno por cada letra del abecedario y se iluminará la letra final de la misma. En nuestro caso, para hacerlo más visual para el usuario, en este espacio aparece la letra escrita. El siguiente componente es el de la entrada: Este sería un teclado un poco distinto al usual que inicia la señal, al final, esta máquina se puede pensar como una máquina de escribir que escribe una letra distinta a la que uno pulsa. El último elemento visible es el del panel de conexiones. Uno puede conectar dos letras para que, cuando entre o salga una letra del sistema, estas se intercambien. Se puede encontrar más detalle sobre la máquina y su funcionamiento en el Capítulo 2: La máquina Enigma.
+En esta, tenemos dos elementos que captan la atención: La propia máquina, pues tiene una textura distinta al resto de la página y la hoja que está debajo de la misma, que es de un color distinto y, de igual forma, contiene una textura no plana \cite{pinterest_hormigon}.  En la página real, comenzaría la visión desde arriba, por lo que la máquina sería el elemento más reconocible de la pantalla. El diseño de la misma está inspirado en una máquina Enigma M3 real, desde la composición hasta la textura provista \cite{lainakai_enigma}. Yendo de arriba a abajo, tenemos los tres rotores, que, como su nombre indica, giran cada vez que se cifra una letra, el siguiente elemento sería la salida de la máquina. En una máquina Enigma real, la salida está formada por 26 leds, uno por cada letra del abecedario y se iluminará la letra final de la misma \cite{cripta_hacker_enigma}. En nuestro caso, para hacerlo más visual para el usuario, en este espacio aparece la letra escrita. El siguiente componente es el de la entrada: Este sería un teclado un poco distinto al usual que inicia la señal, al final, esta máquina se puede pensar como una máquina de escribir que escribe una letra distinta a la que uno pulsa. El último elemento visible es el del panel de conexiones. Uno puede conectar dos letras para que, cuando entre o salga una letra del sistema, estas se intercambien \cite{cripta_hacker_enigma}. Se puede encontrar más detalle sobre la máquina y su funcionamiento en el Capítulo 2: La máquina Enigma.
+
+El aspecto visual de las teclas se inspiró en botones de máquina de escribir, tomando como referencia recursos de diseño creados en Figma Community \cite{figma_typer}.
 
 La hoja situada debajo del simulador de la máquina representa una hoja de cifrado, donde, progresivamente, se escriben las letras antes del cifrado y después. Así, tenemos un historial de los distintos cifrados realizados mientras dure la sesión. Si tenemos iniciada la sesión en la página, podremos acceder a un historial que perdura aunque se cierre la página.
 
@@ -253,7 +255,7 @@ Concretamente, los temas presentes son los siguientes:
 En esta sección se habla de la creación de la máquina, así como del proceso del comienzo de uso de la máquina por parte de la Armada.
 
 \subsubsection{¿Qué es la máquina Enigma?}
-Primero se plantea la pregunta de qué es la máquina Enigma, pero, para responder a esta pregunta, hay que remontarse a hace muchos siglos atrás y, para quien no sepa de criptografía, se explica los orígenes de la misma, pasando por fórmulas criptográficas clásicas como la escítala o el cifrado César, hasta llegar al funcionamiento de la máquina, que mantiene un claro legado de estos.
+Primero se plantea la pregunta de qué es la máquina Enigma, pero, para responder a esta pregunta, hay que remontarse a hace muchos siglos atrás y, para quien no sepa de criptografía, se explica los orígenes de la misma, pasando por fórmulas criptográficas clásicas como la escítala o el cifrado César \cite{muy_interesante_encriptar}, hasta llegar al funcionamiento de la máquina, que mantiene un claro legado de estos.
 
 \subsubsection{Descifrado}
 Aquí se habla, de forma amplia, de cómo fue el proceso de descifrado de la máquina, pasando por Bletchley Park y comentando acerca de la película "Descifrando el Enigma", que cuenta esta misma historia de una forma cinemática, es importante no confundirla con un documental, pues muchas historias están exageradas o contadas de una forma distinta a lo sucedido en la realidad.
@@ -262,7 +264,7 @@ Aquí se habla, de forma amplia, de cómo fue el proceso de descifrado de la má
 Tenemos presente una línea temporal para clarificar al usuario cómo es el orden de los sucesos alrededor de la máquina.
 
 \subsubsection{Curiosidades}
-En esta sección de la página se comentan ciertas curiosidades de la máquina como que el uso de la misma no se encontraba únicamente en Alemania, sino que, por ejemplo, España la utilizaba, a pesar de no pertenecer a las Potencias del Eje durante la segunda guerra mundial.
+En esta sección de la página se comentan ciertas curiosidades de la máquina como que el uso de la misma no se encontraba únicamente en Alemania, sino que, por ejemplo, España la utilizaba \cite{taylor_enigma}, a pesar de no pertenecer a las Potencias del Eje durante la segunda guerra mundial.
 
 Los cambios con respecto a la versión base fueron los siguientes:
 
@@ -276,11 +278,11 @@ Los cambios con respecto a la versión base fueron los siguientes:
 
 La captura correspondiente puede consultarse en la figura \ref{libro} del apéndice \ref{apendice_figuras}.
 
-La siguiente pestaña educativa es la del Libro de Codificación, representada en la figura \ref{libro}. Esta sección nace con la intención de acercar al usuario a una parte fundamental del uso real de la Máquina Enigma: la configuración diaria de la máquina.
+La siguiente pestaña educativa es la del Libro de Codificación, representada en la figura \ref{libro}. Esta sección nace con la intención de acercar al usuario a una parte fundamental del uso real de la Máquina Enigma: la configuración diaria de la máquina \cite{operation_turing_codebook}.
 
 A diferencia de la página anterior, donde la información se organiza por componentes físicos, en esta pestaña se presenta un documento similar a los libros de claves usados por los operadores. La idea principal es mostrar que el cifrado no dependía únicamente de la máquina, sino también de una configuración concreta para cada día. Sin conocer esa configuración, el mensaje cifrado resultaba prácticamente imposible de interpretar.
 
-En el centro de la página aparece una imagen representativa de un libro de codificación. Esta imagen se coloca como elemento principal porque es el punto alrededor del cual gira toda la sección. El usuario no solo lee una explicación teórica, sino que ve una representación visual del tipo de documento que se utilizaba para preparar la máquina antes de enviar o recibir mensajes.
+En el centro de la página aparece una imagen representativa de un libro de codificación. Esta imagen se coloca como elemento principal porque es el punto alrededor del cual gira toda la sección. El usuario no solo lee una explicación teórica, sino que ve una representación visual del tipo de documento que se utilizaba para preparar la máquina antes de enviar o recibir mensajes \cite{operation_turing_codebook}.
 
 La información se divide en varios bloques grises con línea ocre, siguiendo la estética de los botones y de otros elementos interactivos de la aplicación. Estos bloques permiten explicar por separado las distintas columnas del libro de codificación:
 
@@ -289,7 +291,7 @@ La información se divide en varios bloques grises con línea ocre, siguiendo la
 	\item La posición de los rotores, que define qué rotores se colocan en la máquina y en qué orden.
 	\item La configuración de los anillos, relacionada con el desplazamiento interno de cada rotor.
 	\item Las conexiones entre letras, equivalentes al panel de conexiones de la máquina.
-	\item Los grupos de identificación, usados para reconocer o clasificar mensajes.
+	\item Los grupos de identificación, usados para reconocer o clasificar mensajes \cite{operation_turing_codebook}.
 \end{itemize}
 
 Esta página también tuvo cambios con respecto a la idea inicial. En un primer momento, la sección estaba pensada como una explicación más simple, similar al resto de apartados informativos. Sin embargo, al introducir los retos, cobró más importancia que el libro tuviera una presencia propia y visual. Por ello, se añadió la imagen central y se reorganizó la explicación para que el usuario pudiera entender qué información debía consultar antes de intentar descifrar un mensaje.
@@ -317,6 +319,12 @@ La sección está pensada para funcionar junto con el libro de codificación y e
 	\item Finalmente, introduce los ajustes en la máquina y prueba a descifrar el mensaje.
 \end{itemize}
 
-Con esta página se busca cerrar el recorrido educativo de la aplicación. Primero se enseña la máquina, después se explica su funcionamiento y su historia, luego se introduce el libro de claves y, finalmente, se propone al usuario usar todo lo aprendido.
+Con esta página se busca cerrar el recorrido educativo de la aplicación. Primero se enseña la máquina, después se explica su funcionamiento y su historia, luego se introduce el libro de claves \cite{operation_turing_codebook} y, finalmente, se propone al usuario usar todo lo aprendido.
 
 En cuanto a los cambios de diseño, esta sección también evolucionó durante el desarrollo. La primera idea era mostrar los retos como simples textos, pero esto hacía que la página se sintiera demasiado estática. Por ello, se optó por organizar los mensajes en tarjetas separadas, añadir botones de pista y mantener una distribución más visual. De esta forma, la página se acerca más a una pequeña actividad interactiva que a un apartado puramente informativo.
+
+
+
+
+
+
